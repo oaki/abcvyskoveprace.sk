@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="row " data-bg=" no-repeat">
+        {foreach $list as $l}
+            {if $l['type'] == 'treeCols'}
+                {foreach $l['images'] as $img}
+                    {dump $img}
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col-sp-12">
+                        <div class="block img_animations banner3">
+                            <a href="{$img['params']['link']}">
+                                <span class="banner3--text">
+                                    <span class="banner3--title">{$img['params']['name']}</span>
+                                    <span class="banner3--description">{$img['params']['description']}</span>
+                                </span>
+                                <img src="{$img['image']|img:default:390:270:5}" class="img-responsive ">
+                            </a>
+                        </div>
+                    </div>
+                {/foreach}
+            {/if}
+        {/foreach}
+    </div>
+</div>

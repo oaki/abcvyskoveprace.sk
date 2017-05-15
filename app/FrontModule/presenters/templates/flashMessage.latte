@@ -1,0 +1,10 @@
+{if !empty($flashes)}
+    <div class="row">
+        <div class="col-xs-12">
+            <div n:foreach="$flashes as $flash" n:class="alert, $flash->type">
+                <button class="close" data-dismiss="alert">×</button>
+                {$flash->message}
+            </div>
+        </div>
+    </div>
+{/if}

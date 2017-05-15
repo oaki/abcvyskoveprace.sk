@@ -1,0 +1,9 @@
+parameters:
+    database:
+            driver: mysqli
+            database: abcvyskoveprace
+            username: root
+            password: root
+            charset: utf8
+            explain: false
+            profiler: false

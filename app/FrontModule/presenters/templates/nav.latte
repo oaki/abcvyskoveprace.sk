@@ -1,0 +1,83 @@
+<ul class="nav navbar-nav">
+    {var $parent = null}
+    {foreach $nav[$parent] as $n}
+        {if $n['slug'] === 'eshop'}
+            {include nav-eshop-hover.latte}
+        {else}
+            <li>
+                <a href="{plink :Front:Page:default id=>$n->id_menu_item}">{$n->name}</a>
+            </li>
+        {/if}
+    {/foreach}
+</ul>
+{*
+<li> <a href="{plink :Front:Page:default id=>5}" title="{_'O nás'}">{_'O nás'}</a> </li>
+<li class="dropdown megamenu-fullwidth">
+    <a  class="dropdown-toggle" href="{plink :Front:News:default}" title="{_'Aktuality'}"> {_'Aktuality'} <strong class="caret"> </strong> </a>
+    <ul class="dropdown-menu">
+        <li class="megamenu-content ">
+
+            <ul class="col-lg-3  col-sm-3 col-md-3 unstyled noMarginLeft newCollectionUl">
+                <li><a class="button-style-nav" href="{plink :Front:News:default}" title="{_'viac aktualít ...'}">{_'Aktuality'}</a></li>
+
+
+                <li n:foreach="$nav['news'] as $n"> <a href="{plink :Front:News:view id=>$n['ID']}" title="{$n['TITLE']}"> {$n['TITLE']} </a> </li>
+
+                <li class="more-link"> <a href="{plink :Front:News:default}" class="float-right" title="{_'viac aktualít ...'}"> {_'viac aktualít ...'} </a> </li>
+            </ul>
+
+
+
+            <ul n:foreach="$nav['news'] as $n" class="col-lg-3  col-sm-3 col-md-3  col-xs-4">
+                <li >
+                    <a class="newProductMenuBlock" href="{plink :Front:News:view id=>$n['ID']}" title="{$n['TITLE']}">
+                        <img class="img-responsive" src="{$n['FILENAME']|img:news:300:250:5}" alt="{$n['TITLE']}">
+                        <span class="ProductMenuCaption"> <i class="fa fa-caret-right"> </i> {$n['TITLE']} </span>
+                    </a>
+                </li>
+            </ul>
+
+        </li>
+    </ul>
+</li>
+<li class="dropdown megamenu-fullwidth">
+    <a class="dropdown-toggle" href="{plink :Front:SaleArticle:default}" title="{_'Akcie'}"> {_'Akcie'} <strong class="caret"> </strong> </a>
+    <ul class="dropdown-menu">
+        <li class="megamenu-content ">
+            <ul class="col-lg-3  col-sm-3 col-md-3 unstyled noMarginLeft newCollectionUl">
+                <li><a class="button-style-nav" href="{plink :Front:SaleArticle:default}" title="{_'viac akcií ...'}">{_'Najnovšie akcie'}</a></li>
+                <li n:foreach="$nav['sales'] as $n"> <a target="_blank" href="{$n['LINK_TO_FILE']}" title="{$n['TITLE']}"> {$n['TITLE']} </a> </li>
+
+                <li class="more-link"> <a href="{plink :Front:SaleArticle:default}" class="float-right" title="{_'viac akcií ...'}"> {_'viac akcií ...'} </a> </li>
+            </ul>
+
+            <ul n:foreach="$nav['sales'] as $n" class="col-lg-3  col-sm-3 col-md-3  col-xs-4">
+                <li>
+                    <a target="_blank" class="newProductMenuBlock" href="{$n['LINK_TO_FILE']}" title="{$n['TITLE']}">
+                        <img class="img-responsive" src="{$n['FILENAME']|img:sales:300:250:5}" alt="{$n['TITLE']}">
+                        <span class="ProductMenuCaption"> <i class="fa fa-caret-right"> </i> {$n['TITLE']} </span>
+                    </a>
+                </li>
+            </ul>
+
+        </li>
+    </ul>
+</li>
+<li> <a href="{plink :Front:Page:default id=>7}" title="{_'Služby'}">{_'Služby'}</a> </li>
+<li> <a href="{plink :Front:Page:default id=>8}" title="{_'Katalógy'}">{_'Katalógy'}</a> </li>
+<li> <a href="{plink :Front:Page:default id=>12}" title="{_'Kontakt'}">{_'Kontakt'}</a> </li>
+</ul>
+
+
+<nav id="access">
+<ul id="menu-primary-menu-1" class="menu">
+    {var $parent = null}
+    {foreach $nav[$parent] as $n}
+    <li class="menu-item">
+        <a href="{plink :Front:Page:default id=>$n->id_menu_item}">{$n->name}</a>
+    </li>
+    {/foreach}
+</ul>
+
+
+</nav>*}

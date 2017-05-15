@@ -1,0 +1,34 @@
+{php echo '<'.'?php';}
+
+class {$name|noescape}Model extends BaseModel implements IBaseCms,IJoinFileNodeModel// object je Nette\Object
+{
+private $fileNodeService;
+
+function __construct(DibiConnection $connection, NFileStorage $cache, FileNodeModel $fileNodeService) {
+parent::__construct($connection, $cache);
+$this->table = '{$name|lower}';
+$this->id_name = 'id_node';
+$this->fileNodeService = $fileNodeService;
+}
+
+/*
+* admin
+*/
+function addModuleToCms($id_node) {
+$this->insert( array('id_node'=>$id_node), FALSE );
+}
+
+function identifyTitleAndDescriptionForNode( $values ){
+$desc = 'Nedefinovane';
+
+if(!isset($values['title']) OR $values['title']=='')
+$values['title'] = '{$name|noescape}';
+return array('node_name'=>$values['title'], 'node_desc'=>$desc);
+}
+
+function getIdFileNode($id){
+return $this->fileNodeService->getIdFileNode($id, '{$name|noescape}');
+}
+
+
+}

@@ -1,0 +1,32 @@
+{block content}
+<h1 class="page-header">{block #title}Resources{/block}
+    <a href="{plink Resources:add}" class="btn btn-success">Add</a></h1>
+<div class="tree">
+    {var $continue=>false}
+    {var $depth=>1}
+    {block #treeView}
+        <ul{if $continue} class="border_parent"{/if}>
+            {foreach $parents as $child}
+                <li{if $iterator->isLast()} class="last"{/if}>{$child->name}
+                    <a href="{plink Resources:edit, $child->id}">
+                        <span class="icon icon-edit"></span>
+                    </a>
+
+                    <span class="icon icon-comment" title="{$child->comment}"></span>
+
+                    <a href="{plink Resources:delete, $child->id}">
+                        <span class="icon icon-remove"></span>
+                    </a>
+                </li>
+                {if $nodes->hasChildNodes($child->id)}
+                    {if $iterator->isLast() OR $depth==1}
+                        {var $continue=>false}
+                    {else}
+                        {var $continue=>true}
+                    {/if}
+                    {include #treeView, 'parents' => $nodes->getChildNodes($child->id), 'continue' => $continue, 'depth' => $depth+1}
+                {/if}
+            {/foreach}
+        </ul>
+    {/block}
+</div>

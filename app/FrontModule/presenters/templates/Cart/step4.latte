@@ -1,0 +1,103 @@
+{block title}{!_'Košík'}{/block}
+
+{block content}
+
+
+<div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-7">
+        <h1 class="section-title-inner"><span><i class="fa fa-truck"> </i> {!_'Doprava'}</span></h1>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar">
+        <h4 class="caps"><a href="{plink :Front:Eshop:default}" title="{!_'Späť do obchodu'}"><i
+                        class="fa fa-chevron-left"></i> {!_'Späť do obchodu'} </a></h4>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-12">
+        <div class="row userInfo">
+            <div class="col-xs-12 col-sm-12">
+
+                {form paymentForm}
+
+
+                    <ul class="alert alert-danger" n:if="$form->hasErrors()">
+                        <li n:foreach="$form->errors as $error">{$error}</li>
+                    </ul>
+                {include orderStep.latte}
+
+                    <div class="w100 clearfix">
+                        <div class="row userInfo">
+                            <div class="col-lg-12">
+                                <h2 class="block-title-2"> {!_'Vyberte si metódu dopravy'}</h2>
+                            </div>
+                            <div class="col-xs-12 col-sm-12">
+                                <div class="form-group col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                                    <div class="row">
+
+                                        <table class="table-responsive table-bordered table  table-striped">
+                                            <thead>
+                                            <tr>
+                                                <th>{!_'Druh dopravy'}</th>
+                                                {*<th class="text-right">{!_'Cena'}</th>*}
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr n:foreach="$payments as $key=>$payment">
+                                                <td>
+                                                    <input n:name="payment:$payment['id_payment']">
+                                                    <label n:name="payment:$payment['id_payment']"
+                                                            class="radiolabel">{$payment['name']}</label>
+                                                </td>
+                                                {*<td class="text-right">{$payment['price']|number:2:'.':' '|currency }</td>*}
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+
+                                <!--/row-->
+
+                                <div class="cartFooter w100">
+                                    <div class="box-footer">
+                                        <div class="pull-left"><a class="btn btn-default" href="{plink step1}"
+                                                                  title="{!_'Nákupný košík'}"> <i
+                                                        class="fa fa-arrow-left"></i> &nbsp; {!_'Nákupný košík'} </a>
+                                        </div>
+                                        <div class="pull-right">
+                                            {input next class=>"btn btn-primary btn-small btn-cart-continue"}
+
+                                            {*<a href="checkout-3.html" class="btn btn-primary btn-small" title="{!_'Fakturačná Adresa'}"> {!_'Fakturačná Adresa'} &nbsp; <i class="fa fa-arrow-circle-right"></i> </a> *}
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--/ cartFooter -->
+                {/form}
+            </div>
+        </div>
+        <!--/row end-->
+
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar">
+        <div class="contentBox">
+            <div class="w100 costDetails">
+                <div class="table-block" id="order-detail-content">
+                    <a class="button-style-nav btn btn-primary btn-lg btn-block goToNextStep" title="checkout"
+                       style="margin-bottom:10px"> {!_'Sumár'} &nbsp; <i class="fa fa-arrow-right"></i> </a>
+                    <div class="w100 cartMiniTable">
+                        {control orderSummary}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End popular -->
+    </div>
+    <!--/rightSidebar-->
+
+</div>
+<!--/row-->

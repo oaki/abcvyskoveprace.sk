@@ -1,0 +1,150 @@
+services:
+    - App\Model\Authenticator\DefaultAuthenticator
+    - App\FrontModule\Forms\SignFormFactory
+
+    - Nette\Mail\SendmailMailer
+
+    routerFactory: App\RouterFactory
+
+    router: @routerFactory::createRouter
+
+    connection:
+        factory: DibiConnection
+        arguments: [%database%]
+
+    mysql.panel: Dibi\Bridges\Tracy\Panel
+
+    tracy.bar:
+        setup:
+            - @mysql.panel::register(@connection)
+
+    registrationFormFactory:
+        factory: App\FrontModule\Forms\RegistrationFormFactory
+
+    translator:
+        factory: App\Model\SimpleTranslator
+
+
+    OrderSummary:
+        factory: App\FrontModule\components\OrderSummaryControl\OrderSummary
+
+    Shipping:
+        factory: App\Model\Shipping
+
+    Payment:
+        factory: App\Model\Payment
+
+    TranslationModel:
+        factory: \App\Model\Entity\TranslationModel
+        arguments: [@connection]
+
+
+    cache:
+        factory: Nette\Caching\Cache
+        arguments: ['@cacheStorage']
+
+    cache.storage:
+        factory: Nette\Caching\Storages\FileStorage
+        arguments: [%tempDir%/cache]
+
+    User:
+        factory: App\Model\Entity\UserModel
+
+    Page:
+        factory: App\Model\Entity\PageModel
+
+    Test:
+        factory: App\Model\Entity\TestModel
+
+    Node:
+        factory: App\Model\Entity\NodeModel
+
+    Article:
+         factory: App\Model\Entity\ArticleModel
+
+    FileNode :
+         factory: App\Model\Entity\File\FileNodeModel
+
+    File :
+        factory: App\Model\Entity\File\FileModel
+
+    Slideshow :
+         factory: App\Model\Entity\SlideshowModel
+
+    CategoryModel :
+         factory: App\Model\Entity\Eshop\CategoryModel
+
+    CategoryLangModel :
+         factory: App\Model\Entity\Eshop\CategoryLangModel
+
+    LangModel :
+         factory: App\Model\Entity\LangModel
+
+
+    ProductModel :
+         factory: App\Model\Entity\Eshop\ProductModel
+
+    ProductMarkModel :
+         factory: App\Model\Entity\Eshop\ProductMarkModel
+
+    ProductLangModel :
+         factory: App\Model\Entity\Eshop\ProductLangModel
+
+    ProductParamModel :
+         factory: App\Model\Entity\Eshop\ProductParamModel
+
+    OrderModel :
+        factory: App\Model\Entity\Eshop\OrderModel
+
+    OrderProductModel :
+        factory: App\Model\Entity\Eshop\OrderProductModel
+
+    CategoryProductModel :
+         factory: App\Model\Entity\Eshop\CategoryProductModel
+
+    ProductSupplierModel :
+         factory: App\Model\Entity\Eshop\ProductSupplierModel
+
+    DeliveryModel :
+         factory: App\Model\Entity\Eshop\DeliveryModel
+
+    VatModel :
+         factory: App\Model\Entity\Eshop\VatModel
+
+    PaymentModel :
+         factory: App\Model\Entity\Eshop\PaymentModel
+
+    DashboardModel :
+         factory: App\Model\Entity\DashboardModel
+
+    SettingModel :
+         factory: App\Model\Entity\SettingModel
+
+    ImportPlacekModel :
+         factory: App\Model\Entity\Import\ImportPlacekModel
+
+    ModuleContainer:
+         factory: App\Model\Entity\ModuleContainerModel
+
+    GalleryModel:
+         factory: App\Model\Entity\GalleryModel
+
+    BannerModel:
+         factory: App\Model\Entity\BannerModel
+
+    BannerImageModel:
+         factory: App\Model\Entity\BannerImageModel
+
+    ImageGenerator:
+        factory: \App\Model\Image\Generator
+        arguments: [%webimages%]
+
+    RestService:
+        factory: \App\Model\RestService
+
+    Contact:
+        factory: \App\Model\Entity\ContactModel
+
+    Mail:
+        factory: \App\Services\Mail
+        arguments: [%mailer%]

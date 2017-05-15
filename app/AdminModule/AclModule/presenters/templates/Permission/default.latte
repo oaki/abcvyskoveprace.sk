@@ -1,0 +1,36 @@
+h{block content}
+<h1 class="page-header">{block #title}Permission{/block}
+    <a href="{plink Permission:add}" class="btn btn-success">
+        Add permission</a></h1>
+
+
+{if count($acl)}
+    <table cellspacing="0" cellpadding="5">
+    <tr>
+        <th>Role</th>
+        <th>Resource</th>
+        <th>Privilege</th>
+        <th>Access</th>
+        <th></th>
+    </tr>
+    {foreach $acl as $ac}
+        <tr>
+            <td>{$ac->role}</td>
+            <td>{$ac->resource}</td>
+            <td>{$ac->privilege}</td>
+            <td class="center">
+                <span class="icon {if $ac->access}icon-eye-open{else}icon-eye-close{/if} "></span>
+            </td>
+            <td>
+                <a href="{plink Permission:edit, $ac->id}">
+                    <span class="icon icon-pencil"></span>
+                </a>
+                <a href="{plink Permission:delete, $ac->id}">
+                    <span class="icon icon-remove"></span>
+                </a>
+            </td>
+        </tr>
+    {/foreach}
+    </table>{/if}
+
+

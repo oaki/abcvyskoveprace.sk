@@ -1,0 +1,179 @@
+{block title}
+    {if $category['meta_title']==''}{$category['name']}{else}{$category['meta_title']}{/if}
+{/block}
+
+{block description}{$category['meta_description']}{/block}
+{block keywords}
+    {if $category['meta_keywords']==''}{$category['name']}{else}{$category['meta_keywords']}{/if}
+{/block}
+
+
+{block content}
+
+<div class="row">
+
+    {include ../filter.latte}
+
+    <!--right column-->
+    <div n:snippet="productList" class="col-lg-9 col-md-9 col-sm-12">
+        <div class="w100 clearfix category-top">
+            {dump $category}
+            {*<h2 n:ifset="$category['category_lang'][1]"> {$category['category_lang'][1]['name']|capitalize} </h2>*}
+            {*<h2 n:if="!isset($category['category_lang'][1]) AND $presenter->q==''"> Všetky produkty </h2>*}
+            <h2 n:ifset="$category['name']"> {$category['name']|capitalize} </h2>
+
+            {if $presenter->q!=''}
+                <h2 n:if="$presenter->q!=''">Hľadané slovo: {$presenter->q} </h2>
+                <div class="product-search-form-on-site">
+                    {form productSearchForm}
+                        <div class="form-group">
+                            {input query} <input class="btn btn-success" type="submit" name="btn" value="Vyhľadať"/>
+                        </div>
+                    {/form}
+                </div>
+            {/if}
+            {*<div class="categoryImage"> <img src="images/site/category.jpg" class="img-responsive" alt="img"> </div>*}
+        </div>
+        <!--/.category-top-->
+
+        <div n:if="count($categoryChildren)>0" class="row subCategoryList clearfix">
+            {foreach $categoryChildren as $cat}
+
+                <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4  text-center ">
+                    <div class="thumbnail equalheight">
+                        <a class="subCategoryThumb" title="{$cat['meta_description']}"
+                           href="{plink :Front:Eshop:default id_category=>$cat['id_category']}">
+                            <img src="{$cat['first_image']['image']|img:default:106:106:5}" class="img-rounded "
+                                 alt="{$cat['name']}">
+                        </a>
+                        <a href="{plink :Front:Eshop:default id_category=>$cat['id_category']}"
+                           class="subCategoryTitle"><span> {$cat['name']} </span></a>
+                    </div>
+                </div>
+            {/foreach}
+        </div>
+        <!--/.subCategoryList-->
+
+        <div class="w100 productFilter clearfix">
+            <p class="pull-left"></p>
+
+            <div class="pull-right ">
+
+                <div class="change-order pull-right">
+                    <select style="width: 170px;" class="chosen-select display-mode"
+                            data-placeholder="{!_'Zoradiť podľa'}">
+                        {foreach $presenter->orderOptions as $key=>$itemsPerPage}
+                            <option {ifCurrent default order=>$key}selected="selected"{/ifCurrent}
+                                    value="{plink default order=>$key}">
+                                {$itemsPerPage}
+                            </option>
+                        {/foreach}
+                    </select>
+                </div>
+
+
+                <div class="change-view pull-right">
+                    <a class="hidden-xs hidden-sm" href="{plink default displayMode=>normal, itemsPerPage=>24}"
+                       title="Zobrazenie - Grid" id="grid-view"
+                       class="{if $presenter->displayMode == 'normal'}active{/if}">
+                        <i class="fa fa-th-large"></i>
+                    </a>
+                    <a class="hidden-xs hidden-sm" href="{plink default displayMode=>list, itemsPerPage=>96}"
+                       title="Zobrazenie - List" id="list-view"
+                       class="{if $presenter->displayMode == 'list'}active{/if}">
+                        <i class="fa fa-th-list"></i>
+                    </a>
+                </div>
+
+                <div class="change-count pull-right">
+                    <select style="width: 70px;" class="chosen-select item-per-page" data-placeholder="{!_'Zoradiť'}">
+
+                        {foreach $presenter->itemsPerPageOptions as $key=>$itemsPerPage}
+                            <option {ifCurrent default itemsPerPage=>$key}selected="selected"{/ifCurrent}
+                                    value="{plink default itemsPerPage=>$key}">
+                                {$itemsPerPage}
+                            </option>
+                        {/foreach}
+
+                    </select>
+                </div>
+
+            </div>
+        </div>
+        <!--/.productFilter-->
+
+
+        <div class="filter-options form-group" n:if="$isUsedFilter">
+            <label>Filter: </label>
+            <span n:if="$presenter->q" class="btn">
+                <a class="icon-remove" href="{plink this q=>null}" title="{!_'Vyhľadávanie:'}">
+                    <i class="fa fa-times"></i> {!_'Vyhľadávanie:'} {$presenter->q}
+                </a>
+            </span>
+
+            <span n:if="$presenter->sale" class="btn">
+                <a class="icon-remove" href="{plink this sale=>null}" title="{!_'Akcia'}">
+                    <i class="fa fa-times"></i> {!_'Akcia'}
+                </a>
+            </span>
+
+            <span n:if="$presenter->news" class="btn">
+                <a class="icon-remove" href="{plink this news=>null}" title="{!_'Novinka'}">
+                    <i class="fa fa-times"></i> {!_'Novinka'}
+                </a>
+            </span>
+
+            <span n:if="$presenter->top" class="btn">
+                <a class="icon-remove" href="{plink this top=>null}" title="{!_'Top'}">
+                    <i class="fa fa-times"></i> {!_'Top'}
+                </a>
+            </span>
+
+            <span n:if="$presenter->priceFrom" class="btn">
+                <a class="icon-remove" href="{plink this priceFrom=>null}"
+                   title="{!_'Cena od'} {$presenter->priceFrom|currency}">
+                    <i class="fa fa-times"></i> {!_'Cena od'} {$presenter->priceFrom|currency}
+                </a>
+            </span>
+
+            <span n:if="$presenter->priceTo" class="btn">
+                <a class="icon-remove" href="{plink this priceTo=>null}"
+                   title="{!_'Cena do'} {$presenter->priceTo|currency}">
+                    <i class="fa fa-times"></i> {!_'Cena do'} {$presenter->priceTo|currency}
+                </a>
+            </span>
+
+            {if $presenter->id_product_marks}
+                {foreach $presenter->id_product_marks as $k=>$v}
+                    <span class="btn">
+                        <a href="{$presenter->getFilterUrl('id_product_marks',$v)}"
+                           class="icon-remove filter-info-brand" data-brand="{$v}" title="{!_'Značka'}">
+                            <i class="fa fa-times"></i> {!_'Značka'}:
+                            {$presenter->getProductMarkName($v)}
+                        </a>
+                    </span>
+                {/foreach}
+            {/if}
+        </div>
+
+        <div class="products-grid row categoryProduct xsResponse clearfix">
+            {if $presenter->displayMode == 'list'}
+                {include ../productAnnotationList.latte list=>$products}
+            {else}
+                {include ../productAnnotation.latte list=>$products, containerClass=>'col-lg-4 col-md-4 col-sm-4 col-xs-12'}
+            {/if}
+
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="w100 categoryFooter">
+            <div class="pagination pull-right no-margin-top">
+                {control visualPaginator}
+            </div>
+            <div class="pull-left col-sm-4 col-xs-12 no-padding text-left-xs">
+                <p>{!_'Celkový počet produktov'} <strong>{$productCount}</strong></p>
+            </div>
+        </div>
+
+    </div>
+</div>

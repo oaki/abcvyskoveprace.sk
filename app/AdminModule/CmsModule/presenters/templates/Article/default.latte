@@ -1,0 +1,114 @@
+{block content}
+{import ../defineBlock.latte}
+{include #sortablemenu}
+
+<div class="span8">
+    <div class="btn-group my-action-holder">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li><a href="{link :Admin:Cms:Node:add module_id=>1, id_menu_item=>$presenter->id_menu_item}">Pridať nový
+                    článok</a></li>
+            <li><a href="{link :Admin:Cms:Homepage:default id=>null,id_menu_item=>$presenter->id_menu_item}">Zobraziť
+                    moduly</a></li>
+            <li><a target="_blank"
+                   href="{plink :Front:Article:default id=>$presenter->id, id_menu_item=>$presenter->id_menu_item}">Zobraziť</a>
+            </li>
+        </ul>
+    </div>
+
+
+    <h1 class="page-header">Článok</h1>
+    {form form}
+        <ul class="nav nav-tabs" id="article-tabs">
+            {foreach $form->getGroups() as $k=>$g}
+                {if $k != 'Btn'}
+                    <li><a href="#{$form->getName()}_{$k|webalize}">{$g->getOption('label')}</a></li>
+                {/if}
+            {/foreach}
+        </ul>
+
+        <div class="tab-content">
+            {foreach $form->getGroups() as $k=>$g}
+                {if $k != 'Btn'}
+                    <div class="tab-pane" id="{$form->getName()}_{$k|webalize}">
+                        {foreach $g->getControls() as $c}
+                            {$c->label}
+                            {$c->control}
+                        {/foreach}
+                    </div>
+                {/if}
+            {/foreach}
+        </div>
+
+
+        <div class="form-actions">
+
+            {foreach $form->getGroup('Btn')->getControls() as $c}
+                {$c->control}
+            {/foreach}
+        </div>
+    {/form}
+
+
+    <script>
+        var linkGetSlug = {plink getSlug!};
+
+        $(function() {
+
+            $('#article-tabs a').click(function(e) {
+                e.preventDefault();
+                $(this).tab('show');
+            });
+
+            $('#article-tabs a:first').tab('show');
+
+            function getSlug(data) {
+                console.log(data);
+                var d = [];
+                $.each(data, function(index, obj) {
+                    if (obj.name == 'slug' || obj.name == 'title') {
+                        d.push(obj);
+                    }
+                });
+                console.log(d);
+                $.ajax({
+                    type    : 'POST',
+                    url     : linkGetSlug,
+                    data    : d,
+                    success : function(json_data) {
+                        console.log('success');
+                        console.log(json_data);
+                        $('.article_slug').val(json_data.slug);
+                    }
+                });
+            }
+
+            $('.article_title').live('change', function() {
+                var v = $(this).val();
+                var article_meta_title = $('.article_meta_title');
+                var slug_el = $('.article_slug');
+                var slug = slug_el.val();
+
+                if (slug == '') {
+                    var myform = $(this).parents('form');
+
+                    getSlug(myform.serializeArray());
+                }
+
+                if (article_meta_title.val() == '') {
+                    article_meta_title.val(v);
+                }
+            });
+
+            $('.article_slug').live('change', function() {
+                var myform = $(this).parents('form');
+                getSlug(myform.serializeArray());
+            })
+
+        });
+    </script>
+
+    <div class="well">
+        {control file}
+    </div>
+</div><!--/span-->

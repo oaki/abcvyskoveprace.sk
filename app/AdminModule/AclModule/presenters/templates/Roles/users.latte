@@ -1,0 +1,15 @@
+{block title}Users of role {$role}{/block}
+{block content}
+{include './default.latte'}
+
+<h2>Users belong to the role "{$role}"</h2>
+
+<div class="tree">
+    <ul>
+        {foreach $users as $u}
+            <li>{$u->login} <a href="{plink Users:edit, $u->id_user}">
+                    <span class="icon icon-edit"></span>
+                </a></li>
+        {/foreach}
+    </ul>
+</div>

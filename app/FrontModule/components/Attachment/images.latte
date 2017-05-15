@@ -1,0 +1,14 @@
+<div n:if="count($files)>0" class="gallery">
+    {foreach $files as $f}
+
+        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+            <a rel="prettyPhoto[{$id}]" class="thumbnail"
+               href="{$f|img:default:$dimension['big']['width']:$dimension['big']['height']:$dimension['big']['flag']}">
+                <img class="img-responsive"
+                     src="{$f|img:default:$dimension['thumb']['width']:$dimension['thumb']['height']:$dimension['thumb']['flag']}"
+                     alt="{$f['name']}">
+            </a>
+        </div>
+
+    {/foreach}
+</div><!--  c gallery -->

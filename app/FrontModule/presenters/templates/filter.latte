@@ -1,0 +1,102 @@
+<div class="col-lg-3 col-md-3 col-sm-12">
+    <div class="panel-group" id="accordionNo">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title"><a data-toggle="collapse" href="#collapseCategory" class="collapseWill"> <span
+                                class="pull-left"> <i class="fa fa-caret-right"></i></span> Kategória </a></h4>
+            </div>
+            <div id="collapseCategory" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    {var $parent = null}
+                    {block category}
+                        {if isset($categories[$parent]) AND ($parent === NULL OR $parent == $presenter->id_category OR isset($categoryParents[$parent]))}
+                            {foreach $categories[$parent] as $c}
+                                <ul class="nav nav-pills nav-stacked tree">
+                                    <li class="{if $c['id_category'] == $presenter->id_category}active open-tree{/if} dropdown-tree ">
+                                        <a href="{plink :Front:Eshop:default
+                                id_category=>$c['id_category'],
+                                sale=>null,
+                                top=>null,
+                                news=>null,
+                                id_product_marks=>null }" class="dropdown-tree-a">{$c['name']} </a>
+                                        {include #this parent => $c['id_category']}
+                                </ul>
+                            {/foreach}
+                        {/if}
+                    {/block}
+                </div>
+            </div>
+        </div>
+        <!--/Category menu end-->
+
+        {form filterForm class=>'filter-form '}
+            <div class="panel panel-default panel-not-category">
+                <div class="panel-heading">
+                    <h4 class="panel-title"><a class="collapseWill  pressed" data-toggle="collapse"
+                                               href="#collapsePrice" title="{!_'Cena'}"> {!_'Cena'} <span
+                                    class="pull-left"> <i class="fa fa-caret-right"></i></span> </a>
+                        <!-- <span class="pull-right clearFilter  label-danger"> Resetovať </span> --> </h4>
+                </div>
+                <div id="collapsePrice" class="panel-collapse collapse">
+                    <div class="panel-body priceFilterBody">
+                        {* <div id="range-slider"></div> *}
+                        {input priceFrom id=>'input-min-number'}
+                        <div class="pull-left" style="padding-top: 22px">-</div>
+                        {input priceTo id=>'input-max-number'}
+
+                        <button type="submit" class="btn btn-default pull-right"
+                                id="range-slider-submit">{!_'filtrovať'}</button>
+                    </div>
+                </div>
+            </div>
+            <!--/price panel end-->
+
+            <div class="panel panel-default" n:if="count($form['id_product_marks']->getItems()) > 1">
+                <div class="panel-heading">
+                    <h4 class="panel-title"><a data-toggle="collapse" href="#collapseBrand" class="collapseWill"> Značka
+                            <span class="pull-left"> <i class="fa fa-caret-right"></i></span> </a></h4>
+                </div>
+                <div id="collapseBrand" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="smoothscroll maxheight300">
+                            <div n:foreach="$form['id_product_marks']->getItems() as $k=>$mark" class="block-element">
+                                <label class="icr-label">
+                                    <span class="icr-item type_checkbox"></span>
+                                    <span class="icr-hidden">
+                                        {$form['id_product_marks']->getControlPart($k)}
+                                    </span>
+                                    <span class="icr-text">{$mark}</span>
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/brand panel end-->
+
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title"><a data-toggle="collapse" href="#collapseThree" class="collapseWill">
+                            Zľava <span class="pull-left"> <i class="fa fa-caret-right"></i></span> </a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        <div class="block-element">
+                            {input top}
+                        </div>
+                        <div class="block-element">
+                            {input sale}
+                        </div>
+                        <div class="block-element">
+                            {input news}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {/form}
+        <!--/discount  panel end-->
+    </div>
+</div>

@@ -1,0 +1,167 @@
+{block content}
+
+<div class="column right twothird">
+
+    <div id="fileupload">
+        <form action="{plink :Admin:FileNode:upload id_file_node=>$control->id_file_node}" method="POST"
+              enctype="multipart/form-data">
+            <div class="fileupload-buttonbar">
+                <label class="fileinput-button">
+                    <span>Pridávanie súborov...</span>
+                    <input type="file" name="files[]" multiple>
+                </label>
+                {*
+                <button type="submit" class="start">Start upload</button>
+                <button type="reset" class="cancel">Cancel upload</button>
+                *}
+                <button type="button" class="delete">Zmazať všetky súbory</button>
+            </div>
+        </form>
+        <div class="fileupload-content">
+            <ul class="files">
+
+            </ul>
+            <div class="fileupload-progressbar"></div>
+        </div>
+    </div>
+
+
+    <script id="template-upload" type="text/x-jquery-tmpl" n:syntax="off">
+			<li class="template-upload{{if error}} ui-state-error{{/if}}">
+				<div class="preview">
+					{{if thumb}}
+						<a href="${url}" target="_blank"><img src="${thumb}"></a>
+					{{/if}}
+				</div>
+				<div class="name">${name}</div>				
+				{{if error}}
+					<div class="error" colspan="2">Error:
+						{{if error === 'maxFileSize'}}File is too big
+						{{else error === 'minFileSize'}}File is too small
+						{{else error === 'acceptFileTypes'}}Filetype not allowed
+						{{else error === 'maxNumberOfFiles'}}Max number of files exceeded
+						{{else}}${error}
+						{{/if}}
+					</div>
+				
+				{{/if}}
+				<div class="cancel"><button>Cancel</button></div>
+			</li>
+
+
+    </script>
+    <script id="template-download" type="text/x-jquery-tmpl" n:syntax="off">
+			<li class="template-download{{if error}} ui-state-error{{/if}}" id="id_file-${id}">
+				{{if error}}
+					<div></div>
+					<div class="name">${name}</div>					
+					<div class="error" colspan="2">Error:
+						{{if error === 1}}File exceeds upload_max_filesize (php.ini directive)
+						{{else error === 2}}File exceeds MAX_FILE_SIZE (HTML form directive)
+						{{else error === 3}}File was only partially uploaded
+						{{else error === 4}}No File was uploaded
+						{{else error === 5}}Missing a temporary folder
+						{{else error === 6}}Failed to write file to disk
+						{{else error === 7}}File upload stopped by extension
+						{{else error === 'maxFileSize'}}File is too big
+						{{else error === 'minFileSize'}}File is too small
+						{{else error === 'acceptFileTypes'}}Filetype not allowed
+						{{else error === 'maxNumberOfFiles'}}Max number of files exceeded
+						{{else error === 'uploadedBytes'}}Uploaded bytes exceed file size
+						{{else error === 'emptyResult'}}Empty file upload result
+						{{else}}${error}
+						{{/if}}
+					</div>
+				{{else}}
+					<div class="preview">
+						{{if thumb}}
+							<img src="${thumb}">
+						{{/if}}
+					</div>
+					<div class="name">
+						<a href="${url}" target="_blank">${name}</a>
+					</div>
+					
+					
+				{{/if}}
+				
+				<div class="btn">
+					<div class="move">
+						<span>Presunúť</span>
+					</div>
+					<div class="delete">					
+						<button data-type="${delete_type}" data-url="${delete_link}">Zmazať</button>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</li>
+
+
+    </script>
+</div>
+
+<div class="clear"></div>
+
+
+<script>
+
+    $(function() {
+        'use strict';
+
+        // Initialize the jQuery File Upload widget:
+        $('#fileupload').fileupload({'autoUpload' : true});
+
+        // Load existing files:
+        $.getJSON(
+                {plink : Admin
+                :
+                FileNode:getFiles
+                'id_file_node' =
+                >
+                $control - > id_file_node
+            },
+            function(files) {
+                var fu = $('#fileupload').data('fileupload');
+                fu._adjustMaxNumberOfFiles(-files.length);
+                fu._renderDownload(files)
+                    .appendTo($('#fileupload .files'))
+                    .fadeIn(function() {
+                        // Fix for IE7 and lower:
+                        $(this).show();
+                    });
+            });
+
+        // Open download dialogs via iframes,
+        // to prevent aborting current uploads:
+        $('#fileupload .files a:not([target^=_blank])').live('click', function(e) {
+            e.preventDefault();
+            $('<iframe style="display:none;"></iframe>')
+                .prop('src', this.href)
+                .appendTo('body');
+        });
+
+        $('ul.files').sortable({
+            handle : '.btn .move span',
+            stop   : function(event, ui) {
+                var arraied = $('ul.files').sortable('toArray');
+                $.post({link saveOrder
+            !
+        },
+                    {
+                        'order' : arraied
+                    }
+                )
+                ;
+            }
+
+        })
+        ;
+
+        $('.move_btn').button({
+            text  : false,
+            icons : {primary : 'ui-icon-trash'}
+        });
+
+    })
+    ;
+</script>

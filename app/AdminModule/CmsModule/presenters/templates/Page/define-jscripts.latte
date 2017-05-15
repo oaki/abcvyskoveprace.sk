@@ -1,0 +1,46 @@
+<script>
+    $(document).ready(function() {
+
+        function getParentLink(parent_id) {
+            $.get( {plink getParentLink!} +'&parent_id=' + parent_id, function(json_data) {
+                $('#fullurl').html(json_data.fullurl);
+            });
+        }
+
+        function getSlug(parent_id, slug, id_menu_item) {
+            $.get(
+                    {plink getSlug!} +'&parent_id=' + parent_id + '&actual_id_menu_item=' + id_menu_item + '&slug=' + slug,
+                function(json_data) {
+                    console.log(json_data);
+                    console.log(json_data.slug);
+                    $('.page-slug').val(json_data.slug);
+                }
+            );
+        }
+
+        $('.page-parent_id').change(function() {
+            var v = $(this).val();
+            getParentLink(v);
+            getSlug(v, $('.page-slug').val(), {$presenter->id_menu_item});
+        });
+
+        $('.page-name').live('change', function() {
+            var v = $(this).val();
+            var slug_el = $('.page-slug');
+            var slug = slug_el.val();
+
+            if (slug == '') {
+                getSlug($('.page-parent_id').val(), v, {$presenter->id_menu_item});
+            }
+        })
+
+        $('.page-slug').live('change', function() {
+            getSlug($('.page-parent_id').val(), $(this).val(), {$presenter->id_menu_item});
+        })
+
+        getParentLink($('.page-parent_id').val());
+    });
+
+
+</script>
+

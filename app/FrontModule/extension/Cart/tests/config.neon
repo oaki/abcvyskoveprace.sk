@@ -1,0 +1,2 @@
+extensions:
+	cart: Oaki\ShoppingCart\DI\Extension

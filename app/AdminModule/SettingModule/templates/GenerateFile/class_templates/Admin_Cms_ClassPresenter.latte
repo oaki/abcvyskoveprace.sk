@@ -1,0 +1,86 @@
+{php echo '<'.'?php';}
+
+/**
+* {$name|noescape}Presenter presenter.
+*
+* @author     Pavol Bincik
+* @package    CMS
+*/
+
+class Admin_Cms_{$name|noescape}Presenter extends Admin_Cms_BasePresenter{
+
+
+private $model;
+
+function __construct(NDIContainer $context) {
+parent::__construct($context);
+$this->model = $this->getService('{$name|noescape}');
+}
+
+
+function renderDefault( $id ){
+
+$value = $this->model->fetch($id);
+
+if(!$value AND $id !='')
+throw new NBadRequestException ('{$name|noescape} does not exist.');
+
+if( $value )
+$this['form']->setDefaults( $value );
+}
+
+function handleSave( Form $form){
+
+$v = $form->getValues();
+
+$this->model->update($v, $this->id);
+
+//musi sa zavolat change status node
+$this->getService('Node')->putInToTheSystem( $this->id );
+
+$this->flashMessage('{$name|noescape} bola uložená');
+
+if($this->isAjax()){
+$this->invalidateControl('form');
+$this->invalidateControl('flashmessage');
+}else{
+$this->redirect('this');
+}
+
+}
+
+function createComponentForm(){
+
+$f = new AdminForm;
+$f->getElementPrototype()->class='ajax';
+
+$f->addText('title', 'Nadpis')
+->setAttribute('placeholder', 'Sem vložte pomenovanie')
+->setAttribute('class', 'span9');
+
+$f->addSubmit('btn', 'Uložiť zmeny')
+->getControlPrototype()->class = 'btn btn-success';
+
+$f->onSuccess[] = array($this, 'handleSave');
+
+//        $f->getElementPrototype()->onsubmit('tinyMCE.triggerSave()');
+
+return $f;
+}
+
+function createComponentFile($name){
+
+$f = new FileControl( $this, $name);
+
+$f->setIdFileNode( $this->model->getIdFileNode( $this->id ) );
+
+$f->setTemplateName('slideshow');
+
+
+$f->addInput( array('type'=>'text','name'=>'name','css_class'=>'input-large name','placeholder'=>'Sem umiestnite názov') );
+
+$f->saveDefaultInputTemplate();
+
+return $f;
+}
+}

@@ -1,0 +1,44 @@
+{block content}
+<h1 class="page-header">{block #title}Roles{/block}
+    <a class="btn btn-success" href="{plink Roles:add}">
+        Add
+    </a></h1>
+<div class="tree">
+
+    {var $continue=>false}
+    {var $depth=>1}
+
+    {block #treeView}
+        <ul{if $continue} class="border_parent"{/if}>
+            {foreach $parents as $child}
+                <li{if $iterator->isLast()} class="last"{/if}>{$child->name} ({$child->members})
+                    <a href="{plink Roles:add, $child->id}">
+                        <span class="icon icon-plus"></span>
+                    </a>
+                    <a href="{plink Roles:edit, $child->id}">
+                        <span class="icon icon-pencil"></span>
+                    </a>
+                    <a href="{plink Roles:users, $child->id}">
+                        <span class="icon icon-user"></span>
+                    </a>
+                    <a href="{plink Roles:access, $child->id}">
+                        <span class="icon icon-camera"></span>
+                    </a>
+                    <span class="icon icon-check" title="{$child->comment}"></span>
+
+                    <a href="{plink Roles:delete, $child->id}">
+                        <span class="icon icon-remove"></span>
+                    </a></li>
+                {if $nodes->hasChildNodes($child->id)}
+                    {if $iterator->isLast() OR $depth==1}
+                        {var $continue=>false}
+                    {else}
+                        {var $continue=>true}
+                    {/if}
+                    {include #treeView, 'parents' => $nodes->getChildNodes($child->id), 'continue' => $continue, 'depth' => $depth+1}
+                {/if}
+            {/foreach}
+        </ul>
+    {/block}
+
+</div>

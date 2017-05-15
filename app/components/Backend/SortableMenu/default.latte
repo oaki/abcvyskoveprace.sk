@@ -1,0 +1,65 @@
+{snippet menu}
+    {var $id_menu_name = 'sortable_left_menu'}
+    <div id="{$id_menu_name|noescape}">
+        {var parent => NULL}
+        {block #menu}
+
+            <ol n:ifset="$tree[$parent]" {if $parent==NULL}class="sortable first"{/if}>
+                {foreach $tree[$parent] as $m}
+
+                    <li id="id_menu_item_{$m['id_menu_item']}"
+                        class="{if $m['id_menu_item'] == $presenter->id_menu_item}active{/if}{if $parent==NULL} first{/if}">
+                        <div class="menu-btn">
+
+                            <a style="float:left;" class="ui-state-default ui-icon ui-icon-pencil"
+                               href="{plink $editLink $m['id_menu_item']}">Zmeniť</a>
+                            <span style="float:left;"
+                                  class="move ui-state-default ui-icon ui-icon-arrow-4">Presunúť</span>
+                            <a style="float:left;" class="ui-state-default ui-icon ui-icon-trash confirm-ajax"
+                               href="{link delete! id=>$m['id_menu_item']}">Zmazať</a>
+                        </div>
+
+                        <a class="name{if $presenter->id_menu_item == $m['id_menu_item']} active{/if}{if $m['status']=='deactivate'} deactivate{/if}"
+                           href="{plink $loadNodeLink 'id_menu_item'=>$m['id_menu_item'], 'id'=>NULL}">{$m['name']}</a>
+
+                        {include #this parent => $m['id_menu_item']}
+                    </li>
+
+                {/foreach}
+            </ol>
+        {/block}
+    </div>
+
+    <script>
+
+        $(document).ready(function() {
+            var name = {$id_menu_name};
+            var $sortable = $('#' + name + ' ol.sortable');
+            var link = {link saveOrder!};
+            $sortable.nestedSortable({
+                disableNesting       : 'no-nest',
+                forcePlaceholderSize : true,
+                handle               : 'span.move',
+                helper               : 'clone',
+                items                : 'li',
+                maxLevels            : 5,
+                opacity              : .6,
+                placeholder          : 'placeholder',
+                revert               : 250,
+                tabSize              : 10,
+                tolerance            : 'pointer',
+                toleranceElement     : '> div',
+
+                stop : function(event, ui) {
+                    //serialized = $('ol.sortable').nestedSortable('serialize');
+                    arraied = $sortable.nestedSortable('toArray', {startDepthCount : 0});
+
+                    $.post(link, {
+                        '{$control->getName()|noescape}-order' : arraied
+                    });
+                }
+            });
+
+        });
+    </script>
+{/snippet}

@@ -1,0 +1,11 @@
+{foreach $list as $l}
+    {if $l['type'] == 'oneCol'}
+        {foreach $l['images'] as $img}
+            <div class="img_animations banner-fullwidth">
+                <a href="{$img['params']['link']}">
+                    <img src="{$img['image']|img:default:1970:403:5}" class="img-responsive " title="" alt="banner">
+                </a>
+            </div>
+        {/foreach}
+    {/if}
+{/foreach}

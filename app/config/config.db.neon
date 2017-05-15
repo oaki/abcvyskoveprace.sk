@@ -1,0 +1,11 @@
+parameters:
+    database:
+            driver: mysqli
+            socket: /tmp/mariadb101.sock
+            database: abcvyskoveprace
+            username: abcvyskoveprace
+            password: abcvyskoveprace
+            charset: utf8
+#            port: 3310
+#            explain: true
+#            profiler: true

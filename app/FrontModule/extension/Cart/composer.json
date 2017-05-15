@@ -1,0 +1,24 @@
+{
+  "name": "oaki/shopping-cart",
+  "description": "Nette Shopping Cart",
+  "keywords": [
+    "nette",
+    "cart",
+    "eshop"
+  ],
+  "license": "MIT",
+  "version": "0.0.1",
+  "authors": [
+    {
+      "name": "Pavol Bincik",
+      "email": "pavol@bincik.sk"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.1",
+    "nette/nette": "~2.3"
+  },
+  "require-dev": {
+    "nette/tester": "~1.3"
+  }
+}

@@ -1,0 +1,47 @@
+{block title}{!_'Košík'}{/block}
+
+{block content}
+
+
+<div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-7">
+        <h1 class="section-title-inner"><span><i
+                        class="fa fa fa-envelope"> </i><span> {!_'Fakturačná adresa a adresa doručenia'}</span></h1>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar">
+        <h4 class="caps"><a href="{plink :Front:Eshop:default}" title="{!_'Späť do obchodu'}"><i
+                        class="fa fa-chevron-left"></i> {!_'Späť do obchodu'} </a></h4>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-12">
+        <div class="row userInfo">
+            <div class="col-xs-12 col-sm-12">
+                {include orderStep.latte}
+
+                {include ../profileSingIn.latte, type=>'cart'}
+
+            </div>
+        </div>
+    </div>
+    <!--/row end-->
+
+    <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar">
+        <div class="contentBox">
+            <div class="w100 costDetails">
+                <div class="table-block" id="order-detail-content">
+                    <a class="button-style-nav btn btn-primary btn-lg btn-block goToNextStep" title="checkout"
+                       style="margin-bottom:10px"> {!_'Spôsob platby'} &nbsp; <i class="fa fa-arrow-right"></i> </a>
+                    <div class="w100 cartMiniTable">
+                        {control orderSummary}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End popular -->
+    </div>
+    <!--/rightSidebar-->
+
+</div>
+<!--/row-->

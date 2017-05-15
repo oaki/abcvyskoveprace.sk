@@ -1,0 +1,39 @@
+{block content}
+<h1 class="page-header">{block #title}Users{/block}
+    <a href="{plink Users:add}" class="btn btn-success">
+        Add
+    </a></h1>
+
+{$form->render('begin')}
+{$form->render('errors')}
+<table>
+    <tr>
+        <th>{$form['login']->getLabel()}</th>
+        <td>{$form['login']->getControl()}</td>
+        <td>{$form['search']->getControl()}</td>
+    </tr>
+    <tr>
+        <td></td>
+        <td colspan="2">Examples: "John Doe", "John*", "%Doe"</td>
+    </tr>
+</table>
+{$form->render('end')}
+
+
+<dl>
+    {foreach $users as $id => $u}
+        <dt>{$u['login']} <a href="{plink Users:edit, $id}">
+                <span class="icon icon-edit"></span>
+            </a>
+            <a href="{plink Users:access, $id}">
+                <span class="icon icon-user"></span>
+            </a>
+            <a href="{plink Users:delete, $id}">
+                <span class="icon icon-remove"></span>
+
+            </a></dt>
+        {if count($u['roles'])}
+            <dd>{foreach $u['roles'] as $role}{$role}{if !$iterator->isLast()}, {/if}{/foreach}</dd>{/if}
+    {/foreach}
+</dl>
+

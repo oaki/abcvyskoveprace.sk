@@ -1,0 +1,160 @@
+{block #content}
+
+{import ../defineBlock.latte}
+
+
+{include #sortablemenu}
+
+
+<div class="span8">
+
+    <div class="btn-group my-action-holder">
+        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li><a target="_blank"
+                   href="#{* plink :Front:Page:default id=>$presenter->id_menu_item *}">Zobraziť</a></li>
+        </ul>
+    </div>
+
+    <h1 class="page-header">Moduly na stránke</h1>
+    {snippet nodelist}
+        <div class="btn-group pull-left">
+            <a class="btn " href="{link :Admin:Cms:Node:add module_id=>1,position=>'content'}"><i class="icon-user"></i>
+                Pridať článok</a>
+            {*}<a class="btn  dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="{link :Admin:Cms:Node:add module_id=>1,position=>'content'}">Pridať článok do obsahu</a></li>
+                <li><a href="{link :Admin:Cms:Node:add module_id=>1,position=>'content_right'}">Pridať článok do pravého
+                    stĺpca</li>
+            </ul>
+
+            <a class="btn" href="{link :Admin:Cms:Node:add module_id=>2,position=>'top'}"><i class="icon-plus-sign"></i> Pridať prezentáciu ( Slideshow )</a>
+            <a class="btn" href="{link :Admin:Cms:Node:add module_id=>3,position=>'content'}"><i class="icon-plus-sign"></i> Pridať kontaktnú podstránku</a>*}
+        </div>
+
+        {*<a class="btn" href="{link :Admin:Cms:Node:add module_id=>1}"><i class="icon-plus-sign"></i> Pridať článok</a>
+
+
+         <a class="btn" href="{link :Admin:Cms:Node:add module_id=>2,position=>'top'}"><i class="icon-plus-sign"></i> Pridať prezentáciu ( Slideshow )</a>
+        <a class="btn" href="{link :Admin:Cms:Node:add module_id=>3}"><i class="icon-plus-sign"></i> Pridať kontaktnú podstránku</a>
+*}
+        <div n:snippet="nodePositionBtn" class="pull-right btn-group">
+            <a title="Zobraziť moduly, ktoré sú v hlavnej obsahovej časti" href="{link this! position=>'content'}"
+               class="ajax btn{if $presenter->position == 'content'} active{/if}"><i
+                        class="icon-content"></i><span n:ifset="$nodeCount['content']"
+                        class="btn-count btn-danger">{$nodeCount['content']}</span></a>
+            {*<a title="Zobraziť moduly, ktoré sú v pravo stĺpci" href="{link this! position=>'content_right'}" class="ajax btn{if $presenter->position == 'content_right'} active{/if}"><i class="icon-content-right"></i><span n:ifset="$nodeCount['content_right']" class="btn-count btn-danger">{$nodeCount['content_right']}</span></a>
+            <a  title="Zobraziť moduly, ktoré sú v hornej časti" href="{link this! position=>'top'}" class="ajax btn{if $presenter->position == 'top'} active{/if}"><i class="icon-content-top"></i><span n:ifset="$nodeCount['top']" class="btn-count btn-danger">{$nodeCount['top']}</span></a>
+            *}
+        </div>
+
+        <div class="clear"></div>
+
+        <div id="nodecontainer">
+            <ol class="sortable first">
+
+                {foreach $node_list as $n}
+
+                    <li id="id_node_{$n['id_node']}" class="well node-item">
+                        <div>
+                            <div class="node-list-btn-holder">
+                                <div class="btn-holder btn-group">
+                                    {if $n['node_info']['status'] == 'invisible'}
+                                        {var $icon = 'icon-eye-close'}
+                                        {var $btn = ''}
+                                        {var $title = 'Neviditelné'}
+                                    {else}
+                                        {var $icon = 'icon-eye-open'}
+                                        {var $btn = ''}
+                                        {var $title = 'Viditelné'}
+                                    {/if}
+
+                                    <a class="ajax btn {$btn|noescape}"
+                                       href="{link saveVisibility! id_node=>$n['node_info']['id_node'],status=>$n['node_info']['status']}">
+                                        <i class="{$icon|noescape}" title="{$title}"></i>
+                                    </a>
+
+
+                                    <a class="move btn " title="Presunúť"><i class="icon-move"></i></a>
+
+
+                                    <a class="confirm-moving-node btn " href="#openModalDialogForMoveNode"
+                                       title="Premiesniť do inej sekcie" rel="{$n['node_info']['id_node']}"><i
+                                                class="icon-share-alt"></i></a>
+
+                                    <a class="confirm-ajax btn btn-danger" href="{link delete! id=>$n['id_node']}"
+                                       title="Zmazať"><i class="icon-trash icon-white"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="node-list-name-holder">
+                                <a class="name" href="{$n['link']}">{$n['node_title']['node_name']}</a>
+
+                                <p>{$n['node_title']['node_desc']|striptags|truncate:200}</p>
+                            </div>
+
+
+                        </div>
+
+                    </li>
+
+                {/foreach}
+            </ol>
+
+            <div class="modal hide" id="modal-move-node">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h3>Premiestnenie článku do inej kategórie</h3>
+                </div>
+                {form moveNodeToAnotherPage}
+                    <div class="modal-body">
+                        <p>{label id_menu_item/}
+                            {input id_menu_item}
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn" data-dismiss="modal">Zavrieť</a>
+                        {input btn class=>'btn btn-primary'}
+                    </div>
+                {/form}
+            </div>
+            <script>
+
+                $(document).ready(function() {
+
+                    $('.confirm-moving-node').on('click', function() {
+                        var id_node = $(this).attr('rel');
+
+                        $('#moveNodeToAnotherPage__id_node').val(id_node);
+                        $('#modal-move-node').modal();
+                    })
+
+                    $('#nodecontainer ol.sortable').nestedSortable({
+                        disableNesting       : 'no-nest',
+                        forcePlaceholderSize : true,
+                        handle               : 'a.move',
+                        helper               : 'clone',
+                        items                : 'li',
+                        maxLevels            : 1,
+                        opacity              : .6,
+                        placeholder          : 'placeholder',
+                        revert               : 250,
+                        tabSize              : 10,
+                        tolerance            : 'pointer',
+                        toleranceElement     : '> div',
+
+                        stop : function(event, ui) {
+                            //serialized = $('ol.sortable').nestedSortable('serialize');
+                            arraied = $('#nodecontainer ol.sortable').nestedSortable('toArray', {startDepthCount : 0});
+
+                            $.post( {link saveOrder!}, {'order' : arraied});
+                        }
+                    });
+
+                });
+            </script>
+        </div>
+    {/snippet}
+
+
+</div><!--/span-->

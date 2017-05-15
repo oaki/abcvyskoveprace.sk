@@ -1,0 +1,23 @@
+{
+  "name": "abcvyskoveprace",
+  "version": "0.0.1",
+  "homepage": "http://www.abcvyskoveprace.sk",
+  "authors": [
+    "Pavol Bincik"
+  ],
+  "description": "abcvyskoveprace",
+  "main": "index.html",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "tests"
+  ],
+  "dependencies": {
+    "nette.ajax.js": "~2.0.0",
+    "dropzone": "4.0.1",
+    "ckeditor": "4.5.1",
+    "ublaboo-datagrid": "4.4.22"
+  }
+}

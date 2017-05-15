@@ -1,0 +1,177 @@
+{block title}{!_'Košík'} - {!_'REPRE - reklamné predmety'}{/block}
+
+{block content}
+
+<div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-7">
+        <h1 class="section-title-inner "><span><i
+                        class="glyphicon glyphicon-shopping-cart"></i> {!_'Nákupný košík'} </span>
+        </h1>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar">
+        <h4 class="caps">
+            <a href="{plink :Front:Eshop:default}" title="{_'Späť do obchodu'}">
+                <i class="fa fa-chevron-left"></i>
+                {_'Späť do obchodu'}
+            </a>
+        </h4>
+    </div>
+</div>
+<!--/.row-->
+
+<div n:snippet="cart">
+    {if !$presenter->cart->isEmpty()}
+        <div class="row">
+            <div class="col-lg-9 col-md-9 col-sm-7">
+                <div class="row userInfo">
+                    <!--
+                    Cart
+                    -->
+                    <div class="col-xs-12 col-sm-12">
+                        {form cartForm class=>'ajax'}
+
+                            {include orderStep.latte}
+
+                            <div class="cartContent w100">
+
+                                <table class="cartTable table-responsive" style="width:100%">
+                                    <tbody>
+
+                                    <tr class="CartProduct cartTableHeader">
+                                        <td style="width:15%"> {!_'Produkt'}</td>
+                                        <td style="width:25%">{!_'Popis'}</td>
+                                        <td style="width:15%">{!_'Počet'}</td>
+
+                                        <td style="width:20%">{!_'Cena za kus'}</td>
+                                        <td style="width:15%">{!_'Spolu'}</td>
+                                        <td style="width:10%" class="delete">&nbsp;</td>
+                                    </tr>
+
+                                    <tr n:foreach="$presenter->cart->getItems() as $key=>$i" class="CartProduct">
+
+                                        {*<tr n:foreach="$form['products']->controls as $product" class="CartProduct">*}
+                                        {var $link = $presenter->link($i->getLink(), $i->linkArgs)}
+
+                                        <td class="CartProductThumb">
+                                            <div>
+                                                <a href="{$link}" title="{$i->name}"><img
+                                                            src="{$i->image|img:product:285:380:6}"
+                                                            alt="{$i->name}"></a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="CartDescription">
+                                                <h4>
+                                                    <a href="{$link}" title="{$i->name}">{$i->name}</a>
+                                                </h4>
+                                                <span class="product-code">{$i->data['ean']}</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            {input $form['products'][$key] class=>'quanitySniper'}
+                                            {*<input class="quanitySniper" type="text" value="{$i->quantity}"
+                                                   name="quanitySniper" data-key="{$key}">*}
+                                            <br/>
+
+                                        </td>
+
+                                        <td class="price">
+                                            {$i->getPriceModel()->priceToShow|currency3dec}
+                                        </td>
+                                        <td class="price">
+                                            {$i->getTotalPriceWithTax()|currency}
+                                        </td>
+
+                                        <td class="delete">
+                                            <a class="ajax" href="{link delete! key=>$key}" title="{_'Zmazať'}">
+                                                <i class="glyphicon glyphicon-trash fa-2x"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            {input comment class=>"form-control cart-comment"}
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <!--cartContent-->
+
+                            <div class="cartFooter w100">
+                                <div class="box-footer">
+                                    <div class="pull-left">
+                                        <a href="{plink Eshop:default}" class="btn btn-default"
+                                           title="{!_'Pokračovať v nákupe'}">
+                                            <i class="fa fa-arrow-left"></i> &nbsp; {!_'Pokračovať v nákupe'}
+                                        </a>
+                                    </div>
+                                    <div class="pull-right">
+
+                                        {input updateBtn class=>'btn btn-default'}
+                                        {input next class=>'btn btn-success btn-cart-continue'}
+                                        {*<button data-href="{plink save! data=>[]}" class="btn btn-default saveCartBtn">
+                                            <i class="fa fa-undo"></i> &nbsp;
+                                            {!_'Prepočítať'}
+                                        </button>*}
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/ cartFooter -->
+
+
+                            <script>
+                                if (typeof $ != 'undefined') {
+
+                                    $("input.quanitySniper").TouchSpin({
+                                        buttondown_class : "btn btn-link",
+                                        buttonup_class   : "btn btn-link",
+                                        min              : 0,
+                                        max              : 1000000,
+                                    });
+
+                                }
+                            </script>
+
+                        {/form}
+                    </div>
+                    <!--/ end cart -->
+
+
+                </div>
+                <!--/row end-->
+
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar">
+                <div class="contentBox">
+                    <div class="w100 costDetails">
+                        <div class="table-block" id="order-detail-content">
+
+                            <a class="button-style-nav btn btn-primary btn-lg btn-block goToNextStep" title="checkout"
+                               style="margin-bottom:10px">
+                                {!_'Pokračovať'}&nbsp; <i class="fa fa-arrow-right"></i>
+                            </a>
+
+                            {control orderSummary}
+
+                        </div>
+                    </div>
+                </div>
+                <!-- End popular -->
+            </div>
+            <!--/rightSidebar-->
+
+        </div>
+    {else}
+        <div class="row">
+            <div class="alert alert-info">{!_'Košík je prázdny'}</div>
+        </div>
+    {/if}
+</div>
+<!--/row-->
+
+<div style="clear:both"></div>

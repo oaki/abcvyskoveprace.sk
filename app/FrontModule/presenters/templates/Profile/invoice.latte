@@ -1,0 +1,54 @@
+{block title}{_'Môj profil'} - {_'Aquacity Slovakia - reklamné predmety'}{/block}
+
+{block content}
+<div class="col-xs-12">
+    <div class="row">
+        <h1 class="section-title-inner"><span><i class="fa fa-unlock-alt"></i>&nbsp;{_'Môj profil'}</span></h1>
+        <div class="row userInfo">
+            <div class="col-xs-12">
+                <h2 class="block-title-2">
+                    <span>{_'Vítame Vás vo vašom účte. Tu si môžete upraviť vaše osobné údaje a sledovať vaše objednávky.'}</span>
+                </h2>
+                <ul class="myAccountList row">
+                    {include menu.latte}
+                </ul>
+                <div class="clear clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-xs-12 mt20 mb40">
+    <div class="row">
+        <h2>{_'Faktúry'}</h2>
+        {if !empty($invoiceList)}
+            <table class="my-account table table-striped">
+                <tr>
+                    <th>{_'Číslo'}</th>
+                    <th>{_'Doklad'}</th>
+                    <th>{_'Dátum'}</th>
+                    <th>{_'Dátum od'}</th>
+                    <th>{_'Dátum do'}</th>
+                    <th>{_'Suma bez DPH'}</th>
+                    <th>{_'Suma s DPH'}</th>
+                    <th>{_'Vybavená'}</th>
+                </tr>
+                {foreach $invoiceList as $order}
+                    <tr>
+                        <td><a href="{plink order $order->ID}"
+                               title="{$order->Aquacity Slovakia_ID}">{$order->Aquacity Slovakia_ID}</a></td>
+                        <td>{$order->Aquacity Slovakia_NO}</td>
+                        <td>{$order->DATE_CREATE|date:'d.m.Y'}</td>
+                        <td>{$order->DATE_FROM|date:'d.m.Y'}</td>
+                        <td>{$order->DATE_TO|date:'d.m.Y'}</td>
+                        <td>{$order->EUR_WOT|currency}</td>
+                        <td>{$order->EUR_SUM|currency}</td>
+                        <td style="text-align: center;">{if $order->ORDER_ENDED}<img
+                                src="/images/Aquacity Slovakia-check.png" alt="{_'áno'}" />{/if}</td>
+                    </tr>
+                {/foreach}
+            </table>
+        {else}
+            <div class="alert alert-info">{_'Nemáte žiadne faktúry.'}</div>
+        {/if}
+    </div>
+</div>

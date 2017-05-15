@@ -1,0 +1,22 @@
+{block #content}
+
+{import ../defineBlock.latte}
+
+
+{include #sortablemenu}
+
+
+<div class="span8">
+    <h1 class="page-header">Vitajte
+        <span n:if="$user->getIdentity()->name != ''">{$user->getIdentity()->name}</span>
+        <span n:if="$user->getIdentity()->surname != ''">{$user->getIdentity()->surname}</span>
+    </h1>
+    <div class="hero-unit">
+
+        <p>Ste prihlásený ako: <strong>{$user->getIdentity()->data['login']}</strong><br>
+
+            Pre pokračovanie kliknite na položku v menu.</p>
+    </div>
+
+
+</div><!--/span-->

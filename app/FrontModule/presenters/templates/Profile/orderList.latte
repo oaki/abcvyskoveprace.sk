@@ -1,0 +1,50 @@
+{block title}{_'Objednávky'} - {_'Aquacity Slovakia reklamné predmety'}{/block}
+
+{block content}
+<div class="col-xs-12">
+    <div class="row">
+        <h1 class="section-title-inner"><span><i class="fa fa-unlock-alt"></i>&nbsp;{_'Môj profil'}</span></h1>
+        <div class="row userInfo">
+            <div class="col-xs-12">
+                <h2 class="block-title-2"><span>Vítame Vás vo vašom účte. Tu si môžete upraviť vaše osobné údaje a sledovať vaše objednávky.</span>
+                </h2>
+                <ul class="myAccountList row">
+                    {include menu.latte}
+                </ul>
+                <div class="clear clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-xs-12 mt20 mb40">
+    <div class="row">
+        <h2>{_'Objednávky'}</h2>
+        {if !empty($orderList)}
+            <table class="my-account table table-striped">
+                <tr>
+                    <th>{_'Číslo'}</th>
+                    <th>{_'Doklad'}</th>
+                    <th>{_'Dátum'}</th>
+                    <th>{_'Suma bez DPH'}</th>
+                    <th>{_'Suma s DPH'}</th>
+                    <th>{_'Stav'}</th>
+                    <th></th>
+                </tr>
+                {foreach $orderList as $order}
+                    <tr href="{plink order, $order->id_order}">
+                        <td><a href="{plink order $order->id_order}" title="{$order->id_order}">{$order->id_order}</a>
+                        </td>
+                        <td>{$order->id_order}</td>
+                        <td>{$order->add_date|date:'d.m.Y'}</td>
+                        <td>{$order->total_price|currency}</td>
+                        <td>{$order->total_price_with_tax|currency}</td>
+                        <td>{$orderStates[$order->order_status]}</td>
+                        <td><a class="btn btn-success" href="{plink order $order->id_order}">Zobraziť</a></td>
+                    </tr>
+                {/foreach}
+            </table>
+        {else}
+            <div class="alert alert-info">{_'Nemáte žiadne objednávky.'}</div>
+        {/if}
+    </div>
+</div>

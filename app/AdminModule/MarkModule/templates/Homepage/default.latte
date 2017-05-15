@@ -1,0 +1,26 @@
+{block #content}
+
+<h1 class="page-header">Dashboard</h1>
+
+<div class="alert alert-info">
+    {form addMessage}
+        {label text /}
+        {input text class=>'span9'}
+        {input btn}
+    {/form}
+</div>
+
+{control simpleGrid}
+
+<script>
+    $('.simpleGrid-edidable').on('blur', function() {
+        var value_name = $(this).data('name');
+        var data = {
+            'id_admin_contact' : $(this).data('id'),
+        };
+        data[value_name] = $(this).val();
+
+        $.post({plink save!}, {data : data});
+    })
+</script>
+

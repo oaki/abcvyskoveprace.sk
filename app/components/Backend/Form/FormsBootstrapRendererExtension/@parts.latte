@@ -1,0 +1,26 @@
+{*
+ * This file is part of the Kdyby (http://www.kdyby.org)
+ *
+ * Copyright (c) 2008, 2012 Filip Procházka (filip.prochazka@kdyby.org)
+ *
+ * For the full copyright and license information, please view the file license.txt that was distributed with this source code.
+ *}
+
+{import "@form.latte"}
+
+{if $mode === "errors"}
+    {include #errors, renderer => $renderer}
+
+{elseif $mode === "body"}
+    {include #body, renderer => $renderer}
+
+{elseif $mode instanceof NFormContainer}
+    {include #controls, renderer => $renderer, controls => $renderer->findControls($mode)}
+
+{elseif $mode instanceof NFormGroup}
+    {include #group, renderer => $renderer, group => $renderer->processGroup($mode)}
+
+{elseif $mode instanceof IFormControl}
+    {include #control, renderer => $renderer, control => $mode}
+
+{/if}

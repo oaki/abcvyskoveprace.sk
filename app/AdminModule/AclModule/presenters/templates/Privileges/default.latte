@@ -1,0 +1,15 @@
+{block content}
+<h1 class="page-header">{block #title}Privileges{/block}
+    <a href="{plink Privileges:add}" class="btn btn-success">Add </a></h1>
+<dl>
+    {foreach $privileges as $privilege}
+        <dt>{$privilege->name} <a href="{plink //Privileges:edit, $privilege->id}">
+                <span class="icon icon-edit"></span></a>
+            <a href="{plink Privileges:delete, $privilege->id}">
+                <span class="icon icon-remove"></span>
+            </a>
+        </dt>
+        {ifset $privilege->comment}
+            <dd>{$privilege->comment}</dd>{/ifset}
+    {/foreach}
+</dl>

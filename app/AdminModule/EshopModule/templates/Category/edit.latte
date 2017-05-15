@@ -1,0 +1,68 @@
+{block #content}
+<div class="span4">
+
+    <div class="lang-holder">
+        <a class="btn" href="{link Category:add}">
+            <i class="icon-plus-sign"></i>
+            Nová kategória
+        </a>
+    </div>
+
+    <div class="well sidebar-nav" style="padding: 8px 0;">
+
+        {control sortableEshopCategory}
+
+    </div><!--/.well -->
+</div><!--/span-->
+
+<div class="span8">
+    <h2 class="page-header">Kategória</h2>
+
+    {form categoryForm}
+        <ul class="nav nav-tabs" id="category-tabs">
+            {foreach $form->getGroups() as $k=>$g}
+                {if $k != 'Btn'}
+                    <li><a href="#{$form->getName()}_{$k|webalize}">{$g->getOption('label')}</a></li>
+                {/if}
+            {/foreach}
+        </ul>
+
+        <div class="tab-content">
+            {foreach $form->getGroups() as $k=>$g}
+                {if $k != 'Btn'}
+                    <div class="tab-pane" id="{$form->getName()}_{$k|webalize}">
+                        {foreach $g->getControls() as $c}
+                            {$c->label}
+                            {$c->control}
+                        {/foreach}
+                    </div>
+                {/if}
+            {/foreach}
+        </div>
+
+
+        <div class="form-actions">
+
+            {foreach $form->getGroup('Btn')->getControls() as $c}
+                {$c->control}
+            {/foreach}
+        </div>
+
+    {/form}
+
+    <script>
+        $(function() {
+            $('#category-tabs a').click(function(e) {
+                e.preventDefault();
+                $(this).tab('show');
+            })
+            $('#category-tabs a:first').tab('show');
+        });
+    </script>
+
+    <h1 class="page-header">Obrázok</h1>
+
+    {control file}
+
+
+</div>

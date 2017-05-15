@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{!_'REPRE.SK'}</title>
+    <meta charset="utf-8"/>
+    <style type="text/css">
+        body
+        {
+            color       : #595959;
+            padding     : 0;
+            margin      : 0;
+            font-family : "Trebuchet MS";
+            font-size   : 12px;
+        }
+
+        #heading
+        {
+            height           : 90px;
+            background-color : #b3b7ba;
+            padding-top      : 10px;
+            padding-left     : 40px;
+            width            : 100%;
+        }
+
+        #content
+        {
+            width       : 100%;
+            margin-left : 40px;
+        }
+
+        table
+        {
+            border-collapse : collapse;
+        }
+
+        td
+        {
+            border : 1px solid #b3b7ba;
+        }
+
+        th
+        {
+            background-color : #b3b7ba;
+            color            : #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div id="heading">
+    <img src="{$baseUrl}/images/repre_logo.gif" alt="{!_'REPRE.SK'}"/>
+</div>
+<div id="content">
+    <br/><br/>
+    {!_'Dobrý deň,'}<br/><br/>
+    {!_'bola prijatá nasledujúca objednávka'}{if $fastOrder == 1} - {!_'rýchly dopyt'}{/if}:<br/><br/>
+
+    {if $fastOrder == 1}
+        <table>
+            <tr>
+                <td><strong>{!_'Email'}</strong></td>
+                <td>{$userEmail}</td>
+            </tr>
+        </table>
+    {else}
+        <table>
+            <tr>
+                <td><strong>{!_'Firma'}</strong></td>
+                <td>{$customer->getCompany()}</td>
+            </tr>
+            <tr>
+                <td><strong>{!_'Ulica'}</strong></td>
+                <td>{$customer->getStreet()}</td>
+            </tr>
+            <tr>
+                <td><strong>{!_'PSČ'}</strong></td>
+                <td>{$customer->getZip()}</td>
+            </tr>
+            <tr>
+                <td><strong>{!_'Obec'}</strong></td>
+                <td>{$customer->getCity()}</td>
+            </tr>
+            <tr>
+                <td><strong>{!_'IČO'}</strong></td>
+                <td>{$customer->getCompanyNumber()}</td>
+            </tr>
+            <tr>
+                <td><strong>{!_'DIČ'}</strong></td>
+                <td>{$customer->getTaxNumber()}</td>
+            </tr>
+            <tr>
+                <td><strong>{!_'IČDPH'}</strong></td>
+                <td>{$customer->getVatNumber()}</td>
+            </tr>
+
+        </table>
+    {/if}
+
+    <br/><br/>
+
+    {!_'Položky objednávky'}:<br/><br/>
+    <table>
+        <thead>
+        <tr>
+            <th>{!_'KÓD'}</th>
+            <th>{!_'NÁZOV'}</th>
+            <th>{!_'CENA BEZ DPH'}</th>
+            <th>{!_'POTLAČ'}</th>
+            <th>{!_'MNOŽSTVO'}</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr n:foreach="$items as $i">
+            <td>{$i->data['ean_code']}</td>
+            <td>{$i->getName()}</td>
+            <td>
+                {$i->getPackageQuantity()|amount} * {$i->getPrice()|currency}<br/>
+                {$i->getExtraQuantity()|amount} * {$i->getAdditionalPrice()|currency}
+            </td>
+            <td>{if $i->isPrint()}Áno{else}Nie{/if}</td>
+            <td>{$i->getQuantity()}</td>
+        </tr>
+
+        <tr n:foreach="$printing as $p">
+            <td></td>
+            <td>Potlač - {$p['data']['type']['NAME']} {$p['data']['color']['NAME']} </td>
+            <td>
+                {$p['price']|number:2:'.':' '|currency }
+            </td>
+            <td></td>
+            <td>{$p['count']} </td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td>{!_'Doprava'} - {$shipping['name']}</td>
+            <td>{$shipping['price']|number:2:'.':' '|currency }</td>
+            <td></td>
+            <td>1</td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td>{!_'Manipulačný poplatok'}</td>
+            <td>{$additionalPrice|number:2:'.':' '|currency }</td>
+            <td></td>
+            <td>1</td>
+        </tr>
+
+        </tbody>
+        <tfoot>
+        <tr>
+            <th colspan="2">{!_'Cena spolu'}</th>
+            <th>{$totalPrice|number:2:'.':' '|currency } {!_'bez DPH'}</th>
+            <th>{$totalPriceWithVat|number:2:'.':' '|currency } {!_'s DPH'}</th>
+            <th></th>
+        </tr>
+        </tfoot>
+
+    </table>
+
+    <br/><br/>
+
+    <br/><br/>
+
+    Poznámka: {$notice}
+
+    <br/><br/>
+
+    {!_'Vaša objednávka nadobudne platnosť až po odsúhlasení cenovej ponuky zaslanej obchodným oddelením. Cenová ponuka Vám bude zaslaná v krátkom čase. V cenovej ponuke Vám budú potvrdené termíny dodania na objednané položky. Ak ponuku neobdržíte, kontaktujte, prosím, naše'}
+    <a href="{$link}" title="{!_'obchodné oddelenie'}">{!_'obchodné oddelenie'}</a>.
+
+    <br/><br/>
+
+    {!_'S pozdravom'},<br/>
+    {!_'Tím REPRE'}<br/>
+    <br/><br/>
+</div>
+</body>
+</html>

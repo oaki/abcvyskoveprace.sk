@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{_'Aquacity Slovakia.SK'}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <style type="text/css">
+        body
+        {
+            color       : #595959;
+            padding     : 0;
+            margin      : 0;
+            font-family : "Trebuchet MS";
+            font-size   : 12px;
+        }
+
+        #heading
+        {
+            height           : 90px;
+            background-color : #b3b7ba;
+            padding-top      : 10px;
+            padding-left     : 40px;
+            width            : 100%;
+        }
+
+        #content
+        {
+            width       : 100%;
+            margin-left : 40px;
+        }
+
+        table
+        {
+            border-collapse : collapse;
+        }
+
+        td
+        {
+            border : 1px solid #b3b7ba;
+        }
+
+        th
+        {
+            background-color : #b3b7ba;
+            color            : #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div id="heading">
+    <img src="{$baseUrl}/images/Aquacity Slovakia_logo.gif" alt="Aquacity Slovakia.SK"/>
+</div>
+<div id="content">
+    <br/><br/>
+    {_'Dobrý deň,<br /><br />
+        bola prijatá nasledujúca požiadavka od používateľa s prihlasovacím menom'} {$userName}:<br/><br/>
+
+    <hr>
+
+    {$message}
+
+    <hr>
+
+
+    <br/><br/>
+
+    {_'S pozdravom,<br />
+        Tím Aquacity Slovakia'}<br/>
+    <br/><br/>
+</div>
+</body>
+</html>

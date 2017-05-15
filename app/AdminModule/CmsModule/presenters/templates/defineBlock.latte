@@ -1,0 +1,31 @@
+{define sortablemenu}
+
+    <div class="span4">
+
+        <div class="lang-holder">
+            <a class="btn" href="{link Page:addItem}">
+                <i class="icon-plus-sign"></i>
+                Nová stránka
+            </a>
+
+            {if count($langs)>1}
+                &nbsp;&nbsp;
+                Jazyk:
+
+                {foreach $langs as $lang}
+                    <a n:if="$lang->active" class="btn btn-mini {if $presenter->lang == $lang->iso} btn-inverse{/if}"
+                                            href="{plink :Admin:Cms:Homepage:default lang=>$lang->iso, id_menu_item=>NULL}"
+                                            title="{$lang->name}">{$lang->iso|capitalize}</a>
+                {/foreach}
+            {/if}
+        </div>
+
+        <div class="well sidebar-nav" style="padding: 8px 0;">
+
+
+            {control sortablemenu}
+
+        </div><!--/.well -->
+    </div><!--/span-->
+
+{/define}

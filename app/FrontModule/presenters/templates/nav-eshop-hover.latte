@@ -1,0 +1,46 @@
+<li class="dropdown megamenu-fullwidth ">
+
+    <a class="dropdown-toggle" href="{plink :Front:Eshop:default}" title="{_'Online Shop'}"> {_'Online Shop'} <strong
+                class="caret"> </strong> </a>
+
+    <ul class="dropdown-menu">
+        <li class="megamenu-content">
+            <div class="col-lg-6 col-sm-6 col-md-6 unstyled noMarginLeft newCollectionUl">
+                <a href="{$eshopDefaultLink}" class="button-style-nav" title="{_'Vstúpte'}">{_'Vstúpte'}</a>
+                <ul class="col-lg-6 col-sm-6 col-md-6 unstyled noMarginLeft">
+                    <li>
+                        <p><strong> {_'Obľúbené kategórie'} </strong></p>
+                    </li>
+                    <li n:foreach="$nav['categories'] as $c"><a
+                                href="{plink :Front:Eshop:default id_category=>$c['id_category']}"
+                                title="{$c['name']}"> {$c['name']} </a></li>
+                    {*<li class="more-link"> <a href="{plink :Front:Eshop:default}" title="{_'všetky kategórie'}"> {_'všetky kategórie'} ... </a> </li>*}
+                </ul>
+                <ul class="col-lg-6 col-sm-6 col-md-6 unstyled">
+                    <li>
+                        <p><strong> {_'Obľúbené značky'} </strong></p>
+                    </li>
+                    <li n:foreach="$nav['brands'] as $b"><a
+                                href="{plink :Front:Eshop:default id_category=>null,id_product_marks=>[$b['id_product_mark']]}"
+                                title="{$b['name']}"> {$b['name']} </a></li>
+                    {*<li class="more-link"> <a href="{plink :Front:Eshop:default}" title="{_'všetky značky'}"> {_'všetky značky'} ... </a> </li>*}
+                </ul>
+            </div>
+            <ul n:foreach="$nav['products'] as $product" class="col-lg-3  col-sm-3 col-md-3 col-xs-6">
+                <li class="no-margin productPopItem ">
+                    {var $link = $presenter->link(':Front:Product:default', ['id_product_param'=>$product['id_product_param']])}
+                    <a href="{$link}" title="{$product['name']}">
+                        <img class="img-responsive"
+                             src="{$product['image']|img:$product['id_product_supplier']:285:380:6}"
+                             alt="{$product['name']}">
+                    </a>
+                    <a class="text-center productInfo alpha90" href="{$link}"
+                       title="{$product['name']|truncate:30}"> {$product['name']|truncate:30} <br>
+                        <span> {$product['price']|number:2:'.':' '|currency}</span>
+                    </a>
+                </li>
+            </ul>
+
+        </li>
+    </ul>
+</li>

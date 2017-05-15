@@ -1,0 +1,19 @@
+<div class="w100 clearfix">
+    <ul class="orderStep orderStepLook2">
+
+        <li {ifCurrent Cart:default}class="active"{/ifCurrent}><a href="{plink Cart:default}"
+                                                                  title="{!_'Nákupný košík'}"><i
+                        class="fa fa-shopping-cart"> </i><span>{!_'Nákupný košík'}</span> </a></li>
+        <!-- <li {ifCurrent Cart:step1}class="active"{/ifCurrent}> <a href="{plink Cart:step1}"><i class="fa fa-paint-brush"> </i><span>{!_'Potlač'}</span> </a> </li> -->
+        <li {ifCurrent Cart:step2}class="active"{/ifCurrent}><a href="{plink Cart:step2}" title="{!_'Doprava'}"><i
+                        class="fa fa-truck"> </i><span>{!_'Doprava'}</span> </a></li>
+        <li {ifCurrent Cart:step3}class="active"{/ifCurrent}><a href="{plink Cart:step3}"
+                                                                title="{!_'Fakturačná Adresa'}"> <i
+                        class="fa fa fa-envelope"> </i><span> {!_'Fakturačná Adresa'} </span></a></li>
+
+        <li {ifCurrent Cart:step4}class="active"{/ifCurrent}><a href="{plink Cart:step4}" title="{!_'Spôsob platby'}"><i
+                        class="fa fa-check-square"> </i><span>{!_'Spôsob platby'}</span></a></li>
+        <li {ifCurrent Cart:step5}class="active"{/ifCurrent}><a href="{plink Cart:step5}" title="{!_'Sumár'}"><i
+                        class="fa fa-check-square"> </i><span>{!_'Sumár'}</span></a></li>
+    </ul>
+</div>

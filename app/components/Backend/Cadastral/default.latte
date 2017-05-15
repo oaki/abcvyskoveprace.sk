@@ -1,0 +1,17 @@
+<label class="control-label">Kraj</label>
+<div class="controls">
+    <select id="frmbaseForm-cadastral-county" name="cadastral[county]">
+        {foreach $counties as $k=>$c}
+            <option value="{$k}" {if $county == $k}selected="selected"{/if}>{$c}</option>
+        {/foreach}
+    </select>
+</div>
+
+<label class="control-label">Okres</label>
+<div class="controls">
+    <select id="frmbaseForm-cadastral-district" name="cadastral[district]">
+        {foreach $districties as $k=>$c}
+            <option value="{$k}" {if $district == $k}selected="selected"{/if}>{$c}</option>
+        {/foreach}
+    </select>
+</div>

@@ -1,0 +1,136 @@
+{block content}
+
+
+{import ../defineBlock.latte}
+
+
+{include #sortablemenu}
+
+
+<div class="span8">
+    <h1 class="page-header">Kontakt</h1>
+    {form form}
+        <ul class="nav nav-tabs" id="contact-tabs">
+            {foreach $form->getGroups() as $k=>$g}
+                {if $k != 'Btn'}
+                    <li><a href="#{$form->getName()}_{$k|webalize}">{$g->getOption('label')}</a></li>
+                {/if}
+            {/foreach}
+        </ul>
+
+        <div class="tab-content">
+            {foreach $form->getGroups() as $k=>$g}
+                {if $k != 'Btn'}
+                    <div class="tab-pane" id="{$form->getName()}_{$k|webalize}">
+                        {foreach $g->getControls() as $c}
+                            {$c->label}
+                            {$c->control}
+                        {/foreach}
+                    </div>
+                {/if}
+            {/foreach}
+        </div>
+
+
+        <div class="form-actions">
+
+            {foreach $form->getGroup('Btn')->getControls() as $c}
+                {$c->control}
+            {/foreach}
+        </div>
+
+
+    {/form}
+
+
+    <script type="text/javascript">
+        (function($) {
+
+            $('.longitude').after('<div id="map_canvas">sss</div>');
+
+            $('#contact-tabs a').click(function(e) {
+                e.preventDefault();
+                $(this).tab('show');
+                if ($(this).attr('href') == '#form_nastavenie-google-maps') {
+                    initialize();
+                }
+                ;
+            })
+
+            $('#contact-tabs a:first').tab('show');
+
+            var geocoder;
+            var map;
+            var marker;
+
+            function initialize() {
+                var options = {
+                    zoom      : 16,
+                    //			center: latlng,
+                    mapTypeId : google.maps.MapTypeId.SATELLITE
+                };
+
+                map = new google.maps.Map(document.getElementById("map_canvas"), options);
+                //MAP
+                var lat = {$presenter['form']['latitude']->getValue()};
+                var lng = {$presenter['form']['longitude']->getValue()};
+                var latlng = new google.maps.LatLng(lat, lng);
+
+                //GEOCODER
+                geocoder = new google.maps.Geocoder();
+
+                marker = new google.maps.Marker({
+                    map       : map,
+                    draggable : true
+                });
+
+                //default
+
+                marker.setPosition(latlng);
+                map.setCenter(latlng);
+
+            }
+
+            $(function() {
+                $(".address").autocomplete({
+                    //This bit uses the geocoder to fetch address values
+                    source : function(request, response) {
+                        geocoder.geocode({'address' : request.term}, function(results, status) {
+                            response($.map(results, function(item) {
+                                return {
+                                    label     : item.formatted_address,
+                                    value     : item.formatted_address,
+                                    latitude  : item.geometry.location.lat(),
+                                    longitude : item.geometry.location.lng()
+                                }
+                            }));
+                        })
+                    },
+                    //This bit is executed upon selection of an address
+                    select : function(event, ui) {
+                        $(".latitude").val(ui.item.latitude);
+                        $(".longitude").val(ui.item.longitude);
+                        var location = new google.maps.LatLng(ui.item.latitude, ui.item.longitude);
+                        marker.setPosition(location);
+                        map.setCenter(location);
+                    }
+                });
+
+            });
+
+            //Add listener to marker for reverse geocoding
+            google.maps.event.addListener(marker, 'drag', function() {
+                geocoder.geocode({'latLng' : marker.getPosition()}, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        if (results[0]) {
+                            $('.address').val(results[0].formatted_address);
+                            $('.latitude').val(marker.getPosition().lat());
+                            $('.longitude').val(marker.getPosition().lng());
+                        }
+                    }
+                });
+            });
+        })(jQuery);
+
+    </script>
+</div><!--/span-->

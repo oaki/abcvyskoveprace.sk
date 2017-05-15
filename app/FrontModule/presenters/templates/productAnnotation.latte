@@ -1,0 +1,57 @@
+<!-- Top -->
+
+<div n:foreach="$list as $l" class="item{ifset $containerClass} {$containerClass}{/ifset}">
+
+    {var $link = $presenter->link(':Front:Product:default', ['id_product_param'=>$l['id_product_param']])}
+
+    <div class="product">
+
+        {if $l['info']['mark']['file']}
+            <img src="{$l['info']['mark']['file']['image']|img:default:80:60}" alt="{$l['info']['mark']['name']}"
+                 class="brand">
+        {/if}
+
+        <div class="image">
+            <a href="{$link}" title="{$l['info']['name']}"><img
+                        src="{$l['image']|img:$l['info']['id_product_supplier']:285:380:6}" alt="{$l['info']['name']}"
+                        class="img-responsive"></a>
+
+            <div n:if="$l['info']['sale'] OR $l['info']['news'] OR $l['info']['our_tip']" class="promotion">
+                <a n:if="$l['info']['sale']" href="{plink :Front:Eshop:default sale=>1}" class="sale"
+                                             title="{_'AKCIA'}">{_'AKCIA'} {$l['info']['sale_percent']}%</a>
+                <a n:if="$l['info']['news']" href="{plink :Front:Eshop:default news=>1}" class="new-product"
+                                             title="{_'NEW'}">{_'NEW'}</a>
+                <a n:if="$l['info']['our_tip']" href="{plink :Front:Eshop:default our_tip=>1}" class="top"
+                                                title="{_'TOP'}">{_'TOP'}</a>
+            </div>
+        </div>
+
+        <div class="description">
+
+            <h4><a href="{$link}" title="{$l['info']['name']}">{$l['info']['name']}</a></h4>
+
+            <div class="grid-description">
+                <p>{$l['info']['description']|truncate:80}</p>
+            </div>
+
+        </div>
+        <div class="price">
+
+
+
+            <span>
+                {$l['price']->priceToShow|currency}
+            </span>
+            <span n:if="$l['price']->isSale==1" class="old-price">
+                {$l['price']->originalPriceToShow|currency}
+            </span>
+
+        </div>
+        <div class="action-control">
+            <a class="btn btn-primary" href="{$link}" title="{_'Pridať do košíka'}">
+                <span class="add2cart"><i class="glyphicon glyphicon-shopping-cart"> </i> {_'Podrobnosti'} </span>
+            </a>
+        </div>
+
+    </div>
+</div>

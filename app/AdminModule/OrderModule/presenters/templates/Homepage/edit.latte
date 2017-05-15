@@ -1,0 +1,146 @@
+{block #content}
+
+<div class="span12">
+    <div class="container-fluid">
+
+
+        <div class="row-fluid submenu-panel">
+
+            {if $o['id_invoice'] != null}
+                <a target="_blank" href="https://moja.superfaktura.sk/invoices/view/{$o['id_invoice']}">Prejsť na
+                    faktúru</a>
+            {else}
+                <a href="{plink createInvoice id=>$o['id_order']}" class="btn btn-success pull-right">Vytvorit
+                    fakturu</a>
+            {/if}
+
+
+            {form statusForm class=>"form-inline"}
+                {label order_status}{input order_status}
+                {input btn_submit class=>"btn"}
+            {/form}
+
+
+        </div>
+        <h2 class="page-header">OBJEDNÁVKA č. {$o['id_order']}</h2>
+
+        <div class="row-fluid">
+            <div class="span6">
+                <h3>Fakturačné údaje</h3>
+
+                {if $o['type'] == 1}
+                    {$o['company_name']}
+                {/if}
+                {$o['name']} {$o['surname']}<br/>
+                {$o['address']}<br/>
+                {$o['zip']}, {$o['city']}<br/>
+                {$o['iso']}<br/>
+
+                {if $o['type'] == 1}{$o['company_name']}
+                    <br/>
+                    IČO: {$o['ico']}<br/>
+                    DIČ: {$o['dic']}<br/>
+                {/if}
+
+            </div>
+
+            <div class="span6">
+                <h3 style="padding-top: 30px;">Dodacia adresa</h3>
+
+                {if $o['use_delivery_address'] == 1}
+                    {if $o['type'] == 1}{$o['delivery_company_name']}{/if}
+                    {$o['delivery_name']} {$o['delivery_surname']}<br/>
+                    {$o['delivery_address']}<br/>
+                {$o['delivery_zip']}, {$o['delivery_city']}<br/>
+                    {$o['delivery_iso']}<br/>
+                {else}
+                    {if $o['type'] == 1}
+                        {$o['company_name']}
+                    {/if}
+                {$o['name']} {$o['surname']}<br/>
+                    {$o['address']}<br/>
+                {$o['zip']}, {$o['city']}<br/>
+                    {$o['iso']}<br/>
+                {/if}
+
+            </div>
+        </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <h3 style="padding-top: 30px;">Kontakt</h3>
+
+                <b>Tel.</b> {$o['phone']}<br/>
+                <b>E-mail</b> {$o['email']}
+
+
+                <h4 style="padding-top: 30px;">Spôsob platby</h4>
+                {$o['payment_title']}
+
+
+                <h4 style="padding-top: 30px;">Spôsob dopravy</h4>
+                {$o['delivery_title']}
+
+
+                {if $o['notice']!=''}
+                    <h3>Poznámka zákazníka k objednávke</h3>
+                    {$o['notice']}
+                {/if}
+            </div>
+        </div>
+
+        <div class="row-fluid">
+            <div class="span12">
+                <h3 style="padding-top: 30px;">Tovar</h3>
+
+
+                <table class="table table-striped">
+                    <tr>
+                        <th>Kód</th>
+                        <th>Názov tovaru</th>
+                        <th style="text-align:center;">Množ.</th>
+                        <th style="text-align:right;">Jedn. cena</th>
+                        <th style="text-align:right;">Celkom</th>
+                    </tr>
+
+                    {foreach $o['products'] as $p}
+                        <tr>
+                            <td>{$p['code']}</td>
+                            <td>{$p['name']}</td>
+                            <td style="text-align:center;">{$p['count']}</td>
+                            <td style="text-align:right;">{$p['price_with_tax']|currency}</td>
+                            <td style="text-align:right;">{$p['count']*$p['price_with_tax']|currency}</td>
+                        </tr>
+                    {/foreach}
+
+                    <tr n:if="$o['delivery_price']>0">
+                        <td></td>
+                        <td>Doprava: {$o['delivery_title']}</td>
+                        <td style="text-align:center;"></td>
+                        <td style="text-align:right;"></td>
+                        <td style="text-align:right;">{$o['delivery_price_with_tax']|currency}</td>
+                    </tr>
+
+                    <tr n:if="$o['payment_price']>0">
+                        <td></td>
+                        <td>{$o['payment_title']}</td>
+                        <td style="text-align:center;"></td>
+                        <td style="text-align:right;"></td>
+                        <td style="text-align:right;">{$o['payment_price_with_tax']|currency}</td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="5">
+                            <h3>SPOLU: {$o['total_price_with_tax']|currency}
+                                s DPH
+                                ( {$o['total_price']|currency} bez DPH ) </h3>
+
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</div>

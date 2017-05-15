@@ -1,0 +1,20 @@
+{block title}{$page['meta_title']}{/block}
+{block description}{$page['meta_description']}{/block}
+{block keywords}{$page['meta_keywords']}{/block}
+
+{block content}
+
+    <div class="container">
+
+        <div class="content">
+            {if count($node_list) > 0}
+                {foreach $node_list as $l}
+                    {control $l['service_name'], $l['id_node'], $id_menu_item}
+                {/foreach}
+            {/if}
+
+        </div>
+        <div class="clear"></div>
+    </div>
+
+{/block}

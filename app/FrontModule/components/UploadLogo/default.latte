@@ -1,0 +1,40 @@
+<div class="modal fade" id="ModalUploadLogo" tabindex="-1" role="dialog">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+                <h3 class="modal-title-site text-center">{_'Nahrajte Vaše logo'}</h3>
+            </div>
+            <div class="modal-body">
+
+                <span class="max-size">Maximálna veľkosť súboru je 2MB.</span>
+                {form uploadLogoForm class=>'ajax'}
+                    <ul class="errors" n:if="$form->hasErrors()">
+                        <li n:foreach="$form->errors as $error">{$error}</li>
+                    </ul>
+
+                    <div class="form-group">
+                        <div>
+                            {input FILE class=>'form-control input'}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        {if $logo!=''}
+                            <div>
+                                {$logo} <br/>
+                                <a href="{link deleteImage!}" class="ajax btn btn-danger btn-xs">Zmazať</a>
+                            </div>
+                        {/if}
+                    </div>
+
+                    <div>
+                        <div>
+                            {input btn class=>'btn  btn-block btn-lg btn-primary'}
+                        </div>
+                    </div>
+                {/form}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+<div class="modal hide" id="modal-candidate">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h3>Úprava</h3>
+    </div>
+    {*{form form}
+        <div class="modal-body">
+            <p>{label id_menu_item/}
+                {input id_menu_item}
+            </p>
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">Zavrieť</a>
+            {input btn class=>'btn btn-primary'}
+        </div>
+    {/form}*}
+    {snippet form}{control form}{/snippet}
+</div>
+
+
+{snippet table}
+
+    <a href="{link add}" class="ajax btn add-candidate">Pridať</a>
+
+    <table class="table table-striped table-bordered">
+        {if count($candidates_list) == 0}
+            <tr>
+                <td colspan="3">bez záznamu</td>
+            </tr>
+        {else}
+
+            <thead>
+            <tr>
+                <th>Meno</th>
+                <th>Dátum</th>
+                <th style="width:60px;"></th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <tr n:foreach="$candidates_list as $c">
+                <td>{$c->name} {$c->surname}</td>
+                <td>{$c->add_date|date:"d.m.y"}</td>
+                <td class="btn-group">
+
+                    <a href="{link edit $c->id_reality_candidate}" class="btn-mini ajax candidate-edit"><i
+                                class="icon-pencil"></i> </a>
+                    <a href="{link delete $c->id_reality_candidate}" class="btn-mini btn-danger confirm-ajax"><i
+                                class="icon-trash icon-white"></i> </a>
+
+                </td>
+            </tr>
+
+            </tbody>
+        {/if}
+    </table>
+
+
+    <script>
+        $('.add-candidate').on('click', function() {
+            $.post({link add!}, $.nette.success);
+            $('#modal-candidate').modal();
+        })
+
+        $('.candidate-edit').on('click', function() {
+            $('#modal-candidate').modal();
+        })
+    </script>
+
+{/snippet}
+
+	

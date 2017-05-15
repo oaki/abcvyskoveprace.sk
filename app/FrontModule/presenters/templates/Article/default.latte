@@ -1,0 +1,24 @@
+{block title}{$article['title']}{/block}
+{block description}{$article['meta_description']}{/block}
+{block keywords}{$article['meta_keywords']}{/block}
+
+{block content}
+
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="row userInfo">
+            <div class="col-xs-12 col-sm-12">
+                <h1>{$article['title']}</h1>
+                {$article['text']|noescape}
+            </div>
+        </div>
+        <!--/row end-->
+        <div class="row" n:if="count($article['files'])>0">
+            <div class="col-sm-12">
+                {control attachment:images $article['files'], $article['id_node']}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="clear:both"></div>

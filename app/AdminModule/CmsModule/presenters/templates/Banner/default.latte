@@ -1,0 +1,28 @@
+{block #content}
+    <div class="span12">
+
+        <div class="container-fluid">
+
+            <h2 class="page-header">
+                <div class="btn-group pull-right ">
+                    <a class="btn btn-success" href="{plink add}">Pridať</a>
+                </div>
+                Banner
+            </h2>
+
+            {control simpleGrid}
+        </div>
+    </div>
+{/block}
+
+{block script}
+{include parent}
+<script>
+    $('.table-sortable tbody').sortable({
+        handle : '.handle',
+        update : function(event, ui) {
+            var newOrder = $(this).sortable('serialize');
+            $.get({plink saveOrder }, {order : newOrder});
+        }
+    });
+</script>

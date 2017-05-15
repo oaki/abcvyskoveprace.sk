@@ -1,0 +1,236 @@
+{block title}{!_'Košík'}{/block}
+
+{block content}
+
+
+<div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-7">
+        <h1 class="section-title-inner"><span><i class="fa fa-truck"> </i> {!_'Sumár'}</span></h1>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar">
+        <h4 class="caps"><a href="{plink :Front:Eshop:default}" title="{!_'Späť do obchodu'}"><i
+                        class="fa fa-chevron-left"></i> {!_'Späť do obchodu'} </a></h4>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-12">
+        <div class="row userInfo">
+
+            <div class="col-xs-12 col-sm-12">
+
+                {form orderForm}
+
+                    <ul class="alert alert-danger" n:if="$form->hasErrors()">
+                        <li n:foreach="$form->errors as $error">{$error}</li>
+                    </ul>
+
+                {include orderStep.latte}
+
+
+                    <div class="w100 clearfix">
+
+
+                        <div class="userInfo">
+
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <h2 class="block-title-2"> {!_'Prehľad objednávky'} </h2>
+                                </div>
+                            </div>
+
+                            <div class="cartContent w100">
+                                <table class="cartTable table-responsive">
+                                    <tbody>
+
+                                    <tr class="CartProduct cartTableHeader">
+                                        <td style="width:15%"> {!_'Produkt'}</td>
+                                        <td style="width:25%">{!_'Popis'}</td>
+                                        <td style="width:20%">{!_'Počet'}</td>
+                                        <td style="width:15%">{!_'Cena za kus'}</td>
+                                        <td style="width:15%">{!_'Spolu'}</td>
+                                    </tr>
+
+                                    <tr n:foreach="$presenter->cart->getItems() as $key=>$i" class="CartProduct">
+                                        {var $link = $presenter->link($i->getLink(), $i->linkArgs)}
+                                        <td class="CartProductThumb">
+                                            <div>
+                                                <a href="{$link}" title="{$i->name}"><img
+                                                            src="{$i->image|img:product:285:380:6}"
+                                                            alt="{$i->name}"></a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="CartDescription">
+                                                <h4>
+                                                    <a href="{$link}" title="{$i->name}">{$i->name}</a>
+                                                </h4>
+
+                                                <span class="product-code">{$i->data['ean']}</span>
+                                            </div>
+                                        </td>
+                                        <td class="quantity">{$i->quantity|amount}</td>
+                                        <td class="price-per-unit">
+                                            {$i->getQuantity()|amount} * {$i->getPriceModel()->priceToShow|currency}
+                                            <br/>
+                                        </td>
+                                        <td class="price">{$i->getTotalPriceWithTax()|currency}</td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+
+                                <h3 style="padding-top: 40px;">{!_'Vaše fakturačné údaje'}</h3>
+
+                                <table class="table table-striped">
+                                    <tbody>
+
+                                    <tr>
+                                        <td class="col-md-3">{!_'Meno'}</td>
+                                        <td>{$userInfo->name}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-3">{!_'Priezvisko'}</td>
+                                        <td>{$userInfo->surname}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-3">{!_'Adresa'}</td>
+                                        <td>{$userInfo->address}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-3">{!_'PSČ'}</td>
+                                        <td>{$userInfo->zip}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-3">{!_'Mesto'}</td>
+                                        <td>{$userInfo->city}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-3">{!_'Štát'}</td>
+                                        <td>{$userInfo->iso}</td>
+                                    </tr>
+
+                                    {if $userInfo->use_delivery_address != 1}
+                                        <tr>
+                                            <td></td>
+                                            <td><p>Dodacia adresa je rovnaká s fakturačnou.</p></td>
+                                        </tr>
+                                    {/if}
+
+                                    </tbody>
+                                </table>
+
+                                {if $userInfo->type == '1'}
+                                    <h3>{!_'Firma'}</h3>
+
+                                    <table class="table table-striped">
+                                        <tbody>
+
+                                        <tr>
+                                            <td class="col-md-3">{!_'Názov spoločnosti'}</td>
+                                            <td>{$userInfo->company_name}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="col-md-3">{!_'Platca DPH'}</td>
+                                            <td>{if $userInfo->paying_vat == '1'}áno{else}nie{/if}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-md-3">{!_'IČO'}</td>
+                                            <td>{$userInfo->ico}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="col-md-3">{!_'DIČ'}</td>
+                                            <td>{$userInfo->dic}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                {/if}
+
+                                {if $userInfo->use_delivery_address == 1}
+                                    <h3>{!_'Dodacie adresa'}</h3>
+                                    <table class="table table-striped">
+                                        <tbody>
+
+                                        <tr>
+                                            <td>{!_'Meno'}</td>
+                                            <td>{$userInfo->delivery_name}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{!_'Priezvisko'}</td>
+                                            <td>{$userInfo->delivery_surname}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>{!_'Telefon'}</td>
+                                            <td>{$userInfo->delivery_phone}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>{!_'Adresa'}</td>
+                                            <td>{$userInfo->delivery_address}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>{!_'Mesto'}</td>
+                                            <td>{$userInfo->delivery_city}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>{!_'PSČ'}</td>
+                                            <td>{$userInfo->delivery_zip}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>{!_'Štát'}</td>
+                                            <td>{$userInfo->delivery_iso}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                {/if}
+
+                                <div class="form-group">
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            {input comment class=>"form-control cart-comment"}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--/row end-->
+                    <div class="cartFooter w100">
+                        <div class="box-footer">
+                            <div class="pull-left"><a class="btn btn-default" href="{plink step3}"
+                                                      title="{!_'Adresa Doručenia'}">
+                                    <i class="fa fa-arrow-left"></i> &nbsp; {!_'Adresa Doručenia'} </a>
+                            </div>
+                            <div class="pull-right">
+                                {input next class=>'btn btn-success btn-cart-continue'}
+
+                            </div>
+                        </div>
+                    </div>
+
+                {/form}
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar">
+        <div class="contentBox">
+            <div class="w100 costDetails">
+                <div class="table-block" id="order-detail-content">
+                    <div class="w100 cartMiniTable">
+                        {control orderSummary}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End popular -->
+    </div>
+    <!--/rightSidebar-->
+
+</div>
+<!--/row-->

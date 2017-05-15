@@ -1,0 +1,12 @@
+<div class="clearfix annotation-article">
+    <div class="pull-left annotation-article--picture">
+        <a href="{$link}">
+            <img src="{$article['first_img']|img:default:150:120:5}" title="{$article['title']}"
+                 alt="{$article['title']}"/>
+        </a>
+    </div>
+    <div class="annotation-article-content">
+        <h3><a href="{$link}">{$article['title']}</a></h3>
+        <a href="{$link}">{$article['text']|noescape}</a>
+    </div>
+</div><!-- article -->

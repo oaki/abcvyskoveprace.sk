@@ -1,0 +1,274 @@
+{form registrationForm class=>"regForm", role=>"form"}
+    <div class="alert alert-danger" role="alert" n:if="$form->hasErrors()">
+        <p n:foreach="$form->errors as $error">{$error}</p>
+    </div>
+    <div class="w100 clearfix">
+        <div n:if="!$user->isLoggedIn()" class="col-lg-12">
+            {!_'Prihlásiť sa môžete'}
+            <a href="" class="underline" data-toggle="modal" data-target="#ModalLogin" title="{!_'tu'}">{!_'tu'}</a>.
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+            <h2 class="block-title-2">{!_'Účtovné informácie'}</h2>
+
+            <div class="form-group registration-form--type">
+                {input type}
+                <div class="alert alert-danger" n:ifcontent>{inputError type}</div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <div class="form-group">
+                        {label name/}
+                        {input name class=>'form-control'}
+                        <div class="alert alert-danger" n:ifcontent>{inputError name}</div>
+
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="form-group">
+                        {label surname/}
+                        {input surname class=>'form-control'}
+                        <div class="alert alert-danger" n:ifcontent>{inputError surname}</div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                {label address/}
+                {input address class=>'form-control'}
+                <div class="alert alert-danger" n:ifcontent>{inputError address}</div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <div class="form-group">
+                        {label city/}
+                        {input city class=>'form-control'}
+                        <div class="alert alert-danger" n:ifcontent>{inputError city}</div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="form-group">
+                        {label phone/}
+                        {input phone class=>'form-control'}
+                        <div class="alert alert-danger" n:ifcontent>{inputError phone}</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <div class="form-group">
+                        {label zip/}
+                        {input zip class=>'form-control'}
+                        <div class="alert alert-danger" n:ifcontent>{inputError zip}</div>
+
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="form-group">
+                        {label iso/}
+                        {input iso class=>'form-control'}
+                        <div class="alert alert-danger" n:ifcontent>{inputError iso}</div>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="registration-form--company">
+                <h2 class="block-title-2"><span>{!_'Firemné informácie'}</span></h2>
+
+                <div class="form-group">
+                    {label company_name/}
+                    {input company_name class=>'form-control'}
+                    <div class="alert alert-danger" n:ifcontent>{inputError company_name}</div>
+                </div>
+
+                <div class="form-group">
+                    {input paying_vat}
+                    <div class="alert alert-danger" n:ifcontent>{inputError paying_vat}</div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="form-group">
+                            {label ico/}
+                            {input ico class=>'form-control'}
+                            <div class="alert alert-danger" n:ifcontent>{inputError ico}</div>
+
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="form-group">
+                            {label dic/}
+                            {input dic class=>'form-control'}
+                            <div class="alert alert-danger" n:ifcontent>{inputError dic}</div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6">
+            <h2 class="block-title-2"><span>{!_'Dodacia adresa'}</span></h2>
+            <div class="form-group ">
+
+                {input use_delivery_address}
+                <div class="alert alert-danger" n:ifcontent>{inputError use_delivery_address}</div>
+            </div>
+
+            <div class="registration-form--delivery-address">
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="form-group">
+                            {label delivery_name/}
+                            {input delivery_name class=>'form-control'}
+                            <div class="alert alert-danger" n:ifcontent>{inputError delivery_name}</div>
+
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="form-group">
+                            {label delivery_surname/}
+                            {input delivery_surname class=>'form-control'}
+                            <div class="alert alert-danger" n:ifcontent>{inputError delivery_surname}</div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    {label delivery_address/}
+                    {input delivery_address class=>'form-control'}
+                    <div class="alert alert-danger" n:ifcontent>{inputError delivery_address}</div>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="form-group">
+                            {label delivery_city/}
+                            {input delivery_city class=>'form-control'}
+                            <div class="alert alert-danger" n:ifcontent>{inputError delivery_city}</div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="form-group">
+                            {label delivery_phone/}
+                            {input delivery_phone class=>'form-control'}
+                            <div class="alert alert-danger" n:ifcontent>{inputError delivery_phone}</div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="form-group">
+                            {label delivery_zip/}
+                            {input delivery_zip class=>'form-control'}
+                            <div class="alert alert-danger" n:ifcontent>{inputError delivery_zip}</div>
+
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <div class="form-group">
+                            {label delivery_iso/}
+                            {input delivery_iso class=>'form-control'}
+                            <div class="alert alert-danger" n:ifcontent>{inputError delivery_iso}</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+
+        <div class="col-xs-6 col-sm-6">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12">
+                    <h2 class="block-title-2"><span>{!_'Ostatné info'}</span></h2>
+                    <div class="form-group">
+                        {label login/}
+                        {input login class=>'form-control'}
+                        <div class="alert alert-danger" n:ifcontent>{inputError login}</div>
+                    </div>
+                </div>
+            </div>
+
+            <div n:if="$type == 'registration'" class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <div class="form-group">
+                        {label password/}
+                        {input password class=>'form-control'}
+                        <div class="alert alert-danger" n:ifcontent>{inputError password}</div>
+
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="form-group">
+                        {label passwordCheck/}
+                        {input passwordCheck class=>'form-control'}
+                        <div class="alert alert-danger" n:ifcontent>{inputError passwordCheck}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xs-12 col-sm-12">
+            <div class="form-group">
+
+                <p class="reg-chbox">
+                    <label for="frm-registrationForm-agree">
+                        {input agree}
+
+                        <div class="alert alert-danger" n:ifcontent>{inputError agree}</div>
+                    </label>
+                </p>
+            </div>
+
+        </div>
+
+        <div class="col-xs-12 col-sm-12">
+            <div class="form-group">
+
+                <p class="reg-chbox">
+                    <label for="frm-registrationForm-delivery_terms">
+                        {input delivery_terms}
+
+                        <div class="alert alert-danger" n:ifcontent>{inputError delivery_terms}</div>
+                    </label>
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="cartFooter w100">
+        <div class="box-footer">
+
+            <div n:ifset="$backButton"class="pull-left">
+                <a class="btn btn-default" href="{$backButton['link']}" title="{$backButton['title']}"> <i
+                            class="fa fa-arrow-left"></i> &nbsp; {$backButton['title']} </a>
+            </div>
+            <div class="pull-right">
+                {input submit class=>"btn btn-primary btn-small btn-cart-continue"}
+                {*<a href="{plink step4}" class="btn btn-primary btn-small " title="{!_'Adresa Doručenia'}"> {!_'Adresa Doručenia'} &nbsp; <i class="fa fa-arrow-circle-right"></i> </a>*}
+            </div>
+        </div>
+    </div>
+{/form}
+

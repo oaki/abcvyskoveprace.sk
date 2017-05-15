@@ -1,0 +1,23 @@
+<div class="c-current-article">
+    <div class="article{if $article['url_identifier']=='akcie'}-sale{/if}">
+
+        <h1 n:if="$article['title']!=''">{$article['title']}</h1>
+
+        {$article['text']|noescape}
+
+    </div><!-- article -->
+
+
+    {if count($images)>1}
+
+        <div class="gallery">
+
+            {foreach $images as $i}
+                <a class="gallimg" rel="prettyPhoto[{$article['id_node']}]" href="{$i['big']}"><img src="{$i['thumb']}"
+                                                                                                    alt=""/></a>
+            {/foreach}
+        </div><!-- gallery -->
+    {/if}
+
+
+</div>

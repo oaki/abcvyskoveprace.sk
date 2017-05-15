@@ -1,0 +1,59 @@
+<div n:snippet="minicart" class="dropdown cartMenu ">
+    <a href="{plink :Front:Cart:default}" class="dropdown-toggle">
+        <i class="fa fa-shopping-cart"> </i> <span
+                class="cartRespons">Košík ( {!$cart->getTotalPriceWithTax()|number:2:'.':' '|currency} ) </span>
+        <b class="caret"> </b>
+    </a>
+
+    <div class="dropdown-menu col-lg-4 col-xs-12 col-md-4 ">
+        <div class="w100 miniCartTable scroll-pane">
+            <table>
+                <tbody>
+                <tr n:foreach="$cart->getItems() as $key=>$i" class="miniCartProduct">
+                    {var $link = $presenter->link($i->getLink(), $i->linkArgs)}
+                    <td style="width:20%" class="miniCartProductThumb">
+                        <div>
+                            <a href="{$link}"> <img src="{$i->image|img:product:285:380:6}" alt="{$i->name}"> </a>
+                        </div>
+                    </td>
+                    <td style="width:40%">
+                        <div class="miniCartDescription">
+                            <h4><a href="{$link}"> {$i->name}</a></h4>
+                            <div class="price"><span> {$i->getPriceModel()->priceToShow|currency} </span></div>
+                        </div>
+                    </td>
+                    <td style="width:10%" class="miniCartQuantity"><span>x</span> {$i->quantity|amount}</td>
+                    <td style="width:15%" class="miniCartSubtotal"><span> {$i->getTotalPriceWithTax()|currency} </span>
+                    </td>
+                    <td style="width:5%" class="delete"><a class="ajax" href="{link delete! key=>$key}"> <i
+                                    class="fa fa-times"></i></a></td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+        <div class="miniCartFooter text-right">
+            <div class="text-right subtotal"> Spolu: {$cart->getTotalPriceWithTax()|currency} </div>
+            <a class="btn btn-sm btn-danger" href="{plink :Front:Cart:default}">
+                <i class="fa fa-shopping-cart"> </i>
+                Objednať
+            </a>
+        </div>
+    </div>
+
+    <script>
+        if (typeof $ !== 'undefined') {
+            $(".scroll-pane").mCustomScrollbar({
+                advanced         : {
+                    updateOnContentResize : true
+                },
+                scrollButtons    : {
+                    enable : false
+                },
+                mouseWheelPixels : "200",
+                theme            : "dark-2"
+            });
+        }
+    </script>
+</div>

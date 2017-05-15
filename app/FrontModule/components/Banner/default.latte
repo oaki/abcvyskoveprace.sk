@@ -1,0 +1,96 @@
+<div class="banner banner-boxes">
+    <div class="slider-content"><span class="prevControl sliderControl"> <i class="fa fa-angle-left fa-3x "></i></span>
+        <span class="nextControl sliderControl"> <i class="fa fa-angle-right fa-3x "></i></span>
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                {foreach $list as $l}
+
+                    {if $l['type'] == 'big'}
+                        {foreach $l['images'] as $image}
+                            <div class="swiper-slide slide-2x">
+                                <div class="box-slider-content">
+                                    <div class="box-text">
+                                        <h2>{$image['params']['name']}</h2>
+                                        <a n:if="$image['params']['link']!=''" href="{$image['params']['link']}"
+                                                                               class="btn btn-stroke-light">kúpiť</a>
+                                    </div>
+                                    <div class="box-content-overly"></div>
+                                    <a href="{$image['params']['link']}" class="box-img"> <img
+                                                src="{$image['image']|img:upload:500:500:5}"
+                                                alt="{$image['params']['name']}"></a>
+                                </div>
+                            </div>
+                        {/foreach}
+                    {/if}
+
+                    {if $l['type'] == 'medium'}
+                        <div class="swiper-slide slide-2x">
+
+                            {foreach $l['images'] as $image}
+                                {if $iterator->counter <= 2}
+                                    {if $iterator->counter == 1}
+                                        <div class="slider-box-top">
+                                            <div class="box-slider-content">
+                                                <div class="box-text-table">
+                                                    <div class="box-text-cell">
+                                                        <h2 class="bolder-style light"><a
+                                                                    href="{$image['params']['link']}">{$image['params']['name']}</a>
+                                                        </h2>
+                                                        <!--<span class="bolder-sub"> <a href="obchod.html">zľava 80%</a> </span> -->
+                                                    </div>
+                                                </div>
+                                                <div class="box-content-overly"></div>
+                                                <a href="#" class="box-img"> <img
+                                                            src="{$image['image']|img:upload:500:250:5}"
+                                                            alt="{$image['params']['name']}"></a></div>
+                                        </div>
+                                    {else}
+                                        <div class="slider-box-bottom">
+                                            <div class="box-slider-content">
+                                                <div class="box-price-tag"><span
+                                                            class="price">{$image['params']['name']}</span></div>
+                                                <a href="{$image['params']['link']}" class="box-img"> <img
+                                                            src="{$image['image']|img:upload:500:250:5}"
+                                                            alt="{$image['params']['name']}"> </a>
+                                                <div class="box-content-overly"><a href="{$image['params']['link']}"
+                                                                                   class="box-blank-url"></a></div>
+                                            </div>
+                                        </div>
+                                    {/if}
+                                {/if}
+                            {/foreach}
+
+                        </div>
+                    {/if}
+
+                    {if $l['type'] == 'small'}
+                        <div class="swiper-slide slide-4x">
+
+                            {foreach $l['images'] as $image}
+                                {var $alpha = ['a','b','c','d']}
+
+                                {if $iterator->counter <= 4}
+                                    <div class="box-4in {$alpha[$iterator->counter-1]}">
+                                        <div class="box-slider-content"><a href="#" class="box-img"> <img
+                                                        src="{$image['image']|img:upload:250:250:5}"
+                                                        alt="{$image['params']['name']}"></a>
+                                            <div class="box-content-overly">
+                                                <div n:if="$image['params']['link']!=''" class="box-text-table">
+                                                    <div class="box-text-cell"><a href="{$image['params']['link']}"
+                                                                                  class="btn btn-stroke-light">{$image['params']['name']}</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {/if}
+                            {/foreach}
+
+                        </div>
+                    {/if}
+                {/foreach}
+            </div>
+            <div class="box-pagination"></div>
+        </div>
+    </div>
+</div>

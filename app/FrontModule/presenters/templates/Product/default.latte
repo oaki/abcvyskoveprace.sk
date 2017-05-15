@@ -1,0 +1,137 @@
+{block title}{$l['info']['name']}{/block}
+{block description}{$l['info']['description']}{/block}
+{block content}
+
+{include ../breadcrumb.latte links=>$breadcrumbs}
+
+<div class="row transitionfx">
+
+    <div class="col-lg-6 col-md-6 col-sm-6">
+
+        <div class="main-image sp-wrap col-lg-12 no-padding">
+
+            <a href="{$l['image']|img:$l['info']['id_product_supplier']:800:800}" title="{$l['info']['name']}">
+                <img src="{$l['image']|img:$l['info']['id_product_supplier']:800:800}" class="img-responsive"
+                     alt="{$l['info']['name']}">
+            </a>
+
+            <a n:if="$l['info']['files']" n:foreach="$l['info']['files'] as $img"
+                    href="{$img['image']|img:image:800:800}" title="{$l['info']['name']}">
+                <img src="{$img['image']|img:image:800:800}" class="img-responsive" alt="{$l['info']['name']}">
+            </a>
+
+            {if $l['info']['mark']['file']}
+                <img src="{$l['info']['mark']['file']['image']|img:default:93:65}" alt="{$l['info']['mark']['name']}"
+                     class="brand">
+            {/if}
+        </div>
+    </div>
+    <!--/ left column end -->
+
+    <!-- right column -->
+    <div class="col-lg-6 col-md-6 col-sm-5">
+
+        <div n:if="$user->isLoggedIn() AND $user->isAllowed('spravca_eshopu','edit')" class="pull-right">
+            <a class="btn btn-danger" href="{plink :Admin:Eshop:Product:default id=>$l['id_product']}">Upraviť</a>
+        </div>
+        <h1 class="product-title">{$l['info']['name']}</h1>
+
+        <h2 class="product-code">{!_'Kód produktu'}: {$l['EAN']}</h2>
+
+
+        <div n:if="$l['info']['sale'] OR $l['info']['news'] OR $l['info']['our_tip']" class="promotion-tags">
+            <a n:if="$l['info']['sale']" href="{plink :Front:Eshop:default sale=>1}" class="sale"
+                                         title="{_'AKCIA'}">{_'AKCIA'} {$l['info']['sale_percent']}%</a>
+            <a n:if="$l['info']['news']" href="{plink :Front:Eshop:default news=>1}" class="new-product"
+                                         title="{_'NEW'}">{_'NEW'}</a>
+            <a n:if="$l['info']['our_tip']" href="{plink :Front:Eshop:default our_tip=>1}" class="top"
+                                            title="{_'TOP'}">{_'TOP'}</a>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="product-description">
+            {$l['info']['description']}
+        </div>
+
+        <div class="product-price">
+                <span class="price-sales">
+                    {$l['price']->priceToShow|currency}
+                </span>
+
+            <span n:if="$l['price']->isSale==1"
+                    class="price-standard">{$l['price']->originalPriceToShow|currency }</span>
+        </div>
+
+
+        <div class="productFilter productFilterLook2">
+            <div n:if="count($l['info']['variants']) > 1" class="filterBox">
+                Varianty: &nbsp;&nbsp;<select style="width:80px;margin-left:10px;" class="chosen-select product-sizes"
+                                              data-placeholder="{!_'Varianty'}">
+                    <option n:foreach="$l['info']['variants'] as $k=>$v"
+                            value="{plink default id_product_param=>$v['id_product_param']}"
+                            {if $presenter->id_product_param==$v['id_product_param']}selected="selected"{/if}
+                    >{$v['packing']}</option>
+                </select>
+            </div>
+            <div class="filterBox">
+                <input type="text" value="1" class="form-control" id="product-quantity" placeholder="Množstvo"/>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div class="cart-actions">
+            <div class="addto">
+                <button data-href="{plink addToCart! productId=>0,quantity=>1}"
+                        class="button btn-cart cart first addToCart" data-product-id="{$l['id_product_param']}"
+                        title="{!_'Pridať do košíka'}" type="button">{!_'Pridať do košíka'}
+                </button>
+                <div class="clear"></div>
+
+                <h3 class="incaps">
+
+                    {if $l['is_on_stock'] == 1}
+                        <i class="fa fa fa-check-circle-o color-in"></i> {!_'Na sklade'}
+                    {else}
+                        <i class="fa fa-minus-circle color-out"></i> {!_'Počty skladov nie sú k dispozícií'}
+                    {/if}
+                </h3>
+            </div>
+        </div>
+
+        <div class="product-tab w100 clearfix">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#details" data-toggle="tab" title="{!_'Popis'}">{!_'Popis'}</a></li>
+                <li n:if="$l['packing']!=''"><a href="#packing" data-toggle="tab"
+                                                title="{!_'Balenie'}">{!_'Balenie'}</a></li>
+                {*<li><a href="#delivery" data-toggle="tab" title="{!_'Dodanie'}">{!_'Dodanie'}</a></li>*}
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="details">
+                    {if $l['info']['long_description']!=''}
+                        {$l['info']['long_description']|noescape}
+                    {else}
+                        {$l['info']['description']|noescape}
+                    {/if}
+                </div>
+                <div class="tab-pane" id="packing" n:if="$l['packing']!=''">
+                    {$l['packing']}
+                </div>
+                {*<div class="tab-pane" id="delivery">*}
+                {*nevinmme*}
+                {*</div>*}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row recommended">
+
+    <h3>{!_'PODOBNÉ PRODUKTY'}</h3>
+
+    <div id="SimilarProductSlider">
+        {include ../productAnnotationMini.latte list=>$alternativeProducts}
+    </div>
+    <!--/.recommended-->
+
+</div>
+
+<div class="clear-both"></div>

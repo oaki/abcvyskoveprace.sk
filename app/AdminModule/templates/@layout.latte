@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Administračné rozhranie</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="author" content="Pavol Bincik">
+    <meta name="robots" content="index,follow">
+    <meta name="doc-type" content="Web Page">
+    <meta name="doc-class" content="Published">
+    <meta name="doc-rights" content="Copywritten Work">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css"
+          href="{$basePath}/assets/backend/jscripts/jquery/custom-theme/pepper-grinder/jquery-ui-1.8.22.custom.css">
+
+    <link rel="stylesheet" type="text/css" href="{$basePath}/assets/backend/jscripts/jquery/tags/jquery.tagsinput.css">
+    <link rel="stylesheet" type="text/css" href="{$basePath}/assets/backend/bootstrap/css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="{$basePath}/assets/backend/css/notification/notification.css">
+
+    <link rel="stylesheet" type="text/css" href="{$basePath}/assets/backend/css/sortablemenu/sortablemenu.css">
+
+    <link rel="stylesheet" type="text/css" href="{$basePath}/assets/backend/simpleGrid/DT_bootstrap.css">
+    <link rel="stylesheet" type="text/css"
+          href="{$basePath}/assets/backend/components/bootstrap-fileupload/bootstrap-fileupload.min.css">
+
+    <link rel="stylesheet" type="text/css"
+          href="{$basePath}/assets/backend/components/ublaboo-datagrid/assets/dist/datagrid.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="{$basePath}/assets/backend/components/ublaboo-datagrid/assets/dist/datagrid-spinners.min.css">
+
+    <link rel="stylesheet" type="text/css" href="{$basePath}/assets/backend/css/screen.css">
+
+    <script type="text/javascript" src="{$basePath}/assets/backend/jscripts/jquery/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript"
+            src="{$basePath}/assets/backend/jscripts/jquery/jquery-ui-1.8.22.custom.min.js"></script>
+    <script type="text/javascript" src="{$basePath}/assets/backend/jscripts/jquery/jquery.ui.datepicker-sk.js"></script>
+    <script type="text/javascript" src="{$basePath}/assets/backend/jscripts/jquery/js.cookie.js"></script>
+    {*<script type="text/javascript" src="{$basePath}/assets/backend/jscripts/jquery/jquery.nette.js"></script>*}
+    {*<script type="text/javascript" src="{$basePath}/assets/backend/jscripts/jquery/jquery.ajaxform.js"></script>*}
+    <script type="text/javascript" src="{$basePath}/assets/backend/jscripts/nette.ajax.js"></script>
+    <script type="text/javascript" src="{$basePath}/assets/backend/jscripts/jquery/netteForms.js"></script>
+
+    <script>
+        $.nette.init();
+    </script>
+    <script type="text/javascript" src="{$basePath}/assets/backend/jscripts/jquery/tags/jquery.tagsinput.js"></script>
+    <script type="text/javascript" src="{$basePath}/assets/backend/jscripts/jquery/jquery.livequery.js"></script>
+    <script type="text/javascript" src="{$basePath}/assets/backend/jscripts/jquery/jquery.highlight.js"></script>
+    <script type="text/javascript"
+            src="{$basePath}/assets/backend/jscripts/jquery/jquery.easy-confirm-dialog.js"></script>
+    <script type="text/javascript" src="{$basePath}/assets/backend/jscripts/confl.js"></script>
+    <script type="text/javascript" src="{$basePath}/assets/backend/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{$basePath}/assets/backend/jscripts/notifications.js"></script>
+    <script type="text/javascript" src="{$basePath}/assets/backend/bootbox/bootbox.min.js"></script>
+    <script type="text/javascript"
+            src="{$basePath}/assets/backend/jscripts/jquery/DataTables-1.9.3/media/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="{$basePath}/assets/backend/simpleGrid/DT_bootstrap.js"></script>
+    <script type="text/javascript"
+            src="{$basePath}/assets/backend/jscripts/jquery/jquery.mjs.nestedSortable.js"></script>
+    <script type="text/javascript"
+            src="{$basePath}/assets/backend/jscripts/jquery/jquery.collapsibleCheckboxTree.js"></script>
+    <script type="text/javascript" src="{$basePath}/assets/backend/jscripts/tiny_mce/tiny_mce.js"></script>
+    <script type="text/javascript" src="{$basePath}/assets/backend/jscripts/default_setting_tiny_mce.js"></script>
+
+    <script type="text/javascript"
+            src="{$basePath}/assets/backend/components/ublaboo-datagrid/assets/dist/datagrid.min.js"></script>
+    <script type="text/javascript"
+            src="{$basePath}/assets/backend/components/ublaboo-datagrid/assets/dist/datagrid-instant-url-refresh.min.js"></script>
+    <script type="text/javascript"
+            src="{$basePath}/assets/backend/components/ublaboo-datagrid/assets/dist/datagrid-spinners.min.js"></script>
+
+
+    <script type="text/javascript"
+            src="{$basePath}/assets/backend/components/bootstrap-fileupload/bootstrap-fileupload.min.js"></script>
+
+    <script type="text/javascript"
+            src="http://maps.google.com/maps/api/js?key=AIzaSyCj38SKlAkIPR3WWMIrZxZ0Yw210ZpiQSY"></script>
+    <link rel="stylesheet" type="text/css" href="{$basePath}/assets/backend/css/contact.css">
+
+</head>
+
+<body>
+<div class="navbar navbar-fixed-top">
+
+    <ul id="notifications"></ul>
+    {snippet flashmessage}
+        <script>
+            {foreach $flashes as $flash}
+            new Notification({$flash->message}, {$flash->type});
+            {/foreach}
+        </script>
+    {/snippet}
+
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+
+            <div class="brand" href="#">{$presenter->context->parameters['companyName']}</div>
+            <div class="btn-group pull-right">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="icon-user"></i> {if $user->getIdentity()->name == ''}{$user->getIdentity()->login}{else}{$user->getIdentity()->name}{/if}
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="{plink :Admin:User:Homepage:edit id=>$user->getId()}">Profil</a></li>
+                    <li class="divider"></li>
+                    <li><a href="{plink :Admin:Login:out}">Odhlásiť</a></li>
+                </ul>
+            </div>
+            <div class="nav-collapse">
+                <ul class="nav">
+                    {*<li n:if="$user->isAllowed('spravca_obsahu','edit')" class="{ifCurrent :Admin:Dashboard:Homepage:} active{/ifCurrent}"><a href="{plink :Admin:Dashboard:Homepage:default}">Dashboard</a></li>*}
+                    {*<li class="divider-vertical"></li>*}
+
+
+                    <li n:if="$user->isAllowed('spravca_eshopu','edit')" {ifCurrent :Admin:Eshop:Homepage:}class="active"{/ifCurrent}>
+                        <a href="{plink :Admin:Eshop:Homepage:default id=>null,id_category=>null}">Eshop</a></li>
+                    <li n:if="$user->isAllowed('spravca_eshopu','edit')" {ifCurrent :Admin:Order:Homepage:}class="active"{/ifCurrent}>
+                        <a href="{plink :Admin:Order:Homepage:default}">Objednávky</a></li>
+                    <li n:if="$user->isAllowed('spravca_eshopu','edit')" {ifCurrent :Admin:Cms:Banner:}class="active"{/ifCurrent}>
+                        <a href="{plink :Admin:Cms:Banner:default}">Banner</a></li>
+
+
+                    <li n:if="$user->isAllowed('spravca_obsahu','edit')" {ifCurrent :Admin:Cms:Homepage:}class="active"{/ifCurrent}>
+                        <a href="{plink :Admin:Cms:Homepage:default}">CMS</a></li>
+
+
+                    <li n:if="$user->isAllowed('spravca_obsahu','edit')"
+                            class="{ifCurrent :Admin:User:Homepage:} active{/ifCurrent}"><a
+                                href="{plink :Admin:User:Homepage:default}">Uživatelia</a></li>
+
+                    {*<li n:if="$user->isAllowed('spravca_obsahu','edit')"*}
+                    {*class="{ifCurrent :Admin:ListManager:Homepage:} active{/ifCurrent}">*}
+                    {*<a href="{plink :Admin:ListManager:Homepage:default}">Číselníky</a>*}
+                    {*</li>*}
+                    {*<li n:if="$user->isAllowed('spravca_obsahu','edit')" class="{ifCurrent :Admin:Gallery:Homepage:} active{/ifCurrent}"><a href="{plink :Admin:Gallery:Homepage:default}">Galérie</a></li>*}
+
+                    <li n:if="$user->isAllowed('acl','edit')" style="position: relative;"
+                                                              class="{ifCurrent :Admin:Acl:Homepage:} active{/ifCurrent}">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"">ACL</a>
+                        <ul class="dropdown-menu">
+
+                            <li{ifCurrent ':Admin:Acl:Users:'} class="hover"{/ifCurrent}><a
+                                        href="{plink :Admin:Acl:Users:}">Users</a></li>
+                            <li{ifCurrent ':Admin:Acl:Permission:'} class="hover"{/ifCurrent}><a
+                                        href="{plink :Admin:Acl:Permission:}">Permission</a></li>
+                            <li{ifCurrent ':Admin:Acl:Roles:'} class="hover"{/ifCurrent}><a
+                                        href="{plink :Admin:Acl:Roles:}">Roles</a></li>
+                            <li{ifCurrent ':Admin:Acl:Resources:'} class="hover"{/ifCurrent}><a
+                                        href="{plink :Admin:Acl:Resources:}">Resources</a></li>
+                            <li{ifCurrent ':Admin:Acl:Privileges:'} class="hover last"{/ifCurrent}><a
+                                        href="{plink :Admin:Acl:Privileges:}">Privileges</a></li>
+                        </ul>
+                    </li>
+
+
+                    <li n:if="$user->isAllowed('spravca_eshopu','edit')" {ifCurrent :Admin:Eshop:Mark:}class="active"{/ifCurrent}>
+                        <a href="{plink :Admin:Eshop:Mark:default}">Značky</a></li>
+
+                    {*<li n:if="$user->isAllowed('spravca_obsahu','edit')" style="position: relative;" class="">*}
+                    {*<a class="dropdown-toggle" data-toggle="dropdown" href="#"">Ostatné</a>*}
+                    {*<ul class="dropdown-menu">*}
+
+                    {*</ul>*}
+                    {*</li>*}
+
+
+                    <li n:if="$user->isAllowed('spravca_obsahu','edit')"
+                            class="{ifCurrent :Admin:Setting:Homepage:} active{/ifCurrent}">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="{plink :Admin:Setting:Homepage:}"">Nastavenia</a>
+                        <ul class="dropdown-menu">
+
+                            <li{ifCurrent ':Admin:Setting:Delivery:'} class="hover"{/ifCurrent}><a
+                                        href="{plink :Admin:Setting:Delivery:}">Doprava</a></li>
+
+                        </ul>
+                    </li>
+
+                    <li n:if="$user->isAllowed('import_manager','edit')"
+                            class="{ifCurrent :Admin:ImportManager:Homepage:} active{/ifCurrent}">
+                        <a href="{plink :Admin:ImportManager:Homepage:default}">Import</a>
+                    </li>
+
+                    <li n:if="$user->isAllowed('spravca_obsahu','edit')">
+                        <a href="{plink :Admin:Setting:Homepage:clearCache}">Vymazať Cache</a>
+                    </li>
+
+
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+
+        {include content}
+
+    </div><!--/row-->
+
+    <hr>
+
+    <footer>
+        <p>&copy; {$presenter->context->parameters['companyName']} {php echo date('Y')}</p>
+    </footer>
+
+</div><!--/.fluid-container-->
+</body>
+</html>

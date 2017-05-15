@@ -1,0 +1,48 @@
+#
+# WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+# http://nette.org/security-warning
+#
+parameters:
+    baseUri: ''
+    companyName = abcvyskoveprace
+    mailer:
+        from: info@abcvyskoveprace.sk
+        to: info@abcvyskoveprace.sk
+        bcc: info@abcvyskoveprace.sk
+
+    smtp:
+        host: smtp.websupport.sk
+        login: info@abcvyskoveprace.sk
+        password: abcvyskoveprace
+
+    webimages:
+        uploadDir: %wwwDir%/uploaded/system_files/original
+        uploadUrl: %baseUri%/uploaded/system_files/original
+        tempDir: %wwwDir%/img
+        tempUrl: %baseUri%/img
+        hash: *
+
+    DELIVERY_TAX: 20
+
+    formats:
+        sk:
+            currency: €
+
+php:
+    date.timezone: Europe/Prague
+
+application:
+    errorPresenter: Front:Error
+#    catchExceptions: true
+    mapping:
+        *: App\*Module\Presenters\*Presenter
+
+session:
+    autoStart: true
+    expiration: 30 days
+#    saveHandler: files
+    savePath: "%tempDir%/sessions"
+
+extensions:
+    visualPaginator: IPub\VisualPaginator\DI\VisualPaginatorExtension
+    cart: Oaki\Cart\DI\Extension

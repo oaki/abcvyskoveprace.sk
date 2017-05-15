@@ -1,0 +1,23 @@
+{block #content}
+
+<h1 class="page-header">Galérie</h1>
+
+
+<div class="alert alert-info">
+    {control addDocument}
+</div>
+
+{control simpleGrid}
+
+<script>
+    $('.gallery-name').on('blur', function() {
+
+        $.post({plink save!}, {
+            data : {
+                'id'   : $(this).data('id'),
+                'name' : $(this).val()
+            }
+        })
+    })
+</script>
+

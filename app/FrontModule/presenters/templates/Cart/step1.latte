@@ -1,0 +1,140 @@
+{block title}{!_'Košík'} - {!_'REPRE - reklamné predmety'}{/block}
+
+{block content}
+
+
+{control uploadLogo}
+
+<div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-7">
+        <h1 class="section-title-inner"><span><i class="fa fa-paint-brush"> </i> {!_'Potlač'}</span></h1>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar">
+        <h4 class="caps"><a href="{plink Eshop:default}" title="{!_'Späť do obchodu'}"><i
+                        class="fa fa-chevron-left"></i> {!_'Späť do obchodu'} </a></h4>
+    </div>
+</div> <!--/.row-->
+
+<div class="row">
+    <div class="col-lg-9 col-md-9 col-sm-12">
+        <div class="row userInfo">
+
+            <div n:snippet="choosePrinting" class="col-xs-12 col-sm-12">
+
+                {form choosePrintingForm}
+
+
+                    <ul class="alert alert-danger" n:if="$form->hasErrors()">
+                        <li n:foreach="$form->errors as $error">{$error}</li>
+                    </ul>
+                {include orderStep.latte}
+
+                    <div class="w100 clearfix">
+                        <div class="cartContent w100">
+                            <table class="cartTable table-responsive" style="width:100%">
+                                <tbody>
+
+                                <tr class="CartProduct cartTableHeader">
+                                    <td style="width:15%"> {!_'Produkt'} </td>
+                                    <td style="width:15%">{!_'Typ potlače'}</td>
+                                    <td style="width:15%">{!_'Farba'}</td>
+                                    <td style="width:15%">{!_'Počet'}</td>
+                                    <td style="width:10%">{!_'Cena za kus'}</td>
+                                    <td style="width:10%">{!_'Spolu'}</td>
+                                </tr>
+
+
+                                <tr n:foreach="$productToPrint as $key=>$group" class="CartProduct">
+
+                                    <td class="CartProductThumb">
+                                        {foreach $group['items'] as $i}
+                                            {var $link = $presenter->link($i->getLink(), $i->linkArgs)}
+
+                                            <a href="{$link}" title="{$i->name}"><img
+                                                        src="{$i->image|img:product:285:380:6}" alt="{$i->name}"></a>
+                                            <div class="CartDescription">
+                                                <h4>
+                                                    <a href="{$link}" title="{$i->name}">{$i->name}</a>
+                                                </h4>
+                                                <span n:ifset="$i->data['size']" class="size">{$i->data['size']}</span>
+                                                <span class="product-code">{$i->data['ean_code']}</span>
+                                            </div>
+                                        {/foreach}
+                                    </td>
+                                    {if $group['impress']}
+                                        <td>
+                                            <div class="form-group">
+                                                <div class="checkbox">
+                                                    {input $form[$group['formContainerId']]['type']}
+                                                </div>
+                                            </div>
+
+                                        </td>
+                                        <td>
+                                            {input $form[$group['formContainerId']]['color']}
+                                        </td>
+                                        <td>
+                                            <div class="impress-count-{$key}"></div>
+                                        </td>
+
+                                        <td class="price-per-unit price-unit-{$key}"></td>
+                                        <td class="price-per-unit price-sum-{$key}"></td>
+                                    {else}
+                                        <td colspan="5">
+                                            Pre potlač produktu nás prosím kontaktujte
+                                        </td>
+                                    {/if}
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--/row end-->
+
+                    </div>
+                    <div class="cartFooter w100">
+                        <div class="box-footer">
+                            <div class="pull-left"><a class="btn btn-default" href="{plink Eshop:default}"
+                                                      title="{!_'Späť do obchodu'}"> <i class="fa fa-arrow-left"></i>
+                                    &nbsp; {!_'Späť do obchodu'} </a></div>
+
+                            <div class="pull-right">
+                                <a data-toggle="modal" data-target="#ModalUploadLogo" class="btn btn-warning"
+                                   title="{!_'Nahrať logo'}">{!_'Nahrať logo'} </a>
+
+                                {input next class=>"btn btn-primary btn-small btn-cart-continue"}
+                            </div>
+                        </div>
+                    </div>
+                    <!--/ cartFooter -->
+                {/form}
+
+                <script>
+                    var _ImpressValues = JSON.parse({$impressJs});
+                    var _ImpressChoosed = JSON.parse({$impressChoosedJs});
+                    var _setPrintingLink = {plink orderSummary!}
+                </script>
+            </div>
+        </div>
+        <!--/row end-->
+
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-5 rightSidebar">
+        <div class="contentBox">
+            <div class="w100 costDetails">
+                <div class="table-block" id="order-detail-content">
+                    <a class="button-style-nav btn btn-primary btn-lg btn-block goToNextStep" title="checkout"
+                       style="margin-bottom:10px"> {!_'Doprava'} &nbsp; <i class="fa fa-arrow-right"></i> </a>
+                    <div class="w100 cartMiniTable">
+                        {control orderSummary}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End popular -->
+    </div>
+    <!--/rightSidebar-->
+
+</div> <!--/row-->
+
+<div style="clear:both"></div>

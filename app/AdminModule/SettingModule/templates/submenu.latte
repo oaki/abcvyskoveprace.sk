@@ -1,0 +1,20 @@
+<ul class="nav nav-tabs">
+    <li class="{ifCurrent :Admin:Setting:Homepage:default}active{/ifCurrent}">
+        <a href="{link :Admin:Setting:Homepage:default}">Globálne nastavenia</a>
+    </li>
+    <li class="{ifCurrent :Admin:Setting:Delivery:default}active{/ifCurrent}">
+        <a href="{link :Admin:Setting:Delivery:default}">Doprava - Spôsob doručenia</a>
+    </li>
+    <li class="{ifCurrent :Admin:Setting:Vat:default}active{/ifCurrent}">
+        <a href="{link :Admin:Setting:Vat:default}">DPH - dane</a>
+    </li>
+    <li class="{ifCurrent :Admin:Setting:Payment:default}active{/ifCurrent}">
+        <a href="{link :Admin:Setting:Payment:default}">Platby</a>
+    </li>
+    <li n:if="$user->isAllowed('generate_file','edit')">
+        <a class="{ifCurrent :Admin:Setting:GenerateFile:default}active{/ifCurrent}"
+           href="{link :Admin:Setting:GenerateFile:default}">Generovať súbory</a>
+    </li>
+</ul>
+
+<div class="clear"></div>

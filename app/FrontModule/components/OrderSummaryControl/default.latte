@@ -1,0 +1,40 @@
+<div n:snippet="orderSummary" class="w100 cartMiniTable">
+
+    <table id="cart-summary" class="std table">
+        <tbody>
+        <tr>
+            <td>{!_'Cena produktov'}</td>
+            <td class="price">{$cart->getTotalPriceWithTax()|currency }</td>
+        </tr>
+
+        <tr>
+            <td>{!_'Doprava'}</td>
+            <td class="price">
+                {$model->getShippingPrice()->priceToShow|currency}
+            </td>
+        </tr>
+        <tr class="cart-total-price">
+            <td>{!_'Cena spolu bez DPH'}:</td>
+            <td class="price">{$model->getTotalPrice()|currency }</td>
+        </tr>
+        <tr>
+            <td> {!_'Spolu s DPH'}</td>
+            <td class=" site-color" id="total-price">{$model->getTotalPriceWithVat()|currency}</td>
+        </tr>
+        {*<tr>
+            <td colspan="2">
+                <div class="input-append couponForm">
+                    {form couponForm class=>'ajax'}
+                        <ul class="alert alert-danger" n:if="$form->hasErrors()">
+                            <li n:foreach="$form->errors as $error">{$error}</li>
+                        </ul>
+                        {input coupon class=>"col-lg-8"}
+                        {input btn class=>"col-lg-4 btn btn-success"}
+                    {/form}
+                </div>
+            </td>
+        </tr>*}
+        </tbody>
+
+    </table>
+</div>

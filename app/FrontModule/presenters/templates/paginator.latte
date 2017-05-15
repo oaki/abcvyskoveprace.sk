@@ -1,0 +1,28 @@
+{if $paginator->pageCount > 1}
+    <ul class="pagination">
+        {if $paginator->isFirst()}
+        <li class="disabled"><a>«</a></li>
+        {else}
+        <li><a href="{link $handle, 'page' => $paginator->page - 1}" rel="prev" n:class="$useAjax ? ajax"
+               title="{_'predchádzajúce'}">«</a>
+        <li>
+            {/if}
+
+            {foreach $steps as $step}
+            {if $step == $paginator->page}
+        <li class="active"><a href="#" title="{$step}">{$step}</a></li>
+        {else}
+        <li><a href="{link $handle, 'page' => $step}" n:class="$useAjax ? ajax" title="{$step}">{$step}</a></li>
+        {/if}
+        {if $iterator->nextValue > $step + 1}
+            <li class="disabled"><a title="…">…</a></li>{/if}
+        {/foreach}
+
+        {if $paginator->isLast()}
+            <li class="disabled"><a title="{_'nasledujúce'}">»</a></li>
+        {else}
+            <li><a href="{link $handle, 'page' => $paginator->page + 1}" rel="next" n:class="$useAjax ? ajax"
+                   title="{_'nasledujúce'}">»</a></li>
+        {/if}
+    </ul>
+{/if}

@@ -1,0 +1,103 @@
+<div class="wrapper whitebg contact-us">
+    <div class="container main-container">
+        <div class="row innerPage">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="row userInfo">
+                    <div class="col-xs-12 col-sm-12">
+                        <h1 class="title-big text-center section-title-style2"><span> Kontakt </span></h1>
+                        <h2 class="text-center"><span> {$c->title} </span></h2>
+                        <hr>
+                        <div class="row">
+                            {$c['text']|noescape}
+                            <div style="clear:both"></div>
+                            <hr>
+                            <div style="clear:both"></div>
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <div class="w100 map">
+
+                                    <div class="gmap">
+                                        <div id="gmapHolder" data-lat="{$c['latitude']}" data-lon="{$c['longitude']}"
+                                             data-text="{$c['google_text']}"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="contact-form">
+
+                                <h3>Napíšte nám</h3>
+
+
+                                {form form}
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6">
+                                            <div class="form-group">
+                                                {label name/}
+                                                {input name class=>'form-control'}
+                                                <div class="alert alert-danger" n:ifcontent>{inputError name}</div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6">
+                                            <div class="form-group">
+                                                {label surname/}
+                                                {input surname class=>'form-control'}
+                                                <div class="alert alert-danger" n:ifcontent>{inputError surname}</div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6">
+                                            <div class="form-group">
+                                                {label company/}
+                                                {input company class=>'form-control'}
+                                                <div class="alert alert-danger" n:ifcontent>{inputError company}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-6">
+                                            <div class="form-group">
+                                                {label email/}
+                                                {input email class=>'form-control'}
+                                                <div class="alert alert-danger" n:ifcontent>{inputError email}</div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6">
+                                            <div class="form-group">
+                                                {label tel/}
+                                                {input tel class=>'form-control'}
+                                                <div class="alert alert-danger" n:ifcontent>{inputError tel}</div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12">
+                                            <div class="form-group">
+                                                {label text/}
+                                                {input text class=>'form-control'}
+                                                <div class="alert alert-danger" n:ifcontent>{inputError text}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {input btn_form class=>'btn btn-success'}
+                                {/form form}
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+    <div class="gap"></div>
+</div>

@@ -1,0 +1,225 @@
+{block content}
+
+
+<div class="span12">
+
+    <div class="container-fluid">
+        {form productForm}
+
+
+        <h2 class="page-header">
+            <div class="btn-group pull-right">
+                <a class="btn " href="{plink Homepage:default id=>null}"><i class="icon-arrow-left"></i> späť</a>
+                {input btn class=>'btn btn-success'}
+            </div>
+
+            Produkt
+        </h2>
+
+        <div class="tabbable">
+            <ul class="nav nav-tabs" id="product-tabs">
+                <li class="active"><a href="#basic-information" data-toggle="tab">Základné informácie</a></li>
+                <li><a href="#categories" data-toggle="tab">Kategórie</a></li>
+
+                {*<li><a href="#params" data-toggle="tab">Parametre</a></li>*}
+            </ul>
+
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="basic-information">
+
+
+                    <div class="c-lang-input">
+                        {formContainer product_lang}
+
+                            <div n:if="count($langs) > 1" class="lang-link-holder btn-group">
+                                {foreach $langs as $l}
+                                    <a href="#lang-input-{$l->id_lang}"
+                                       class="btn-lang btn {if $iterator->isFirst()}active{/if}">{$l->iso}</a>
+                                {/foreach}
+                            </div>
+
+                            {foreach $langs as $l}
+                                <div class="lang-input {if !$iterator->isFirst()}hide{/if}"
+                                     id="lang-input-{$l->id_lang}">
+                                    {formContainer $l->id_lang}
+                                        {label name/} {input name}
+                                        {label description/} {input description}
+                                        {label long_description/} {input long_description}
+
+                                    {/formContainer}
+                                </div>
+                            {/foreach}
+                        {/formContainer}
+                    </div>
+
+                    <div class="form-group" style="padding-top: 10px;">
+
+                        {label id_product_mark/}
+                        {input id_product_mark}
+
+                        <div class="checkbox">
+                            {input sale}
+                        </div>
+
+                        <div class="checkbox">
+                            {input sale_percent}
+                        </div>
+
+                        <div class="checkbox">
+                            {input news}
+                        </div>
+
+                        <div class="checkbox">
+                            {input our_tip}
+                        </div>
+
+                        <div class="checkbox">
+                            {input home}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="categories">
+                    <script type="text/javascript">$(function() {
+                            $('ul#id_categories').collapsibleCheckboxTree({
+                                checkParents    : true,
+                                checkChildren   : false,
+                                uncheckChildren : true,
+                                initialState    : 'default'
+                            });
+                        });</script>
+                    <style>#id_categories li
+                        {
+                            list-style : none;
+                        }
+
+                        #id_categories ul.hide
+                        {
+                            display : none;
+                        }
+
+                        #id_categories span
+                        {
+                            color       : #999;
+                            font-family : 'Courier New', Courier, monospace;
+                            cursor      : default;
+                        }
+
+                        #id_categories span.expanded, #id_categories span.collapsed
+                        {
+                            cursor : pointer;
+                        }
+
+                        #id_categories label
+                        {
+                            float   : none;
+                            display : inline;
+                        }</style>
+
+                    {*{input categories}*}
+                    {var $parent = null}
+                    {block categoryTreeBlock}
+
+                        <ul {if $parent == NULL}id="id_categories"{/if} n:ifset="$categories[$parent]">
+                            {foreach $categories[$parent] as $id=>$m}
+                                <li id="id_{$m['id_category']}">
+                                    <input {if isset($productCategories[$m['id_category']])}checked="checked"{/if}
+                                           type="checkbox" name="categories[]" id="category-input-{$m['id_category']}"
+                                           value="{$m['id_category']}">
+                                    <label for="category-input-{$m['id_category']}">{$m['name']}</label>
+                                    {include categoryTreeBlock parent => $id}
+                                </li>
+                            {/foreach}
+                        </ul>
+                    {/block}
+
+
+                    {*{label categories/}*}
+                    {*{input categories}*}
+                </div>
+
+
+                {*<div class="tab-pane" id="seo">
+                    <div class="c-lang-input">
+                        {formContainer product_lang}
+
+                            <div class="lang-link-holder btn-group">
+                            {foreach $langs as $l}
+                                <a href="#seo-lang-input-{$l->id_lang}" class="btn-lang btn  {if $iterator->isFirst()}active{/if}">{$l->iso}</a>
+                            {/foreach}
+                            </div>
+
+                            {foreach $langs as $l}
+                                <div class="lang-input {if !$iterator->isFirst()}hide{/if}" id="seo-lang-input-{$l->id_lang}">
+                                    {formContainer $l->id_lang}
+                                        {label link_rewrite/} {input link_rewrite}
+                                        {label meta_title/} {input meta_title}
+                                        {label meta_description/} {input meta_description}
+                                        {label meta_keywords/} {input meta_keywords}
+                                    {/formContainer}
+                                </div>
+                            {/foreach}
+                        {/formContainer}
+                    </div>
+
+                </div>
+
+
+                *}
+
+
+
+                {*<div class="form-actions">*}
+
+                {*{foreach $form->getGroup('Btn')->getControls() as $c}*}
+                {*{$c->control}*}
+                {*{/foreach}*}
+                {*</div>*}
+
+
+                <script>
+                    $(function() {
+
+                        function setLangBtnActive(el) {
+                            el.parent().find('a.btn-lang').removeClass('active');
+                            el.addClass('active');
+                        }
+
+                        //basic info
+                        $('#basic-information .c-lang-input a.btn-lang').click(function(e) {
+                            e.preventDefault();
+                            $('#basic-information  .lang-input').addClass('hide');
+                            var href = $(this).attr('href');
+                            setLangBtnActive($(this));
+                            $(href).removeClass('hide');
+                        })
+
+                        $('#seo .c-lang-input a.btn-lang').click(function(e) {
+                            e.preventDefault();
+                            $('#seo  .lang-input').addClass('hide');
+                            var href = $(this).attr('href');
+                            setLangBtnActive($(this));
+                            $(href).removeClass('hide');
+                        })
+
+                        //					$('#product-tabs a').click(function (e) {
+                        //						e.preventDefault();
+                        //						$(this).tab('show');
+                        //					})
+                        //$('#product-tabs a:first').tab('show');
+                    });
+                </script>
+            </div>
+            {/form}
+
+            <h3>Parametre</h3>
+            {control productParamGrid}
+        </div>
+
+        <h1 class="page-header">Súbory</h1>
+        {control file}
+    </div>
+</div>
+	
+	
