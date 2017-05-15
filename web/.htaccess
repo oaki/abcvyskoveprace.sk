@@ -3,15 +3,15 @@
 	RewriteEngine On
 #	RewriteBase /
 
-    RewriteCond %{HTTP_HOST} ^super-zoo\.sk$
-    RewriteRule ^(.*)$ https://www.super-zoo.sk/$1 [R=301,L]
+#    RewriteCond %{HTTP_HOST} ^abcvyskoveprace\.sk$
+#    RewriteRule ^(.*)$ https://www.abcvyskoveprace.sk/$1 [R=301,L]
 
 
-#    RewriteCond ^http://www.super-zoo\.sk$
-#    RewriteRule ^(.*)$ https://www.super-zoo.sk/$1 [R=301,L]
+#    RewriteCond ^http://www.abcvyskoveprace\.sk$
+#    RewriteRule ^(.*)$ https://www.abcvyskoveprace.sk/$1 [R=301,L]
 
-    RewriteCond %{HTTPS} !off
-    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+#    RewriteCond %{HTTPS} !off
+#    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
 
 	# prevents files starting with dot to be viewed by browser

@@ -120,9 +120,6 @@ services:
     SettingModel :
          factory: App\Model\Entity\SettingModel
 
-    ImportPlacekModel :
-         factory: App\Model\Entity\Import\ImportPlacekModel
-
     ModuleContainer:
          factory: App\Model\Entity\ModuleContainerModel
 
@@ -138,9 +135,6 @@ services:
     ImageGenerator:
         factory: \App\Model\Image\Generator
         arguments: [%webimages%]
-
-    RestService:
-        factory: \App\Model\RestService
 
     Contact:
         factory: \App\Model\Entity\ContactModel

@@ -1,0 +1,26 @@
+<div n:foreach="$list as $product" class="item">
+    {var $link = $presenter->link(':Front:Product:default', ['id_product_param'=>$product['id_product_param']])}
+
+    <div class="product product-mini">
+
+        {if $product['info']['mark']['file']}
+            <img src="{$product['info']['mark']['file']['image']|img:default:80:60}"
+                 alt="{$product['info']['mark']['name']}" class="brand">
+        {/if}
+        <a href="{$link}" class="product-image" title="{$product['info']['name']}">
+            <img src="{$product['image']|img:$product['info']['id_product_supplier']:285:380:6}"
+                 alt="{$product['info']['name']}" class="img-responsive">
+        </a>
+        <div class="description">
+            <h4><a href="{$link}" title="{$product['info']['name']}">{$product['info']['name']}</a></h4>
+            <div class="description">
+                <div class="grid-description">
+                    <p>{$product['info']['description']|truncate:200}</p>
+                </div>
+            </div>
+            <div class="price">
+                <span>{$product['price']->priceToShow|currency}</span>
+            </div>
+        </div>
+    </div>
+</div><!--/.item-->

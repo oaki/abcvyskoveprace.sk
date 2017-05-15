@@ -1,0 +1,95 @@
+<div class="col-xs-12 col-sm-12">
+    <table class="table-products table-striped table-hover">
+        <thead>
+        <tr class="cartTableHeader">
+            <th></th>
+
+            <th>
+                <a href="{if $presenter->order == 'product_lang.name DESC'}{plink default order=>'product_lang.name'}{else}{plink default order=>'product_lang.name DESC'}{/if}"
+                   title="{_'Názov'}">
+                    {_'Názov'}
+                    <span class="arrow-holder">
+                        <span class="arrow-up{if $presenter->order == 'product_lang.name DESC'} arrow-active{/if}"></span>
+                        <span class="arrow-down{if $presenter->order == 'product_lang.name'} arrow-active{/if}"></span>
+                    </span>
+                </a>
+                /
+                <a href="{if $presenter->order == 'EAN DESC'}{plink default order=>'EAN'}{else}{plink default order=>'EAN DESC'}{/if}"
+                   title="{_'Kód produktu'}">
+                    {_'Kód produktu'}
+                    <span class="arrow-holder">
+                        <span class="arrow-up{if $presenter->order == 'EAN DESC'} arrow-active{/if}"></span>
+                        <span class="arrow-down{if $presenter->order == 'EAN'} arrow-active{/if}"></span>
+                    </span>
+                </a>
+            </th>
+            <th class="text-right">
+
+                <a href="{if $presenter->order == 'is_on_stock DESC'}{plink default order=>'is_on_stock'}{else}{plink default order=>'is_on_stock DESC'}{/if}"
+                   title="{_'Sklad'}">
+                    {_'Sklad'}
+                    <span class="arrow-holder">
+                        <span class="arrow-up{if $presenter->order == 'is_on_stock DESC'} arrow-active{/if}"></span>
+                        <span class="arrow-down{if $presenter->order == 'is_on_stock'} arrow-active{/if}"></span>
+                    </span>
+                </a>
+
+            </th>
+            <th class="text-right">
+                <a href="{if $presenter->order == 'price DESC'}{plink default order=>'price'}{else}{plink default order=>'price DESC'}{/if}"
+                   title="{_'Cena'}">
+                    {_'Cena'}
+                    <span class="arrow-holder">
+                        <span class="arrow-up{if $presenter->order == 'price DESC'} arrow-active{/if}"></span>
+                        <span class="arrow-down{if $presenter->order == 'price'} arrow-active{/if}"></span>
+                    </span>
+                </a>
+            </th>
+            <th>
+                {_'Značka'}
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr n:foreach="$list as $l" data-href="{plink :Front:Product:default id_product_param=>$l['id_product_param']}">
+
+            <td class="prd-img">
+                <img src="{$l['image']|img:$l['info']['id_product_supplier']:285:380:6}">
+
+                <div n:if="$l['info']['sale']" class="promotion"><a href="{plink :Front:Eshop:default sale=>1}"
+                                                                    class="discount" title="{_'AKCIA'}">{_'AKCIA'}</a>
+                </div>
+                <div n:if="$l->info['news']" class="promotion"><a href="{plink :Front:Eshop:default news=>1}"
+                                                                  class="new-product" title="{_'NEW'}">{_'NEW'}</a>
+                </div>
+                <div n:if="$l->info['our_tip']" class="promotion"><a href="{plink :Front:Eshop:default top=>1}"
+                                                                     class="top" title="{_'TOP'}">{_'TOP'}</a></div>
+
+            </td>
+
+            <td class="prd-name">
+                {$l['info']['name']}<br>
+                <strong>{$l['EAN']}</strong>
+                <div class="description">
+
+                </div>
+            </td>
+            <td class="prd-stock text-right">
+                {if $l['is_on_stock'] == '1'}áno{else}nie{/if}
+            </td>
+            <td class="prd-price price text-right">
+                <span n:if="$l['price']->isSale==1" class="old-price">{$l['price']->originalPriceToShow|currency}
+                    <br/></span>
+                <span>{$l['price']->priceToShow|currency}</span>
+            </td>
+            <td class="prd-img">
+                <a title="{$l['info']['mark']['name']}"
+                   href="{plink :Front:Eshop:default brands=>[ $l['info']['mark']['id_product_mark'] ]}">
+                    <img n:if="$l['info']['mark']['file']" src="{$l['info']['mark']['file']['image']|img:default:80:70}"
+                                                           alt="{$l['info']['mark']['name']}" class="brand">
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
