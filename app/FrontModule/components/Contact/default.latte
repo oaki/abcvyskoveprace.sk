@@ -112,7 +112,10 @@
                 <div id="map" style="width: 100%; height: 300px;"></div>
                 <script>
                     function initMap() {
-                        var position = {lat : {!$c->latitude}, lng : {!$c->longitude} };
+                        var position = {
+                            'lat' : {!$c->latitude},
+                            'lng' : {!$c->longitude}
+                        };
                         var map = new google.maps.Map(document.getElementById('map'), {
                             zoom   : 14,
                             center : position

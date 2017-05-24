@@ -72,6 +72,23 @@ module.exports = function(grunt) {
                 files : ['web/assets/frontend/js/*.js', '!web/assets/frontend/js/main.dist.js'],
                 tasks : ['uglify']
             },
+        },
+
+        uncss : {
+            dist : {
+                files : [{
+                    nonull : true,
+                    src    : [
+                        'http://abcvyskovepracesk:8888/',
+                        'http://abcvyskovepracesk:8888/referencie.html',
+                        'http://abcvyskovepracesk:8888/kontakt.html',
+                        'http://abcvyskovepracesk:8888/vyskove-prace-horolezeckou-technikou.html',
+                        'http://abcvyskovepracesk:8888/realizacia-a-rekonstrukcia-plochych-striech.html',
+                        'http://abcvyskovepracesk:8888/zateplenie-budov.html',
+                    ],
+                    dest   : './web/assets/frontend/css/main-reduced.css'
+                }]
+            }
         }
 
     });
@@ -83,6 +100,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-uncss');
 
     //tasks
     grunt.registerTask('default', 'Default Task Alias', ['less']);

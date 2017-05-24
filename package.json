@@ -14,7 +14,8 @@
     "grunt-contrib-cssmin": "^0.12.3",
     "grunt-contrib-less": "~1",
     "grunt-contrib-uglify": "~3.0.1",
-    "grunt-contrib-watch": "~0.6.1"
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-uncss": "^0.6.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
