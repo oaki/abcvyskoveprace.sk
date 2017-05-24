@@ -23,8 +23,8 @@ module.exports = function(grunt) {
             },
             min     : {
                 files : [{
-                    src  : 'web/assets/frontend/css/main.css',
-                    dest : 'web/assets/frontend/css/main.min.css'
+                    src  : 'web/assets/frontend/css/main-reduced.css',
+                    dest : 'web/assets/frontend/css/main-reduced.min.css'
                 }]
             }
         },
@@ -77,6 +77,9 @@ module.exports = function(grunt) {
         uncss : {
             dist : {
                 files : [{
+                    options:{
+                        ignore: ['.open','.dropdown-menu']
+                    },
                     nonull : true,
                     src    : [
                         'http://abcvyskovepracesk:8888/',
@@ -92,6 +95,8 @@ module.exports = function(grunt) {
         }
 
     });
+
+
 
     //npm tasks
     grunt.loadNpmTasks('grunt-contrib-copy');

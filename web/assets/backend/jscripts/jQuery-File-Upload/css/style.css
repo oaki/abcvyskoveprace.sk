@@ -1,0 +1,19 @@
+@charset 'UTF-8';
+
+ul.files{ list-style-type: none; margin:0px; }
+
+ul.files li{ display: block; float: left;margin:10px;
+		  
+}
+
+
+
+ul.files.slideshow li.template-download .preview{ float:left;}
+
+li.template-download .input-medium{
+    display: block;
+}
+
+ul.files.slideshow .inputs{ float:left; padding:0 0 0 15px; width: 220px;}
+ul.files.slideshow .buttons{ float:left;padding:0 0 0 15px; }
+

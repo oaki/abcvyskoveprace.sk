@@ -1,0 +1,72 @@
+
+/*
+* Sortable menu	
+*/
+
+
+ol.sortable {
+	margin: 4em 0;
+	padding-left: 30px;
+}
+
+ol.sortable, ol.sortable ol {
+	margin: 0 0 0 15px;
+	padding: 0;
+	list-style-type: none;
+}
+
+ol.sortable.first {
+	margin: 0;
+	padding: 0px;
+}
+
+ol.sortable .placeholder {
+	border: 1px dashed #4183C4;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	margin:2px 15px;
+}
+
+ol.sortable .mjs-nestedSortable-error {
+	background: #fbe3e4;
+	border-color: transparent;
+}
+
+ol.sortable li {
+	margin: 5px 0 0 0;
+	padding: 0;
+	position: relative;
+}
+
+ol.sortable li>a{ display: block;padding:5px 15px;}
+ol.sortable li>a:hover{ background-color: #eee;color:#005580; text-decoration: none;}
+ol.sortable li>a.active{ background-color: #0088CC;color:#fff;}
+
+/*
+ol.sortable li div  {
+	padding: 0px;
+	margin: 0;
+	cursor: move;
+}*/
+
+ol.sortable .menu-btn{ float: right; width:55px; padding-left: 10px;margin:5px 10px 2px 0px; }
+ol.sortable .deactivate{ text-decoration: line-through;}
+
+.sortable li.mjs-nestedSortable-collapsed > ol {
+	display: none;
+}
+
+.sortable li .disclose {
+	display: inline-block;
+	width: 10px;
+	padding-left:10px;
+}
+
+.sortable li.mjs-nestedSortable-collapsed > div.link-and-btn-holder .disclose > span:before {
+	content: '+ ';
+}
+
+.sortable li.mjs-nestedSortable-expanded > div.link-and-btn-holder .disclose > span:before {
+	content: '- ';
+}

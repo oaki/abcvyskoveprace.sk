@@ -1,0 +1,102 @@
+/*
+* MAIN ADMIN CSS
+*/
+body{ padding-top:40px;}
+.clear{ clear:both;}
+.float-right{ float: right;}
+.lang-holder{ padding:30px 0 20px 15px;}
+
+#ajax-spinner {
+	margin: 15px 0 0 15px;
+	padding: 13px;
+	background: white url('spinner.gif') no-repeat 50% 50%;
+	font-size: 0;
+	z-index: 123456;
+	display: none;
+}
+
+/*
+* NODE CONTAINER
+*/
+#nodecontainer{ padding-top:15px;}
+#nodecontainer .node-item { display:block;}
+#nodecontainer ol.sortable .placeholder{height:80px; margin:0px;}
+#nodecontainer .node-list-name-holder{ padding:15px; min-height: 45px;}
+#nodecontainer .node-list-btn-holder{float:right; width:160px;height:30px;padding:25px 0px 0px 20px;}
+.icon-content{
+	background-image : url('node-icon.png');
+    background-position: 0px 0px !important;
+	width:22px !important;height:14px !important;
+}
+.icon-content-right{
+	background-image : url("node-icon.png");
+    background-position: -22px 0px !important;
+	width:22px !important;height:14px !important;
+}
+.icon-content-top{
+	background-image : url("node-icon.png");
+    background-position: -44px 0px !important;
+	width:22px !important;height:14px !important;
+}
+
+/*
+* my-action-holder
+*/
+.my-action-holder{ float:left;
+padding:22px 10px 0 0;
+}
+
+.btn-count {
+    -webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	-webkit-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.5);
+	box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.5); 
+    color: white;
+    font-size: 9px;
+    padding: 0px 7px;
+    position: absolute;
+    text-align: center;
+    top: -11px;
+	z-index: 3;
+}
+
+.admin-widget-holder{ float: left; padding:10px;}
+.admin-widget-holder label{ float: left;padding-left: 10px;}
+.admin-widget-holder input{ float: left;}
+
+/**
+* Time statuses
+*/
+tr.time-status-actual td{
+
+}
+
+tr.time-status-in-progress td{
+	background-color: #dff0d8!important;
+}
+
+tr.time-status-inactive td{
+	background-color: #f2dede!important;
+}
+
+.datagrid{
+	padding: 0;
+}
+
+.datagrid input{
+	width: auto;
+}
+
+.datagrid-settings .btn-group{
+	display: none;
+}
+
+.submenu-panel{
+	padding-top:20px;
+}
+
+.defaultSkin table.mceLayout{
+	margin-bottom :1rem;
+}

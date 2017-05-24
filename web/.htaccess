@@ -3,8 +3,8 @@
 	RewriteEngine On
 #	RewriteBase /
 
-#    RewriteCond %{HTTP_HOST} ^abcvyskoveprace\.sk$
-#    RewriteRule ^(.*)$ https://www.abcvyskoveprace.sk/$1 [R=301,L]
+    RewriteCond %{HTTP_HOST} ^abcvyskoveprace\.sk$
+    RewriteRule ^(.*)$ https://www.abcvyskoveprace.sk/$1 [R=301,L]
 
 
 #    RewriteCond ^http://www.abcvyskoveprace\.sk$
