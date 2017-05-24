@@ -59,7 +59,7 @@ class ContactControl extends BaseControl
          */
         $mail = $this->getService('Mail');
 
-        $mail->setTemplateFile(dirname(__FILE__) . '/email.latte  ');
+        $mail->setTemplateFile(dirname(__FILE__) . '/email.latte');
         if ($contact_val['email'] != '') {
             $mail->addTo($contact_val['email']);
         }

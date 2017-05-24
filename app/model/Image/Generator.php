@@ -3,6 +3,7 @@
 namespace App\Model\Image;
 
 use Nette\Object;
+use Tracy\Debugger;
 
 class Generator extends Object
 {
@@ -201,6 +202,8 @@ class Generator extends Object
 
     public function getFileNameAndExtension($fileName)
     {
+        Debugger::barDump('getFileNameAndExtension');
+        Debugger::barDump($fileName);
         $info = pathinfo($fileName);
 
         return ['src' => $info['filename'], 'ext' => $info['extension']];

@@ -52,7 +52,9 @@
 
                 stop : function(event, ui) {
                     //serialized = $('ol.sortable').nestedSortable('serialize');
-                    arraied = $sortable.nestedSortable('toArray', {startDepthCount : 0});
+                    arraied = $sortable.nestedSortable('toArray', {
+                        startDepthCount : 0
+                    });
 
                     $.post(link, {
                         '{$control->getName()|noescape}-order' : arraied

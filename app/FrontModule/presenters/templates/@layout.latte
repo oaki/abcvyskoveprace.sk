@@ -1,251 +1,137 @@
-<!DOCTYPE html>
-<html lang="{$presenter->lang}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="apple-touch-icon" sizes="57x57" href="/assets/frontend/ico/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/assets/frontend/ico/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/assets/frontend/ico/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/assets/frontend/ico/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/assets/frontend/ico/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/assets/frontend/ico/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/assets/frontend/ico/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/assets/frontend/ico/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/frontend/ico/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="/assets/frontend/ico/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/frontend/ico/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/assets/frontend/ico/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/frontend/ico/favicon-16x16.png">
-    <link rel="manifest" href="/assets/frontend/ico/manifest.json">
-    <meta name="msapplication-TileColor" content="#ffffff">
-    <meta name="msapplication-TileImage" content="/assets/frontend/ico/ms-icon-144x144.png">
-    <meta name="theme-color" content="#ffffff">
+{include head.latte}
+<body class="home page-template page-template-template-home page-template-template-home-php page page-id-25 custom-background  wpb-js-composer js-comp-ver-4.12.1 vc_responsive">
+<div class="site_wrapper">
 
-    <title>{block title}Aquacity slovakia s.r.o.{/block}</title>
-    <meta name="description" content="{block description}{/block}"/>
-    <meta name="keywords" content="{block keywords}{/block}"/>
+    <div class="loader">
+        <div class="satellite"></div>
+        <p class="title-loader">Loading ...</p>
+    </div>
 
-    {if $presenter->isDebugMode()}
-        <link href="{$basePath}/assets/frontend/css/main.css" rel="stylesheet">
+
+    {foreach $flashes as $flash}
+        <div class="flash {$flash->type}">{$flash->message}</div>
+    {/foreach}
+
+    {include header.latte}
+
+
+    <div class="main-content">
+        <div class="main-content">
+            <div class="container">
+                <div class="row">
+
+
+                    {include content}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {include footer.latte}
+
+    <a href="#" class="scrollToTop"><i class="fa fa-angle-up"></i></a>
+    <style id="stassets_footer_css">
+
+        .st_1494881861:after
+        {
+            background-color : rgba(0, 47, 94, 0.74) !important
+        }
+
+        .st_1494881862:after
+        {
+            background-color : rgba(255, 182, 0, 0.75) !important
+        }
+
+        .st_1494881863:after
+        {
+            background-color : rgba(0, 47, 94, 0.74) !important
+        }
+
+        .st_1494881864
+        {
+            color : #ffffff !important
+        }
+
+        .st_1494881865:after
+        {
+            background : #3b5998 none repeat scroll 0 0 !important
+        }
+
+        .st_1494881866:after
+        {
+            background : #01a2de none repeat scroll 0 0 !important
+        }
+
+        .st_1494881867:after
+        {
+            background : #ea4c89 none repeat scroll 0 0 !important
+        }
+
+        .st_1494881868:after
+        {
+            background : #517fa4 none repeat scroll 0 0 !important
+        }
+
+        .st_1494881869:after
+        {
+            background : #4ebbff none repeat scroll 0 0 !important
+        }
+
+        .vc_custom_1473144046635
+        {
+            padding-top      : 50px !important;
+            background-color : #121416 !important;
+        }
+
+        .vc_custom_1473144617026
+        {
+            background-color : #0a0a0b !important;
+        }
+
+        .vc_custom_1473144888797
+        {
+            padding-top : 0px !important;
+        }
+
+        .vc_custom_1473144780945
+        {
+            margin-bottom : 0px !important;
+        }
+    </style>
+
+
+    {**}
+
+    {*<script type='text/javascript' src='https://abcvyskoveprace.sk/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=4.7'></script>*}
+    {*<script type='text/javascript' src='//abcvyskoveprace.sk/wp-content/plugins/woocommerce/assets/js/jquery-blockui/jquery.blockUI.min.js?ver=2.70'></script>*}
+    {*<script type='text/javascript' src='//abcvyskoveprace.sk/wp-content/plugins/woocommerce/assets/js/js-cookie/js.cookie.min.js?ver=2.1.3'></script>*}
+
+
+    {*<script type='text/javascript' src='https://abcvyskoveprace.sk/wp-content/themes/buildingx/assets/bs/js/bootstrap.min.js'></script>*}
+    {*<script type='text/javascript' src='https://abcvyskoveprace.sk/wp-includes/js/comment-reply.min.js?ver=4.7.4'></script>*}
+    {*<script type='text/javascript' src='https://abcvyskoveprace.sk/wp-content/themes/buildingx/assets/js/bootsnav.js'></script>*}
+    {*<script type='text/javascript' src='https://abcvyskoveprace.sk/wp-content/themes/buildingx/assets/js/jquery.appear.js'></script>*}
+    {*<script type='text/javascript' src='https://abcvyskoveprace.sk/wp-content/themes/buildingx/assets/js/jquery-countTo.js'></script>*}
+    {*<script type='text/javascript' src='https://abcvyskoveprace.sk/wp-content/themes/buildingx/assets/js/jquery.parallax-1.1.3.js'></script>*}
+    {*<script type='text/javascript' src='https://abcvyskoveprace.sk/wp-content/themes/buildingx/assets/js/owl.carousel.min.js'></script>*}
+    {*<script type='text/javascript' src='https://abcvyskoveprace.sk/wp-content/themes/buildingx/assets/js/jquery.mixitup.min.js'></script>*}
+    {*<script type='text/javascript' src='https://abcvyskoveprace.sk/wp-content/themes/buildingx/assets/js/jquery.fancybox.js'></script>*}
+    {*<script type='text/javascript' src='https://abcvyskoveprace.sk/wp-content/themes/buildingx/assets/js/jquery.cubeportfolio.min.js'></script>*}
+    {*<script type='text/javascript' src='//maps.googleapis.com/maps/api/js?key=AIzaSyAqAX0wwIskofRc1ZjZsvySkQfC25mldzA'></script>*}
+    {*<script type='text/javascript' src='https://abcvyskoveprace.sk/wp-content/themes/buildingx/assets/js/gmap3.min.js'></script>*}
+    {*<script type='text/javascript' src='https://abcvyskoveprace.sk/wp-content/themes/buildingx/assets/js/custom.js'></script>*}
+
+    {*<script type='text/javascript' src='https://abcvyskoveprace.sk/wp-content/themes/buildingx/assets/js/ajax.js'></script>*}
+    {*<script type='text/javascript' src='https://abcvyskoveprace.sk/wp-includes/js/wp-embed.min.js?ver=4.7.4'></script>*}
+    {*<script type='text/javascript' src='https://abcvyskoveprace.sk/wp-content/plugins/js_composer/assets/js/dist/js_composer_front.min.js?ver=4.12.1'></script>*}
+
+
+    {if $presenter->debugMode}
+        <script type='text/javascript' src='/assets/frontend/js/main.dist.js'></script>
     {else}
-        <link href="{$basePath}/assets/frontend/css/main.min.css" rel="stylesheet">
+        <script type='text/javascript' src='/assets/frontend/js/main.dist.js'></script>
     {/if}
 
-    {*<link href="{$basePath}/assets/frontend/bootstrap/css/bootstrap.css" rel="stylesheet">*}
-    {*<link href="{$basePath}/assets/frontend/css/idangerous.swiper.css" rel="stylesheet">*}
-    {*<link href="{$basePath}/assets/frontend/css/style.css" rel="stylesheet">*}
-    {*<link href="{$basePath}/assets/frontend/css/animate.min.css" rel="stylesheet">*}
-    {*<link href="{$basePath}/assets/frontend/css/owl.carousel.css" rel="stylesheet">*}
-    {*<link href="{$basePath}/assets/frontend/css/owl.theme.css" rel="stylesheet">*}
-
-    {*<link href="{$basePath}/assets/frontend/js/ion-checkRadio/css/ion.checkRadio.css" rel="stylesheet">*}
-    {*<link href="{$basePath}/assets/frontend/js/ion-checkRadio/css/ion.checkRadio.cloudy.css" rel="stylesheet">*}
-
-    {*<link href="{$basePath}/assets/frontend/css/jquery.mCustomScrollbar.css" rel="stylesheet">*}
-
-    {*<link href="{$basePath}/assets/frontend/js/prettyPhoto/css/prettyPhoto.css" rel="stylesheet">*}
-
-    {*<link href="{$basePath}/assets/frontend/css/main.css" rel="stylesheet">*}
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-    <![endif]-->
-    <script>
-        (function(i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function() {
-                    (i[r].q = i[r].q || []).push(arguments)
-                }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-        ga('create', 'UA-87734730-1', 'auto');
-        ga('send', 'pageview');
-
-    </script>
-</head>
-<body class="{block bodyClass}{/block}">
-
-{control login}
-
-<div class="navbar navbar-tshop navbar-fixed-top megamenu" role="navigation">
-
-    <div class="white-background navbar-top">
-        <div class="container">
-            <div class="navbar-header col-sm-7">
-                {*<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span*}
-                {*class="sr-only"> Toggle navigation </span>*}
-                {*<span class="icon-bar"> </span>*}
-                {*<span*}
-                {*class="icon-bar"> </span>*}
-                {*<span class="icon-bar"> </span>*}
-                {*</button>*}
-
-                <button class="menu-button hidden-lg navbar-toggle" data-toggle="collapse"
-                        data-target=".navbar-collapse" id="open-button">
-                    <span>Menu</span>
-                </button>
-
-                {*<a href="{plink :Front:Cart:default}" class="navbar-toggle" title="Košík">*}
-                {*<i class="fa fa-shopping-cart colorWhite"> </i>*}
-                {*<span class="cartRespons colorWhite"> Košík </span>*}
-                {*</a>*}
-
-
-                <a class="navbar-brand" href="{plink :Front:Homepage:default}" title="Aquacity Slovakia">
-                    <img class="img-responsive" src="{$basePath}/assets/frontend/img/super-zoo-chovatelske-potreby.svg"
-                         alt="Aquacity Slovakia">
-                </a>
-
-                {*<div class="search-box pull-right hidden-lg hidden-md hidden-sm">*}
-                {*<div class="input-group">*}
-                {*<button class="btn btn-nobg getFullSearch" type="button"><i class="fa fa-search"> </i></button>*}
-                {*</div>*}
-                {*</div>*}
-            </div>
-
-
-            <div class="navbar-login col-sm-5">
-
-                <div class="navbar-tel  hidden-xs">
-                    <div class="phone-icon"><span class="fa fa-phone"></span></div>
-                    <span><span class="navbar-tel--title">Zavolajte nám</span> <br> Tel: <span> 0123 456 789</span></span>
-                </div>
-
-                <div class="btn-group " role="group">
-
-
-                    <a href="{plink :Front:Cart:default}" class="btn hidden-md hidden-lg" title="Košík">
-                        <i class="fa fa-shopping-cart hide visible-xs "></i>
-                        <span class="hidden-sm">Košík</span>
-
-                    </a>
-
-                    <a n:if="$user->isLoggedIn()" href="{plink :Front:Profile:default}" class="btn btn-success"
-                                                  title="Môj účet">
-                        <i class="fa fa-user "></i>
-                        <span>Môj účet</span>
-                    </a>
-
-                    <a n:if="!$user->isLoggedIn()" href="#" class="btn " data-toggle="modal" data-target="#ModalLogin"
-                                                   title="Prihlásenie">
-                        <i class="fa fa-sign-in"></i>
-                        <span class="hidden-sm"> Prihlásenie</span>
-                    </a>
-
-                    <a n:if="!$user->isLoggedIn()" href="{plink :Front:Registration:default}"
-                                                   class="btn btn-default btn-signup" title="Registrácia">
-                        <i class="fa fa-user-plus"></i>
-                        <span class="hidden-sm"> Registrácia</span>
-                    </a>
-
-                    <a n:if="$user->isLoggedIn()" href="{plink :Front:Homepage:logout}" class="btn btn-default"
-                                                  title="Odhlásiť">
-                        <i class="fa fa-sign-out"></i>
-                        Odhlásiť
-                    </a>
-                </div>
-            </div>
-
-
-        </div>
-    </div>
-
-    <div class="main-menu">
-        <div class="container">
-            <div class="navbar-collapse collapse">
-
-                {include nav.latte}
-
-                <div class="nav navbar-nav navbar-right hidden-xs">
-
-                    {control cart}
-
-                    <div class="search-box">
-                        <div class="input-group">
-                            <button class="btn btn-nobg getFullSearch" type="button"><i class="fa fa-search"> </i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="search-full text-right"><a class="pull-right search-close"> <i class=" fa fa-times-circle"> </i>
-            </a>
-
-            <div class="searchInputBox pull-right">
-                {form productSearchForm id=>"frm-productSearchForm2"}
-                    {input query id=>"frm-productSearchForm-query2",type=>"search",class=>"search-input",placeholder=>$presenter->context->getService('translator')->translate('vyhľadávanie')}
-
-                    <button name="btn" class="btn-nobg search-btn" type="submit"><i class="fa fa-search"> </i></button>
-                {/form}
-            </div>
-        </div>
-    </div>
 </div>
-
-{ifCurrent :Front:Homepage:*}
-    <div class="header-offset">
-        {include content}
-    </div>
-{else}
-    <div class="container main-container header-offset">
-        {include flashMessage.latte}
-        {include content}
-    </div>
-{/ifCurrent}
-
-{include footer.latte}
-
-
-<!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-<![endif]-->
-<script type="text/javascript" src="//maps.google.com/maps/api/js?sensor=true"></script>
-
-<script> paceOptions = {elements : true};</script>
-
-{if $presenter->isDebugMode()}
-    <script src="{$basePath}/assets/frontend/js/jquery/1.8.3/jquery.js" type="text/javascript"></script>
-    <script src="{$basePath}/assets/frontend/bootstrap/js/bootstrap.min.js"></script>
-    <script src="{$basePath}/assets/frontend/js/idangerous.swiper-2.1.min.js"></script>
-
-
-    <script src="{$basePath}/assets/frontend/js/pace.min.js"></script>
-    <script src="{$basePath}/assets/frontend/js/jquery.cycle2.min.js"></script>
-    <script src="{$basePath}/assets/frontend/js/jquery.easing.1.3.js"></script>
-    <script src="{$basePath}/assets/frontend/js/jquery.parallax-1.1.js"></script>
-    <script src="{$basePath}/assets/frontend/js/helper-plugins/jquery.mousewheel.min.js"></script>
-    <script src="{$basePath}/assets/frontend/js/jquery.mCustomScrollbar.js"></script>
-    <script src="{$basePath}/assets/frontend/js/ion-checkRadio/js/ion.checkRadio.min.js"></script>
-    <script src="{$basePath}/assets/frontend/js/grids.js"></script>
-    <script src="{$basePath}/assets/frontend/js/owl.carousel.min.js"></script>
-    <script src="{$basePath}/assets/frontend/js/chosen.jquery.js"></script>
-    <script src="{$basePath}/assets/frontend/js/bootstrap.touchspin.js"></script>
-
-    <script src="{$basePath}/assets/frontend/js/smoothproducts.min.js"></script>
-    <script src="{$basePath}/assets/frontend/js/nette.ajax.js"></script>
-    <script src="{$basePath}/assets/frontend/js/netteForms.min.js"></script>
-
-    <script src="{$basePath}/assets/frontend/js/prettyPhoto/js/jquery.prettyPhoto.js"></script>
-    <script src="{$basePath}/assets/frontend/js/gmaps.min.js"></script>
-    <script src="{$basePath}/assets/frontend/js/home.js"></script>
-    <script src="{$basePath}/assets/frontend/js/script.js?v=3"></script>
-
-{else}
-    <script src="{$basePath}/assets/frontend/js/main.dist.js?v=3"></script>
-{/if}
-
-{block additionalJs}{/block}
 </body>
 </html>

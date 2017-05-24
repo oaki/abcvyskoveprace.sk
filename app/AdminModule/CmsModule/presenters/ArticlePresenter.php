@@ -110,6 +110,10 @@ class ArticlePresenter extends BasePresenter
         $f->addTextarea('text', 'Text')
             ->setAttribute('class', 'span9 mceEditor');
 
+        $f->addTextarea('text2', 'Bočný text')
+            ->setAttribute('class', 'span9 mceEditor');
+
+
         $f->addGroup('Meta data');
 
         $f->addText('slug', 'Url adresa')

@@ -231,7 +231,9 @@
             $.getJSON( {plink :Admin:FileNode:getFiles 'id_file_node'=>$control->id_file_node}, function(result) {
                 if (result && result.length) {
                     $(that).fileupload('option', 'done')
-                        .call(that, null, {result : result});
+                        .call(that, null, {
+                            result : result
+                        });
                 }
             });
         });
@@ -240,7 +242,9 @@
             handle : '.preview',
             stop   : function(event, ui) {
                 var arraied = $('ul.files').sortable('toArray');
-                $.post( {plink :Admin:FileNode:saveOrder}, {'order' : arraied});
+                $.post( {plink :Admin:FileNode:saveOrder}, {
+                    'order' : arraied
+                });
             }
 
         });
@@ -293,7 +297,7 @@
                     if (canvas.getContext && canvas.toBlob) {
                         canvas.getContext('2d').drawImage(img, 0, 0);
                         canvas.toBlob(function(blob) {
-                            $('#fileupload').fileupload('add', {files : [blob]});
+                            $('#fileupload').fileupload('add', {'files' : [blob]});
                         });
                     }
                 }

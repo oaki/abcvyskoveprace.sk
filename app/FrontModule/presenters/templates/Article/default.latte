@@ -3,22 +3,63 @@
 {block keywords}{$article['meta_keywords']}{/block}
 
 {block content}
+{dump $article}
 
 <div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12">
-        <div class="row userInfo">
-            <div class="col-xs-12 col-sm-12">
-                <h1>{$article['title']}</h1>
-                {$article['text']|noescape}
-            </div>
-        </div>
-        <!--/row end-->
-        <div class="row" n:if="count($article['files'])>0">
-            <div class="col-sm-12">
-                {control attachment:images $article['files'], $article['id_node']}
-            </div>
-        </div>
+    <div class="col-md-12">
+        <article class="page type-page status-publish hentry">
+            <div class="entry-content">
+                <div data-vc-full-width="true" data-vc-full-width-init="false" data-vc-stretch-content="true"
+                     class="vc_row wpb_row vc_row-fluid vc_row-no-padding">
+                    <div class="wpb_column vc_column_container vc_col-sm-12">
+                        <div class="vc_column-inner ">
+                            <div class="wpb_wrapper">
+                                <section class="element-banner-layout page_header padding-top"
+                                         style="background-size: cover;background-image: url({$article['first_img']['image']|img:default:1600:680:5});">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-md-12 text-center page-content">
+                                                <h1>{$article['title']}</h1>
+                                                <p class="st_1495123158">Realizácia a rekonštrukcia</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="vc_row-full-width vc_clearfix"></div>
+
+
+                <div class="vc_row wpb_row vc_row-fluid margin-30">
+                    <div class="wpb_column vc_column_container {if $article['text2']!=''}vc_col-sm-7{else}vc_col-sm-12{/if}">
+                        <div class="vc_column-inner ">
+                            <div class="wpb_wrapper">
+                                {$article['text']|noescape}
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div n:if="$article['text2']!=''" class="wpb_column vc_column_container vc_col-sm-5">
+                        <div class="vc_column-inner ">
+                            <div class="wpb_wrapper">
+                                {$article['text2']|noescape}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row" n:if="count($article['files'])>1">
+
+                    <div class="col-sm-12">
+                        {control attachment:images $article['files'], $article['id_node']}
+                    </div>
+                </div>
+
+            </div><!-- .entry-content -->
+        </article><!-- #post-## -->
     </div>
 </div>
-
-<div style="clear:both"></div>

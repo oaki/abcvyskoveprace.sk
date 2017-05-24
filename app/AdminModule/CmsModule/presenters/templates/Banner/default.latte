@@ -22,7 +22,9 @@
         handle : '.handle',
         update : function(event, ui) {
             var newOrder = $(this).sortable('serialize');
-            $.get({plink saveOrder }, {order : newOrder});
+            $.get({plink saveOrder }, {
+                order : newOrder
+            });
         }
     });
 </script>

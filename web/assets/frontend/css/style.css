@@ -1,0 +1,404 @@
+/*
+Theme Name: BuildingX
+Theme URI: #
+Author: ShineTheme
+Author URI: http://shinetheme.xyz
+Description: A Starter Theme
+Version: 1.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: two-columns, left-sidebar, custom-background, custom-colors, custom-header, custom-menu, editor-style, featured-images, microformats, post-formats, rtl-language-support, sticky-post, threaded-comments, translation-ready
+Text Domain: buildingx
+*/
+
+/**
+ * Table of Contents
+ *
+ * 1.0 - Reset
+ * 2.0 - Elements
+ * 3.0 - Alignments
+ * 4.0 - Clearings
+ * 5.0 - Theme Unit Test
+ *
+ */
+
+/**
+ * 1.0 - Reset
+ *
+ * Resetting and rebuilding styles have been helped along thanks to the fine work of
+ * Eric Meyer http://meyerweb.com/eric/tools/css/reset/index.html
+ * along with Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
+ * and Blueprint http://www.blueprintcss.org/
+ */
+
+html, body, div, span, applet, object, iframe, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td
+{
+    border         : 0;
+    font-family    : inherit;
+    font-size      : 100%;
+    font-style     : inherit;
+    /*  font-weight: inherit;*/
+    margin         : 0;
+    outline        : 0;
+    padding        : 0;
+    vertical-align : baseline;
+}
+
+html
+{
+    -webkit-box-sizing       : border-box;
+    -moz-box-sizing          : border-box;
+    box-sizing               : border-box;
+    overflow-y               : scroll;
+    -webkit-text-size-adjust : 100%;
+    -ms-text-size-adjust     : 100%;
+}
+
+*,
+*:before,
+*:after
+{
+    -webkit-box-sizing : inherit;
+    -moz-box-sizing    : inherit;
+    box-sizing         : inherit;
+}
+
+body
+{
+    background : #FFF;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+main,
+nav,
+section
+{
+    display : block;
+}
+
+ol,
+ul
+{
+    list-style : none;
+}
+
+table
+{
+    border-collapse : separate;
+    border-spacing  : 0;
+}
+
+caption,
+th,
+td
+{
+    font-weight : normal;
+    text-align  : left;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after
+{
+    content : "";
+}
+
+blockquote,
+q
+{
+    -webkit-hyphens : none;
+    -moz-hyphens    : none;
+    -ms-hyphens     : none;
+    hyphens         : none;
+    quotes          : none;
+}
+
+a:focus
+{
+    outline : 2px solid #C1C1C1;
+}
+
+a:hover,
+a:active
+{
+    outline : 0;
+}
+
+a img
+{
+    border : 0;
+}
+
+.wp-caption-text
+{
+
+}
+
+.sticky
+{
+
+}
+
+.gallery-caption
+{
+
+}
+
+.bypostauthor
+{
+
+}
+
+/**
+ * 2.0 Elements
+ */
+
+hr
+{
+    background-color : #EAEAEA;
+    background-color : rgba(51, 51, 51, 0.1);
+    border           : 0;
+    height           : 1px;
+    margin-bottom    : 1.6em;
+}
+
+ul,
+ol
+{
+    margin : 0 0 1.6em 1.3333em;
+}
+
+ul
+{
+    list-style : disc;
+}
+
+ol
+{
+    list-style : decimal;
+}
+
+li > ul,
+li > ol
+{
+    margin-bottom : 0;
+}
+
+dl
+{
+    margin-bottom : 1.6em;
+}
+
+dt
+{
+    font-weight : bold;
+}
+
+dd
+{
+    margin-bottom : 1.6em;
+}
+
+table,
+th,
+td
+{
+    border : 1px solid #EAEAEA;
+    border : 1px solid rgba(51, 51, 51, 0.1);
+}
+
+table
+{
+    border-collapse : separate;
+    border-spacing  : 0;
+    border-width    : 1px 0 0 1px;
+    margin          : 0 0 1.6em;
+    table-layout    : fixed; /* Prevents HTML tables from becoming too wide */
+    width           : 100%;
+}
+
+caption,
+th,
+td
+{
+    font-weight : normal;
+    text-align  : left;
+}
+
+th
+{
+    border-width : 0 1px 1px 0;
+    font-weight  : 700;
+}
+
+td
+{
+    border-width : 0 1px 1px 0;
+}
+
+th, td
+{
+    padding : 0.4em;
+}
+
+img
+{
+    -ms-interpolation-mode : bicubic;
+    border                 : 0;
+    height                 : auto;
+    max-width              : 100%;
+    vertical-align         : middle;
+}
+
+figure
+{
+    margin : 0;
+}
+
+del
+{
+    opacity : 0.8;
+}
+
+/**
+ * 3.0 Alignments
+ */
+
+.alignleft
+{
+    display : inline;
+    float   : left;
+}
+
+.alignright
+{
+    display : inline;
+    float   : right;
+}
+
+.aligncenter
+{
+    display      : block;
+    margin-right : auto;
+    margin-left  : auto;
+}
+
+blockquote.alignleft,
+.wp-caption.alignleft,
+img.alignleft
+{
+    margin : 0.4em 1.6em 1.6em 0;
+}
+
+blockquote.alignright,
+.wp-caption.alignright,
+img.alignright
+{
+    margin : 0.4em 0 1.6em 1.6em;
+}
+
+blockquote.aligncenter,
+.wp-caption.aligncenter,
+img.aligncenter
+{
+    clear         : both;
+    margin-top    : 0.4em;
+    margin-bottom : 1.6em;
+}
+
+.wp-caption.alignleft,
+.wp-caption.alignright,
+.wp-caption.aligncenter
+{
+    margin-bottom : 1.2em;
+}
+
+/**
+ * 4.0 Clearings
+ */
+
+.clear:before,
+.clear:after,
+.site:before,
+.site:after,
+.entry-content:before,
+.entry-content:after,
+.comment-content:before,
+.comment-content:after,
+.site-content:before,
+.site-content:after,
+.nav-links:before,
+.nav-links:after,
+.comment-navigation:before,
+.comment-navigation:after,
+.social-navigation ul:before,
+.social-navigation ul:after,
+.textwidget:before,
+.textwidget:after
+{
+    content : "";
+    display : table;
+}
+
+.clear:after,
+.site:after,
+.entry-content:after,
+.comment-content:after,
+.site-content:after,
+.nav-links:after,
+.comment-navigation:after,
+.social-navigation ul:after,
+.textwidget:after
+{
+    clear : both;
+}
+
+/**
+ * 5.0 Theme unit test
+ */
+pre
+{
+    background-color : transparent;
+    background-color : rgba(0, 0, 0, 0.01);
+    border           : 1px solid #EAEAEA;
+    border           : 1px solid rgba(51, 51, 51, 0.1);
+    line-height      : 1.2;
+    margin-bottom    : 1.6em;
+    max-width        : 100%;
+    overflow         : auto;
+    padding          : 0.8em;
+    white-space      : pre;
+    white-space      : pre-wrap;
+    word-wrap        : break-word;
+}
+
+dfn, cite, em, i
+{
+    font-style : italic;
+}
+
+.says, .screen-reader-text
+{
+    clip     : rect(1px, 1px, 1px, 1px);
+    height   : 1px;
+    overflow : hidden;
+    position : absolute !important;
+    width    : 1px;
+}
+
+.sidebar-widget select
+{
+    max-width : 100%;
+}
+
+.entry-content figure
+{
+    max-width : 100%;
+}

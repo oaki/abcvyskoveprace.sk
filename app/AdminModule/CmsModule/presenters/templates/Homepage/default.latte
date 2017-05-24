@@ -38,6 +38,10 @@
          <a class="btn" href="{link :Admin:Cms:Node:add module_id=>2,position=>'top'}"><i class="icon-plus-sign"></i> Pridať prezentáciu ( Slideshow )</a>
         <a class="btn" href="{link :Admin:Cms:Node:add module_id=>3}"><i class="icon-plus-sign"></i> Pridať kontaktnú podstránku</a>
 *}
+
+        <a class="btn" href="{link :Admin:Cms:Node:add module_id=>3}"><i class="icon-plus-sign"></i> Pridať kontaktnú
+            podstránku</a>
+
         <div n:snippet="nodePositionBtn" class="pull-right btn-group">
             <a title="Zobraziť moduly, ktoré sú v hlavnej obsahovej časti" href="{link this! position=>'content'}"
                class="ajax btn{if $presenter->position == 'content'} active{/if}"><i
@@ -145,7 +149,9 @@
 
                         stop : function(event, ui) {
                             //serialized = $('ol.sortable').nestedSortable('serialize');
-                            arraied = $('#nodecontainer ol.sortable').nestedSortable('toArray', {startDepthCount : 0});
+                            arraied = $('#nodecontainer ol.sortable').nestedSortable('toArray', {
+                                startDepthCount : 0
+                            });
 
                             $.post( {link saveOrder!}, {'order' : arraied});
                         }

@@ -47,7 +47,7 @@ class ArticleModel extends BaseDbModel implements IBaseCms, IModuleSlug// object
     public function slugToId($slug)
     {
         $slug = rtrim($slug, '/');
-        $key  = 'slugToId(' . $slug . ')';
+        $key = 'articleSlugToId(' . $slug . ')';
 
         $id = $this->loadCache($key);
 
@@ -63,7 +63,7 @@ class ArticleModel extends BaseDbModel implements IBaseCms, IModuleSlug// object
 
     public function idToSlug($id)
     {
-        $key  = 'idToSlug(' . $id . ')';
+        $key  = 'articleIdToSlug(' . $id . ')';
         $slug = $this->loadCache($key);
 
         if ($slug AND 1 == 2) {

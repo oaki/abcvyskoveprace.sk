@@ -119,10 +119,6 @@
                     {*<li class="divider-vertical"></li>*}
 
 
-                    <li n:if="$user->isAllowed('spravca_eshopu','edit')" {ifCurrent :Admin:Eshop:Homepage:}class="active"{/ifCurrent}>
-                        <a href="{plink :Admin:Eshop:Homepage:default id=>null,id_category=>null}">Eshop</a></li>
-                    <li n:if="$user->isAllowed('spravca_eshopu','edit')" {ifCurrent :Admin:Order:Homepage:}class="active"{/ifCurrent}>
-                        <a href="{plink :Admin:Order:Homepage:default}">Objednávky</a></li>
                     <li n:if="$user->isAllowed('spravca_eshopu','edit')" {ifCurrent :Admin:Cms:Banner:}class="active"{/ifCurrent}>
                         <a href="{plink :Admin:Cms:Banner:default}">Banner</a></li>
 
@@ -159,18 +155,6 @@
                         </ul>
                     </li>
 
-
-                    <li n:if="$user->isAllowed('spravca_eshopu','edit')" {ifCurrent :Admin:Eshop:Mark:}class="active"{/ifCurrent}>
-                        <a href="{plink :Admin:Eshop:Mark:default}">Značky</a></li>
-
-                    {*<li n:if="$user->isAllowed('spravca_obsahu','edit')" style="position: relative;" class="">*}
-                    {*<a class="dropdown-toggle" data-toggle="dropdown" href="#"">Ostatné</a>*}
-                    {*<ul class="dropdown-menu">*}
-
-                    {*</ul>*}
-                    {*</li>*}
-
-
                     <li n:if="$user->isAllowed('spravca_obsahu','edit')"
                             class="{ifCurrent :Admin:Setting:Homepage:} active{/ifCurrent}">
                         <a class="dropdown-toggle" data-toggle="dropdown" href="{plink :Admin:Setting:Homepage:}"">Nastavenia</a>
@@ -182,10 +166,6 @@
                         </ul>
                     </li>
 
-                    <li n:if="$user->isAllowed('import_manager','edit')"
-                            class="{ifCurrent :Admin:ImportManager:Homepage:} active{/ifCurrent}">
-                        <a href="{plink :Admin:ImportManager:Homepage:default}">Import</a>
-                    </li>
 
                     <li n:if="$user->isAllowed('spravca_obsahu','edit')">
                         <a href="{plink :Admin:Setting:Homepage:clearCache}">Vymazať Cache</a>

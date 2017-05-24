@@ -33,34 +33,29 @@ module.exports = function(grunt) {
             js_frontend : {
                 files   : {
                     'web/assets/frontend/js/main.dist.js' : [
-                        'web/assets/frontend/js/jquery/1.8.3/jquery.js',
-                        'web/assets/frontend/bootstrap/js/bootstrap.min.js',
-                        'web/assets/frontend/js/idangerous.swiper-2.1.min.js',
-                        'web/assets/frontend/js/pace.min.js',
-                        'web/assets/frontend/js/jquery.cycle2.min.js',
-                        'web/assets/frontend/js/jquery.easing.1.3.js',
-                        'web/assets/frontend/js/jquery.parallax-1.1.js',
-                        'web/assets/frontend/js/helper-plugins/jquery.mousewheel.min.js',
-                        'web/assets/frontend/js/jquery.mCustomScrollbar.js',
-                        'web/assets/frontend/js/ion-checkRadio/js/ion.checkRadio.min.js',
-                        'web/assets/frontend/js/grids.js',
+                        'web/assets/frontend/js/jquery.blockUI.min',
+                        'web/assets/frontend/js/js.cookie.min.js',
+                        'web/assets/frontend/js/bootstrap.min.js',
+                        'web/assets/frontend/js/jquery.appear.js',
+                        'web/assets/frontend/js/jquery-countTo.js',
+                        'web/assets/frontend/js/jquery.parallax-1.1.3.js',
                         'web/assets/frontend/js/owl.carousel.min.js',
-                        'web/assets/frontend/js/chosen.jquery.js',
-                        'web/assets/frontend/js/bootstrap.touchspin.js',
-                        'web/assets/frontend/js/smoothproducts.min.js',
-                        'web/assets/frontend/js/nette.ajax.js',
-                        'web/assets/frontend/js/netteForms.min.js',
-                        'web/assets/frontend/js/prettyPhoto/js/jquery.prettyPhoto.js',
-                        'web/assets/frontend/js/gmaps.min.js',
-                        'web/assets/frontend/js/home.js',
-                        'web/assets/frontend/js/script.js'
+                        'web/assets/frontend/js/jquery.mixitup.min.js',
+                        'web/assets/frontend/js/jquery.fancybox.js',
+                        'web/assets/frontend/js/jquery.cubeportfolio.min.js',
+                        'web/assets/frontend/js/gmap3.min.js',
+                        'web/assets/frontend/js/custom.js',
+                        'web/assets/frontend/js/ajax.js',
+                        'web/assets/frontend/js/js_composer_front.min.js'
                     ]
                 },
                 options : {
                     // preserveComments: 'some',
-                    mangle   : false,
-                    compress : false,
-                    beautify : true,
+                    // mangle   : false,
+                    compress : {
+                        dead_code : true
+                    },
+                    // beautify : true,
 
                     sourceMap     : true,
                     sourceMapName : 'web/assets/frontend/js/sourcemap.map'

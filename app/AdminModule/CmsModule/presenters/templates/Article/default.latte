@@ -28,6 +28,7 @@
         </ul>
 
         <div class="tab-content">
+
             {foreach $form->getGroups() as $k=>$g}
                 {if $k != 'Btn'}
                     <div class="tab-pane" id="{$form->getName()}_{$k|webalize}">
