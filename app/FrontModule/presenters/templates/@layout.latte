@@ -1,3 +1,5 @@
+{block |strip}
+
 {include head.latte}
 <body class="home page-template page-template-template-home page-template-template-home-php page page-id-25 custom-background  wpb-js-composer js-comp-ver-4.12.1 vc_responsive">
 <div class="site_wrapper">
@@ -9,7 +11,7 @@
 
 
     {foreach $flashes as $flash}
-        <div class="flash {$flash->type}">{$flash->message}</div>
+    <div class="flash {$flash->type}">{$flash->message}</div>
     {/foreach}
 
     {include header.latte}
@@ -18,86 +20,84 @@
     <div class="main-content">
         <div class="main-content">
             <div class="container">
-                <div class="row">
 
+                {include content}
 
-                    {include content}
-                </div>
             </div>
         </div>
     </div>
 
     {include footer.latte}
 
-    <a href="#" class="scrollToTop"><i class="fa fa-angle-up"></i></a>
-    <style id="stassets_footer_css">
+        <a href="#" class="scrollToTop"><i class="fa fa-angle-up"></i></a>
+        <style id="stassets_footer_css">
 
-        .st_1494881861:after
-        {
-            background-color : rgba(0, 47, 94, 0.74) !important
-        }
+            .st_1494881861:after
+            {
+                background-color : rgba(0, 47, 94, 0.74) !important
+            }
 
-        .st_1494881862:after
-        {
-            background-color : rgba(255, 182, 0, 0.75) !important
-        }
+            .st_1494881862:after
+            {
+                background-color : rgba(255, 182, 0, 0.75) !important
+            }
 
-        .st_1494881863:after
-        {
-            background-color : rgba(0, 47, 94, 0.74) !important
-        }
+            .st_1494881863:after
+            {
+                background-color : rgba(0, 47, 94, 0.74) !important
+            }
 
-        .st_1494881864
-        {
-            color : #ffffff !important
-        }
+            .st_1494881864
+            {
+                color : #ffffff !important
+            }
 
-        .st_1494881865:after
-        {
-            background : #3b5998 none repeat scroll 0 0 !important
-        }
+            .st_1494881865:after
+            {
+                background : #3b5998 none repeat scroll 0 0 !important
+            }
 
-        .st_1494881866:after
-        {
-            background : #01a2de none repeat scroll 0 0 !important
-        }
+            .st_1494881866:after
+            {
+                background : #01a2de none repeat scroll 0 0 !important
+            }
 
-        .st_1494881867:after
-        {
-            background : #ea4c89 none repeat scroll 0 0 !important
-        }
+            .st_1494881867:after
+            {
+                background : #ea4c89 none repeat scroll 0 0 !important
+            }
 
-        .st_1494881868:after
-        {
-            background : #517fa4 none repeat scroll 0 0 !important
-        }
+            .st_1494881868:after
+            {
+                background : #517fa4 none repeat scroll 0 0 !important
+            }
 
-        .st_1494881869:after
-        {
-            background : #4ebbff none repeat scroll 0 0 !important
-        }
+            .st_1494881869:after
+            {
+                background : #4ebbff none repeat scroll 0 0 !important
+            }
 
-        .vc_custom_1473144046635
-        {
-            padding-top      : 50px !important;
-            background-color : #121416 !important;
-        }
+            .vc_custom_1473144046635
+            {
+                padding-top      : 50px !important;
+                background-color : #121416 !important;
+            }
 
-        .vc_custom_1473144617026
-        {
-            background-color : #0a0a0b !important;
-        }
+            .vc_custom_1473144617026
+            {
+                background-color : #0a0a0b !important;
+            }
 
-        .vc_custom_1473144888797
-        {
-            padding-top : 0px !important;
-        }
+            .vc_custom_1473144888797
+            {
+                padding-top : 0px !important;
+            }
 
-        .vc_custom_1473144780945
-        {
-            margin-bottom : 0px !important;
-        }
-    </style>
+            .vc_custom_1473144780945
+            {
+                margin-bottom : 0px !important;
+            }
+        </style>
 
 
     {**}
@@ -127,9 +127,9 @@
 
 
     {if $presenter->debugMode}
-        <script type='text/javascript' src='/assets/frontend/js/main.dist.js'></script>
+        <script type='text/javascript' src='/assets/frontend/js/main.dist.js?v=1.6'></script>
     {else}
-        <script type='text/javascript' src='/assets/frontend/js/main.dist.js'></script>
+        <script type='text/javascript' src='/assets/frontend/js/main.dist.js?v=1.6'></script>
     {/if}
 
 </div>

@@ -1,32 +1,33 @@
-<div class="collapse navbar-collapse">
-
-    {var $parent = null}
-    {block #menu}
+{var $parent = null}
+{block #menu}
     {if $parent===null}
-    <ul id="navbar-menu" class="nav navbar-nav navbar-center">
-        {else}
+        <div class="collapse navbar-collapse" id="navbar-menu">
+        <ul class="nav navbar-nav navbar-center">
+    {else}
         <ul role="menu" class="dropdown-menu">
-            {/if}
+    {/if}
 
-            {foreach $nav[$parent] as $n}
-                <li class="dropdown  {ifCurrent :Front:Page:default id=>$n->id_menu_item}active{/ifCurrent}">
-                    {if isset($nav[$n->id_menu_item]) }
-                        <a data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false"
-                           data-id-menu_item="{$n->id_menu_item}"
-                           href="{plink :Front:Page:default id=>$n->id_menu_item}" title="{$n->name}">
-                            {$n->name}
-                            <i class="icon-chevron-small-right show_in_mobile"></i>
-                        </a>
-                    {include #this parent => $n->id_menu_item}
-                    {else}
-                        <a href="{plink :Front:Page:default id=>$n->id_menu_item}"
-                           data-id-menu_item="{$n->id_menu_item}" title="{$n->name}">{$n->name}</a>
-                    {/if}
-                </li>
-            {/foreach}
-        </ul>
-        {/block}
-</div>
+    {foreach $nav[$parent] as $n}
+        <li class="dropdown  {ifCurrent :Front:Page:default id=>$n->id_menu_item}active{/ifCurrent}">
+            {if isset($nav[$n->id_menu_item]) }
+                <a data-toggle="dropdown" class="dropdown-toggle" aria-haspopup="true" aria-expanded="false"
+                   data-id-menu_item="{$n->id_menu_item}"
+                   href="{plink :Front:Page:default id=>$n->id_menu_item}" title="{$n->name}">
+                    {$n->name}
+                    <i class="icon-chevron-small-right show_in_mobile"></i>
+                </a>
+            {include #this parent => $n->id_menu_item}
+            {else}
+                <a href="{plink :Front:Page:default id=>$n->id_menu_item}"
+                   data-id-menu_item="{$n->id_menu_item}" title="{$n->name}">{$n->name}</a>
+            {/if}
+        </li>
+    {/foreach}
+    </ul>
+
+    {if $parent===null}</div>{/if}
+{/block}
+
 
 
 {*

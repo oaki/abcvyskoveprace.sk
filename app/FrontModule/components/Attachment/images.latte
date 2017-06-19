@@ -1,14 +1,20 @@
-<div n:if="count($files)>0" class="gallery">
+<div class="row" n:if="count($files)>0">
+
+
     {foreach $files as $f}
 
-        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-            <a rel="prettyPhoto[{$id}]" class="thumbnail"
-               href="{$f|img:default:$dimension['big']['width']:$dimension['big']['height']:$dimension['big']['flag']}">
-                <img class="img-responsive"
-                     src="{$f|img:default:$dimension['thumb']['width']:$dimension['thumb']['height']:$dimension['thumb']['flag']}"
-                     alt="{$f['name']}">
-            </a>
-        </div>
+{dump $f}
 
+        <div class=" col-sm-6 col-md-4 content_wrap">
+            <div class="image">
+                <a class="fancybox" data-fancybox="gallery-{$id}" data-caption="{$f['params']['name']}"
+                   href="{$f|img:default:$dimension['big']['width']:$dimension['big']['height']:$dimension['big']['flag']}">
+                    {!$f['image']|imageWithSizes:$f['params']['name']:'img-responsive border-radius'}
+                </a>
+            </div>
+
+            <div class="gallery-description">{$f['params']['name']}</div>
+        </div>
     {/foreach}
-</div><!--  c gallery -->
+
+</div>

@@ -13,8 +13,10 @@
         <div class="gallery">
 
             {foreach $images as $i}
-                <a class="gallimg" rel="prettyPhoto[{$article['id_node']}]" href="{$i['big']}"><img src="{$i['thumb']}"
-                                                                                                    alt=""/></a>
+                <a class="gallimg" data-lightbox="image-1" data-title="My caption"
+                   rel="prettyPhoto[{$article['id_node']}]" href="{$i['big']}">
+                    <img src="{$i['thumb']}" alt=""/>
+                </a>
             {/foreach}
         </div><!-- gallery -->
     {/if}

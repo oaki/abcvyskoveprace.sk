@@ -1,12 +1,21 @@
-<div class="clearfix annotation-article">
-    <div class="pull-left annotation-article--picture">
+<div class=" col-sm-6 col-md-4 content_wrap heading_space">
+    <div class="image">
+
+        {var $imageInfo = [
+            'filename'=>$article['first_img']['image'],
+            'alt'=>$article['title'],
+            'class'=>'img-responsive detail',
+            'width'=>'357',
+            'height'=>'233'
+            ]}
+
         <a href="{$link}">
-            <img src="{$article['first_img']|img:default:150:120:5}" title="{$article['title']}"
-                 alt="{$article['title']}"/>
+            {!$article['first_img']['image']|imageWithSizes:'melenie trhlín obvodového plášťa budovy.'}
         </a>
     </div>
-    <div class="annotation-article-content">
-        <h3><a href="{$link}">{$article['title']}</a></h3>
-        <a href="{$link}">{$article['text']|noescape}</a>
-    </div>
-</div><!-- article -->
+    <h3 style="margin-top: 20px;"><a href="{$link}">{$article['title']}</a>
+    </h3>
+    <p>{$article['text']|noescape}</p>
+    <a class="btn-light button-hover border-radius"
+       href="{$link}">Viac</a>
+</div>

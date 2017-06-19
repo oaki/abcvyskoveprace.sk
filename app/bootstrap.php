@@ -18,7 +18,7 @@ $configurator = new Nette\Configurator;
 
 $configurator->addParameters(['syncLogDir' => __DIR__ . '/../log/syncLog']);
 
-$configurator->setDebugMode(['85.216.152.133']); // enable for your remote IP
+$configurator->setDebugMode(['78.99.152.195']); // enable for your remote IP
 $configurator->enableDebugger(__DIR__ . '/../log', 'pavol@bincik.sk');
 error_reporting(~E_USER_DEPRECATED);
 $configurator->setTempDirectory(__DIR__ . '/../temp');
