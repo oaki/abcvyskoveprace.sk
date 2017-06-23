@@ -30,6 +30,31 @@ module.exports = function(grunt) {
         },
 
         uglify : {
+            js_jquery : {
+                files   : {
+                    'web/assets/frontend/js/jquery_themepunch.js' : [
+                        'web/assets/frontend/js/jquery.js',
+                        'web/assets/frontend/js/jquery-migrate.min.js',
+                        'web/assets/frontend/js/jquery.themepunch.tools.min.js',
+                        'web/assets/frontend/js/jquery.themepunch.revolution.min.js'
+
+                    ]
+                },
+                options : {
+                    // preserveComments: 'some',
+                    // mangle   : false,
+
+                    compress : {
+                        dead_code : true
+                    },
+                    // compress: false,
+                    // beautify : true,
+
+                    sourceMap     : true,
+                    sourceMapName : 'web/assets/frontend/js/jquery_themepunch-sourcemap.map'
+                },
+            },
+
             js_frontend : {
                 files   : {
                     'web/assets/frontend/js/main.dist.js' : [

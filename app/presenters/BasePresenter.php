@@ -89,8 +89,12 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             $image300    = $generator->getThumbUrl('default', $image_array['src'], $image_array['ext'], 300, 225, 5);
             $image768    = $generator->getThumbUrl('default', $image_array['src'], $image_array['ext'], 768, 576, 5);
 
-            return '<img src="' . $image1024 . '" srcset="' . $image1024 . ' 1024w, ' . $image300 . ' 300w,' . $image768 . ' 768w" class="' . $class . '" alt="' . $alt . '" sizes="(max-width: 1024px) 100vw, 1024px"/>';
+//            return '<img src="' . $image1024 . '" srcset="' . $image1024 . ' 1024w, ' . $image300 . ' 300w,' . $image768 . ' 768w" class="' . $class . '" alt="' . $alt . '" sizes="(max-width: 1024px) 100vw, 1024px"/>';
+            //<amp-img src="welcome.jpg" alt="Welcome" height="400" width="800"></amp-img>
+
+            return '<amp-img layout="responsive" height="768" width="1024" src="' . $image1024 . '" srcset="' . $image1024 . ' 1024w, ' . $image300 . ' 300w,' . $image768 . ' 768w" class="' . $class . '" alt="' . $alt . '" sizes="(max-width: 1024px) 100vw, 1024px"></amp-img>';
         });
+
 
         $template->addFilter('imageFilename', function ($arr) use ($generator) {
 //            $width='1024',$height='768',$flag='5', $alt = '', $class = 'vc_single_image-img attachment-full'
@@ -107,7 +111,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             $image_array = $generator->getFileNameAndExtension($imageParams['filename']);
             $image       = $generator->getThumbUrl('default', $image_array['src'], $image_array['ext'], $imageParams['width'], $imageParams['height'], $imageParams['flag']);
 
-            return '<img src="' . $image . '" class="' . $imageParams['class'] . '" alt="' . $imageParams['class'] . '" />';
+
+            return '<amp-img layout="responsive" height="' . $imageParams['height'] . '" width="' . $imageParams['width'] . '" src="' . $image . '" class="' . $imageParams['class'] . '" alt="' . $imageParams['class'] . '" ></amp-img>';
         });
 
         $formatHelper = $this->context->getService('FormatHelper');
