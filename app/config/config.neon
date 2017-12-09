@@ -6,20 +6,20 @@ parameters:
     baseUri: ''
     companyName = abcvyskoveprace
     mailer:
-        from: info@abcvyskoveprace.sk
-        to: info@abcvyskoveprace.sk
-        bcc: info@abcvyskoveprace.sk
+        from: info@verticallimit.sk
+        to: info@verticallimit.sk
+        bcc: info@verticallimit.sk
 
     smtp:
         host: smtp.websupport.sk
-        login: info@abcvyskoveprace.sk
-        password: abcvyskoveprace
+        login: info@verticallimit.sk
+        password: oxXTpYfPON
 
     webimages:
         uploadDir: %wwwDir%/uploaded/system_files/original
         uploadUrl: %baseUri%/uploaded/system_files/original
         tempDir: %wwwDir%/img
-        tempUrl: %baseUri%/img
+        tempUrl: https://www.abcvyskoveprace.sk/img
         hash: *
 
     DELIVERY_TAX: 20

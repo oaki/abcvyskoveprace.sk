@@ -92,7 +92,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 //            return '<img src="' . $image1024 . '" srcset="' . $image1024 . ' 1024w, ' . $image300 . ' 300w,' . $image768 . ' 768w" class="' . $class . '" alt="' . $alt . '" sizes="(max-width: 1024px) 100vw, 1024px"/>';
             //<amp-img src="welcome.jpg" alt="Welcome" height="400" width="800"></amp-img>
 
-            return '<amp-img layout="responsive" height="768" width="1024" src="' . $image1024 . '" srcset="' . $image1024 . ' 1024w, ' . $image300 . ' 300w,' . $image768 . ' 768w" class="' . $class . '" alt="' . $alt . '" sizes="(max-width: 1024px) 100vw, 1024px"></amp-img>';
+            return '<img height="768" width="1024" src="' . $image1024 . '" srcset="' . $image1024 . ' 1024w, ' . $image300 . ' 300w,' . $image768 . ' 768w" class="' . $class . '" alt="' . $alt . '" sizes="(max-width: 1024px) 100vw, 1024px" />';
         });
 
 
@@ -112,7 +112,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             $image       = $generator->getThumbUrl('default', $image_array['src'], $image_array['ext'], $imageParams['width'], $imageParams['height'], $imageParams['flag']);
 
 
-            return '<amp-img layout="responsive" height="' . $imageParams['height'] . '" width="' . $imageParams['width'] . '" src="' . $image . '" class="' . $imageParams['class'] . '" alt="' . $imageParams['class'] . '" ></amp-img>';
+            return '<img height="' . $imageParams['height'] . '" width="' . $imageParams['width'] . '" src="' . $image . '" class="' . $imageParams['class'] . '" alt="' . $imageParams['class'] . '" />';
         });
 
         $formatHelper = $this->context->getService('FormatHelper');

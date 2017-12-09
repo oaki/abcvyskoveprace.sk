@@ -9,7 +9,7 @@
             <div class="image">
                 <a class="fancybox" data-fancybox="gallery-{$id}" data-caption="{$f['params']['name']}"
                    href="{$f|img:default:$dimension['big']['width']:$dimension['big']['height']:$dimension['big']['flag']}">
-                    {!$f['image']|imageWithSizes:$f['params']['name']:'img-responsive border-radius'}
+                    {!$f['image']|imageWithSizesSmall:$f['params']['name']:'img-responsive border-radius'}
                 </a>
             </div>
 

@@ -44,12 +44,14 @@ class PagePresenter extends BasePresenter
         $query                         = $node->getFrontQuery($this->template->id_menu_item, 'top');
         $this->template->top_node_list = $query->fetchAll();
 
-//		dde($this->template->node_list);
+//		dde($this->template->node_list, $query_count, $this->template->page['id_menu_item'], $paginator->itemCount);
         if ($paginator->itemCount == 1) {
             $node = current($this->template->node_list);
 
             switch ($node->service_name) {
                 case 'Article':
+//                    $url = $this->link(':Front:Article:default', array('id' => $node->id_node));
+//                    print_r($url);exit;
                     $this->redirect('301', ':Front:Article:default', array('id' => $node->id_node));
                     break;
             }

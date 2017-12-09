@@ -17,7 +17,7 @@ class AttachmentControl extends BaseControl
         'thumb' => array(
             'width'  => 400,
             'height' => 250,
-            'flag'   => 5
+            'flag'   => 6
         ),
         'big'   => array(
             'width'  => 800,

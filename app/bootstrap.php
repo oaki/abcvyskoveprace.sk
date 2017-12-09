@@ -1,5 +1,5 @@
 <?php
-
+// websupport hack for session
 class MemcachedSession extends SessionHandler
 {
 
@@ -18,7 +18,7 @@ $configurator = new Nette\Configurator;
 
 $configurator->addParameters(['syncLogDir' => __DIR__ . '/../log/syncLog']);
 
-$configurator->setDebugMode(['77.119.131.206']); // enable for your remote IP
+$configurator->setDebugMode(['79.121.24.170']); // enable for your remote IP
 $configurator->enableDebugger(__DIR__ . '/../log', 'pavol@bincik.sk');
 error_reporting(~E_USER_DEPRECATED);
 $configurator->setTempDirectory(__DIR__ . '/../temp');
@@ -39,6 +39,8 @@ $configurator->addConfig(__DIR__ . '/config/config.services.neon');
 
 $container = $configurator->createContainer();
 \Oaki\NettePanel\CallbackPanel::register($container);
+
+
 
 function dd($var)
 {

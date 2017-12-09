@@ -65,23 +65,23 @@ class RouterFactory
             'action'    => 'default',
             'id'        => array(
                 Route::PATTERN    => '.*?',
-                Route::FILTER_IN  => function ($url) use ($articleModel) {
-                    return $r = $articleModel->slugToId($url);
+                Route::FILTER_IN  => function ($url) use ($articleModel, $pageModel) {
+                    return $articleModel->slugToId($url, $pageModel);
                 },
-                Route::FILTER_OUT => function ($id) use ($articleModel) {
-                    return $articleModel->idToSlug($id);
+                Route::FILTER_OUT => function ($id) use ($articleModel, $pageModel) {
+                    return $articleModel->idToSlug($id, $pageModel);
                 }
             )
         ]);
 
-        $router[] = new Route('<id>.html', [
+        $router[] = new Route('<id>', [
             'module'    => 'Front',
             'presenter' => 'Page',
             'action'    => 'default',
             'id'        => array(
-                Route::PATTERN    => '.*?',
+                Route::PATTERN    => '[a-z\-\/]+',
                 Route::FILTER_IN  => function ($url) use ($pageModel) {
-                    return $pageModel->slugToId($url);;
+                    return $pageModel->slugToId($url);
                 },
                 Route::FILTER_OUT => function ($url) use ($pageModel) {
                     return $pageModel->idToSlug($url);

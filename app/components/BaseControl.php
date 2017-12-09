@@ -51,6 +51,17 @@ class BaseControl extends Control
             return '<img src="' . $image1024 . '" srcset="' . $image1024 . ' 1024w, ' . $image300 . ' 300w,' . $image768 . ' 768w" class="' . $class . '" alt="' . $alt . '" sizes="(max-width: 1024px) 100vw, 1024px"/>';
         });
 
+
+        $template->addFilter('imageWithSizesSmall', function ($filename, $alt = '', $class = 'vc_single_image-img attachment-full') use ($generator) {
+            $image_array = $generator->getFileNameAndExtension($filename);
+            $image1024   = $generator->getThumbUrl('default', $image_array['src'], $image_array['ext'], 360, 270, 5);
+            $image300    = $generator->getThumbUrl('default', $image_array['src'], $image_array['ext'], 300, 225, 5);
+            $image768    = $generator->getThumbUrl('default', $image_array['src'], $image_array['ext'], 768, 576, 5);
+
+            return '<img src="' . $image1024 . '" srcset="' . $image1024 . ' 1024w, ' . $image300 . ' 300w,' . $image768 . ' 768w" class="' . $class . '" alt="' . $alt . '" sizes="(max-width: 1024px) 100vw, 1024px"/>';
+        });
+
+
         return $template;
     }
 
